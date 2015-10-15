@@ -241,7 +241,7 @@
 <p>An appropriate support strategy allows every user to consume as much visual and interactive richness as their environment can support. This approach—commonly referred to as <em>progressive enhancement</em> — builds a rich experience on top of an accessible core, without compromising that core.</p>
 <p>We have done some testing in older browsers (IE 8+) and the site will 'work' but they won't have the best possible experience.</p>
 <h2 id="view-engine">View Engine</h2>
-<p>All views are created in handlebars, as opposed to razor. We created a View Engine based on the <a href="https://github.com/rexm/Handlebars.Net">handlebars.net</a> library. We did as it saves duplication of a FE developer creating his markup and styling once in test suite and then having to re-do it in razor files.</p>
+<p>All views are created in handlebars, as opposed to razor. We created a View Engine based on the <a href="https://github.com/rexm/Handlebars.Net">handlebars.net</a> library. We did this as it saves duplication of a FE developer creating his markup and styling once in test suite and then having to re-do it in razor files.</p>
 <p>If the view engine can not find a .handlebars view, it will look for one of the same name except .cshtml. So, you don't have to use handlebars, but your FE developer will thank you.</p>
 <h3 id="example-view">Example View</h3>
 <pre><code>
@@ -278,7 +278,7 @@
             return Content("Awaiting Content");
         }</code></pre>
 <h2 id="view-models">View Models</h2>
-<p>If you want to see the properties that are available on a viewmodel, you can seem them on our [Apiary]9http://docs.stephenzsolnai.apiary.io/) documentation.</p>
+<p>If you want to see the properties that are available on a viewmodel, you can seem them on our <a href="http://docs.stephenzsolnai.apiary.io/">Apiary</a> documentation.</p>
                 </section>
 
             </div>
