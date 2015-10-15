@@ -240,6 +240,45 @@
 <p>Support does not mean that everybody gets the same thing. Expecting two users using different browser software to have an identical experience fails to embrace or acknowledge the heterogeneous essence of the Web. In fact, requiring the same experience for all users creates an artificial barrier to participation. Availability and accessibility of content should be our key priority.</p>
 <p>An appropriate support strategy allows every user to consume as much visual and interactive richness as their environment can support. This approach—commonly referred to as <em>progressive enhancement</em> — builds a rich experience on top of an accessible core, without compromising that core.</p>
 <p>We have done some testing in older browsers (IE 8+) and the site will 'work' but they won't have the best possible experience.</p>
+<h2 id="view-engine">View Engine</h2>
+<p>All views are created in handlebars, as opposed to razor. We created a View Engine based on the <a href="https://github.com/rexm/Handlebars.Net">handlebars.net</a> library. We did as it saves duplication of a FE developer creating his markup and styling once in test suite and then having to re-do it in razor files.</p>
+<p>If the view engine can not find a .handlebars view, it will look for one of the same name except .cshtml. So, you don't have to use handlebars, but your FE developer will thank you.</p>
+<h3 id="example-view">Example View</h3>
+<pre><code>
+&lt;div class="mini-league-table"&gt;
+  &lt;header class="mini-league-table__header"&gt;
+    &lt;h2&gt;League Table&lt;/h2&gt;
+  &lt;/header&gt;
+
+  &lt;div class="mini-league-table__content js-dynamicContainer js-realtime" 
+      data-realtime-channel="{{leagueTableChannel}}" 
+      data-render-action="replace"
+      data-template="MiniLeagueTable/MiniLeagueTableItems"&gt;
+
+      {{&gt;MiniLeagueTableItems}}
+
+    &lt;button class="button--fill button--inverse"&gt;View Full Table&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="example-controller-returning-a-view">Example Controller returning a view</h3>
+<p>You don't have to do anything special to use a handlebars view, just return a View as you normally would inside a controller. The conversion to json is automatically handled. It will also convert it to camel case to keep FE devs happy.</p>
+<pre><code> public ActionResult Fixture([UmbracoGlass] FixtureModel model)
+        {
+            if (model != null)
+            {
+                _matchViewModelBuilder.ContentId = model.Id;
+                _matchViewModelBuilder.MatchDataProviderId = model.DataProviderId;
+                _matchViewModelBuilder.TagIdList = CovertTagList(model);
+                _matchViewModelBuilder.CurrentTeamId = model.LandingPage.Team.DataProviderId;
+                var viewModel = _matchViewModelBuilder.Build();
+
+                return View("~/Views/MatchdayModule/MatchdayLayout", viewModel);
+            }
+
+            return Content("Awaiting Content");
+        }</code></pre>
+<h2 id="view-models">View Models</h2>
+<p>If you want to see the properties that are available on a viewmodel, you can seem them on our [Apiary]9http://docs.stephenzsolnai.apiary.io/) documentation.</p>
                 </section>
 
             </div>
