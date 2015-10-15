@@ -65,6 +65,10 @@ menu:
                     text: Responsive Images
                     # Or absolute urls
                     relativeUrl: responsive images.html	
+                Multi Language:
+                    text: Multi Language
+                    # Or absolute urls
+                    relativeUrl: multilanguage.html	
         Design:
             name: Design Guidelines
             items:
