@@ -54,7 +54,7 @@ We support all modern browsers. This basically means IE 10+. A complete matrix i
 </tbody></table>
 
 ### Notes:
-* The dagger symbol (as in "iOS 6.†") indicates that the most-current non-beta version.
+* The dagger symbol (as in "Android 4.†") indicates that the most-current non-beta version.
 
 
 ### What Does "Support" Mean?
