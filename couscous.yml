@@ -1,5 +1,5 @@
 # Base URL of the published website
-baseUrl: http://username.github.io/project
+baseUrl: http://stadionHQ.github.io/Documentation
 
 # Used to link to the GitHub project
 github:
@@ -11,6 +11,7 @@ subTitle: The engine room for your digital stadium.
 template:
     url: https://github.com/CouscousPHP/Template-Dark
 # The left menu bar
+
 menu:
     sections:
         main:
@@ -21,7 +22,7 @@ menu:
                     # You can use relative urls
                     relativeUrl: readme.html
                 umbraco:
-                    text: Umbraco
+                    text: Umbraco.
                     # Or absolute urls
                     relativeUrl: umbraco.html
                 sitecore:				    
