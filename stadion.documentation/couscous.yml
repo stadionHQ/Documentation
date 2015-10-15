@@ -3,8 +3,8 @@ baseUrl: http://username.github.io/project
 
 # Used to link to the GitHub project
 github:
-    user: stadion
-    repo: docs
+    user: stadionHQ
+    repo: Documentation
 
 title: Stadion
 subTitle: The engine room for your digital stadium.
@@ -48,7 +48,7 @@ menu:
                     text: Hosting
                     # Or absolute urls
                     relativeUrl: Hosting.html
-               Deployments:
+                Deployments:
                     text: Deployments
                     # Or absolute urls
                     relativeUrl: Deployments.html
