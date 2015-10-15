@@ -1,0 +1,131 @@
+# Base URL of the published website
+baseUrl: http://docs.stadion.io
+
+# Used to link to the GitHub project
+github:
+    user: stadionHQ
+    repo: Documentation
+
+title: Stadion
+subTitle: The engine room for your digital stadium.
+
+template:
+    # Name of the directory containing the website template (default is "website")
+    directory: website
+
+# List of directories to exclude from the processing (default contains "vendor" and "website")
+# Paths are relative to the repository root
+exclude:
+    - vendor
+    - website
+
+
+menu:
+    sections:
+        main:
+            name: Technical documentation
+            items:
+                home:
+                    text: Overview
+                    # You can use relative urls
+                    relativeUrl: index.html	
+                Front end:
+                    text: Front End
+                    # Or absolute urls
+                    relativeUrl: front end.html
+                API:
+                    text: API
+                    # Or absolute urls
+                    relativeUrl: api.html
+                Hosting:
+                    text: Hosting
+                    # Or absolute urls
+                    relativeUrl: hosting.html
+                Deployments:
+                    text: Deployments
+                    # Or absolute urls
+                    relativeUrl: deployments.html
+                Services:
+                    text: Services
+                    # Or absolute urls
+                    relativeUrl: services.html
+                Configuration:
+                    text: Configuration
+                    # Or absolute urls
+                    relativeUrl: configuration.html
+                Data feeds:
+                    text: Data feeds
+                    # Or absolute urls
+                    relativeUrl: datafeeds.html	
+                CDN:
+                    text: CDN
+                    # Or absolute urls
+                    relativeUrl: cdn.html	
+                Responsive images:
+                    text: Responsive Images
+                    # Or absolute urls
+                    relativeUrl: responsive images.html	
+        Design:
+            name: Design Guidelines
+            items:
+                Overview:
+                    text: Overview
+                    # You can use relative urls
+                    relativeUrl: design.html
+                Design:
+                    text: Style Guide
+                    # Or absolute urls
+                    relativeUrl: style guide.html
+        Sitecore:
+            name: Sitecore
+            items:
+                Overview:
+                    text: Overview
+                    # You can use relative urls
+                    relativeUrl: sitecore/sitecore.html
+                Installation:
+                    text: Installation
+                    # Or absolute urls
+                    relativeUrl: sitecore/installation.html
+                Upgrades:
+                    text: Upgrades
+                    # Or absolute urls
+                    relativeUrl: sitecore/upgrades.html
+                Custom Widgets:
+                    text: Custom Widgets
+                    # Or absolute urls
+                    relativeUrl: sitecore/customwidgets.html
+        Umbraco:
+            name: Umbraco
+            items:
+                Overview:
+                    text: Overview
+                    # You can use relative urls
+                    relativeUrl: umbraco/umbraco.html
+                Installation:
+                    text: Installation
+                    # Or absolute urls
+                    relativeUrl: umbraco/installation.html
+                Upgrades:
+                    text: Upgrades
+                    # Or absolute urls
+                    relativeUrl: umbraco/upgrades.html
+                Custom Widgets:
+                    text: Custom Widgets
+                    # Or absolute urls
+                    relativeUrl: umbraco/customwidgets.html
+        Editor:
+            name: Editor Guidelines
+            items:
+                Editor Guidelines:
+                    text: Overview
+                    # Or absolute urls
+                    relativeUrl: editor guidelines.html
+                Images:
+                    text: Images
+                    # Or absolute urls
+                    relativeUrl: images.html	
+                Publishing:
+                    text: Publishing
+                    # Or absolute urls
+                    relativeUrl: publishing.html						
