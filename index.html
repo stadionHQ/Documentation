@@ -89,6 +89,11 @@
                                             Responsive Images
                                         </a>
                                     </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/multilanguage.html">
+                                            Multi Language
+                                        </a>
+                                    </li>
                                                             </ul>
                                                     <p class="text-muted">
                                 Design Guidelines
@@ -188,6 +193,7 @@
 <p>Stadion is a .net platform, which can sit on top of <a href="umbraco/umbraco.html">Umbraco</a> or <a href="sitecore/sitecore.html">Sitecore</a>, to provide all of the functionality that a sports club will need.</p>
 <h1 id="architechture">Architechture</h1>
 <p>Stadion is made up of multiple components, as can be seen in the diagram below.</p>
+<p>We expose many <a href="services.html">services</a> which provide all of the key functionality you may need to create a custom widget.</p>
 <h1 id="dependencies">Dependencies</h1>
 <p>We have dependencies on the following services / software:</p>
 <ul>
@@ -197,6 +203,20 @@
 <li>AWS S3</li>
 <li>MS SQL Server / Azure SQL / AWS RDS SQL</li>
 </ul>
+<h1 id="how-to-customize">How to Customize</h1>
+<p>You can customize any aspect of Stadion. If you want to provide your own implementation of a service, you should create your own 'Registry' in StructureMap and tell an interface to to implement your version like in the example below.</p>
+<pre><code>    public class FakeDataProviderRegistry : Registry
+    {
+        public FakeDataProviderRegistry()
+        {
+
+            For&lt;ICompetitionService&gt;().Use&lt;FakeCompetitionService&gt;();
+            For&lt;IClubService&gt;().Use&lt;FakeClubService&gt;();
+            For&lt;IFixtureService&gt;().Use&lt;FakeFixtureService&gt;();
+            For&lt;IPlayerProfileService&gt;().Use&lt;FakePlayerProfileService&gt;();
+            For&lt;ILiveGameRepository&gt;().Use&lt;FakeLiveGameRepository&gt;();
+        }
+    } </code></pre>
 <h1 id="supported-browsers">Supported Browsers</h1>
 <p>We support all modern browsers. This basically means IE 10+. A complete matrix is below.</p>
 <table class="environments"><tbody><tr><th align="left">Internet Explorer</th>
