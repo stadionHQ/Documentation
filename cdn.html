@@ -45,16 +45,6 @@
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="http://docs.stadion.io/umbraco.html">
-                                            Umbraco.
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore.html">
-                                            Sitecore
-                                        </a>
-                                    </li>
-                                                                    <li class="">
                                         <a href="http://docs.stadion.io/front end.html">
                                             Front End
                                         </a>
@@ -70,18 +60,33 @@
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="http://docs.stadion.io/installation.html">
-                                            Installation
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/hosting.html">
-                                            Hosting
-                                        </a>
-                                    </li>
-                                                                    <li class="">
                                         <a href="http://docs.stadion.io/deployments.html">
                                             Deployments
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/services.html">
+                                            Services
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/configuration.html">
+                                            Configuration
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/datafeeds.html">
+                                            Data feeds
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/cdn.html">
+                                            CDN
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/responsive images.html">
+                                            Responsive Images
                                         </a>
                                     </li>
                                                             </ul>
@@ -98,6 +103,58 @@
                                                                     <li class="">
                                         <a href="http://docs.stadion.io/style guide.html">
                                             Style Guide
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Sitecore
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/sitecore.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/installation.html">
+                                            Installation
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/upgrades.html">
+                                            Upgrades
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/customwidgets.html">
+                                            Custom Widgets
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Umbraco
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/umbraco.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/installation.html">
+                                            Installation
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/upgrades.html">
+                                            Upgrades
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/customwidgets.html">
+                                            Custom Widgets
                                         </a>
                                     </li>
                                                             </ul>
@@ -127,8 +184,17 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="an-h1-header">An h1 header</h1>
-<p>Paragraphs are separated by a blank line.</p>
+                    <h1 id="content-delivery-networks">Content Delivery Networks</h1>
+<p>Obviously all static assets (images, css, js) can be served by a CDN, but you can also serve the whole site via a CDN, if you are not doing personalisation.
+Serving your whole site via the CDN will make the site very fast and will significantly reduce your hosting costs.</p>
+<h2 id="cdn-configuration">CDN Configuration.</h2>
+<p>In the App_Config\dsp.config file, there is a CDN settings node:</p>
+<p><code>&lt;cdnSettings host="exampleclub.com" enabled="true" mediaHost="images.exampleclub.com"  /&gt;</code></p>
+<p>You can enable or disable the cdn by using the 'enable' attribute.</p>
+<p>The 'host' attribute is used when rendering fully qualified links.</p>
+<p>The 'mediaHost' attribute is used when rendering images. ( It uses a different CDN as it has to pull images form the S3 bucket.)</p>
+<h2 id="logged-in-users">Logged In Users</h2>
+<p>When a user logs in, we redirect them to the version of your site served by your webserver(s). We would recommend a domain name such as secure.exampleclub.com</p>
                 </section>
 
             </div>

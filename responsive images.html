@@ -45,16 +45,6 @@
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="http://docs.stadion.io/umbraco.html">
-                                            Umbraco.
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore.html">
-                                            Sitecore
-                                        </a>
-                                    </li>
-                                                                    <li class="">
                                         <a href="http://docs.stadion.io/front end.html">
                                             Front End
                                         </a>
@@ -70,18 +60,33 @@
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="http://docs.stadion.io/installation.html">
-                                            Installation
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/hosting.html">
-                                            Hosting
-                                        </a>
-                                    </li>
-                                                                    <li class="">
                                         <a href="http://docs.stadion.io/deployments.html">
                                             Deployments
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/services.html">
+                                            Services
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/configuration.html">
+                                            Configuration
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/datafeeds.html">
+                                            Data feeds
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/cdn.html">
+                                            CDN
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/responsive images.html">
+                                            Responsive Images
                                         </a>
                                     </li>
                                                             </ul>
@@ -98,6 +103,58 @@
                                                                     <li class="">
                                         <a href="http://docs.stadion.io/style guide.html">
                                             Style Guide
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Sitecore
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/sitecore.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/installation.html">
+                                            Installation
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/upgrades.html">
+                                            Upgrades
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/customwidgets.html">
+                                            Custom Widgets
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Umbraco
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/umbraco.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/installation.html">
+                                            Installation
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/upgrades.html">
+                                            Upgrades
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/umbraco/customwidgets.html">
+                                            Custom Widgets
                                         </a>
                                     </li>
                                                             </ul>
@@ -127,8 +184,11 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="an-h1-header">An h1 header</h1>
-<p>Paragraphs are separated by a blank line.</p>
+                    <h1 id="responsive-images">Responsive Images</h1>
+<p>To help solve the 'problem' of responsive images, we use a 3rd party service called <a href="www.blitline.com">Blitline</a>.
+This enables the editor to upload one image and we automatically crop and resize the image into multiple different formats.</p>
+<p>When an image is uploaded, we  push to image to an S3 bucket. We can pass the url of the image to blitline who process it into the multiple formats and put them back on the S3 bucket.
+We then serve the images via a <a href="cdn.html">CDN</a> such as Cloudfront, to enable fast and cheap delivery to users around the world.</p>
                 </section>
 
             </div>
