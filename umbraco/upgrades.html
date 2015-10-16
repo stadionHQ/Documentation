@@ -152,7 +152,7 @@
                                             Installation
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/umbraco/upgrades.html">
                                             Upgrades
                                         </a>
@@ -189,8 +189,13 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="an-h1-header">An h1 header</h1>
-<p>Paragraphs are separated by a blank line.</p>
+                    <h1 id="upgrades">Upgrades</h1>
+<p>To update an umbraco installation of stadion, you can run the following command in nuget package manager console.</p>
+<blockquote>
+<p>Note: You should run this on a local installation first and perform any necessary backups.</p>
+</blockquote>
+<pre><code>Update-Package Stadion.Umbraco</code></pre>
+<p>Once you have done this, you will need to re-install some tempaltes and document types in your umbraco solution. Manually install the content package found in 'packages\Stadion.Umbraco.1.x.xx'.</p>
                 </section>
 
             </div>

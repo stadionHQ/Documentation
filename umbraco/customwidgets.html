@@ -157,7 +157,7 @@
                                             Upgrades
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/umbraco/customwidgets.html">
                                             Custom Widgets
                                         </a>
@@ -189,8 +189,58 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="an-h1-header">An h1 header</h1>
-<p>Paragraphs are separated by a blank line.</p>
+                    <h1 id="custom-widgets">Custom Widgets</h1>
+<p>To get umbraco to use your controllers, you need to register your routes, like below.</p>
+<pre><code> public class ModuleRouting : IModuleRouteRegister
+    {
+        public void RegisterRoutes()
+        {
+            RouteTable.Routes.MapRoute(
+                                   "SampleModuleRoute",
+                                   "SampleModule/{action}",
+                                   new
+                                   {
+                                       controller = "SampleModule",
+                                       action = "{action}"
+                                   });
+
+        }
+    }
+</code></pre>
+<p>To get  your custom widgets to appear as a 'Stadion Widget' in the grid layout, you need to attach the <code>[UmbracoWidget]</code> attribute to your actions and then add a class like below which will pick up any available actions.</p>
+<pre><code>
+    public class WidgetRegistration : IWidgetRegister
+    {
+        public ActionDescriptor[] GetWidgets()
+        {
+            return new ReflectedControllerDescriptor(typeof (SampleModuleController)).GetCanonicalActions();
+
+        }
+    }
+</code></pre>
+<p>Below is an example of a simple widget.</p>
+<pre><code>
+    public class SampleModuleController : UmbracoController
+    {
+        [UmbracoWidget]
+        public ActionResult WidgetA()
+        {
+            return Content("Hello world");
+        }
+    }
+</code></pre>
+<p>Below is an example of a simple page. The <code>[UmbracoGlass] BaseUmbracoItem model</code> in the action parameters will be automatically binded from the current page or datasource, if one is set.</p>
+<pre><code>
+    public class SamplePageController : UmbracoController
+    {
+        //Controller name = document type (template in sitecore speak) &amp; Template = Action Name
+        public ActionResult PageA([UmbracoGlass] BaseUmbracoItem model)
+        {
+            var viewModel = model;
+            return UmbracoView("~/Views/SampleModule/PageA", viewModel);
+        }
+    }
+</code></pre>
                 </section>
 
             </div>
