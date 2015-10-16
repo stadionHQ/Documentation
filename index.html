@@ -39,7 +39,7 @@
                             </p>
 
                             <ul class="nav nav-pills nav-stacked">
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/index.html">
                                             Overview
                                         </a>
@@ -189,12 +189,17 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <p>currentMenu: home</p>
-<h1 id="overview">Overview</h1>
+                    <h1 id="overview">Overview</h1>
 <p>Stadion is a .net platform, which can sit on top of <a href="umbraco/umbraco.html">Umbraco</a> or <a href="sitecore/sitecore.html">Sitecore</a>, to provide all of the functionality that a sports club will need.</p>
 <h1 id="architechture">Architechture</h1>
 <p>Stadion is made up of multiple components, as can be seen in the diagram below.</p>
 <p>We expose many <a href="services.html">services</a> which provide all of the key functionality you may need to create a custom widget.</p>
+<h1 id="nuget">Nuget</h1>
+<p>The stadion platform is distributed as a series of versioned nuget packages, from a private nuget feed.  We operate a Contiuos Delivery release policy, so you can always grab the latest build by using the –IncludePrerelease switch.</p>
+<pre><code>
+Update-Package Stadion.Sitecore –IncludePrerelease
+</code></pre>
+<p>When we do an update, we always try to overwrite our core files (including views, css, etc), so you should try not to modify our files and duplicate / inherit from them instead.</p>
 <h1 id="dependencies">Dependencies</h1>
 <p>We have dependencies on the following services / software:</p>
 <ul>

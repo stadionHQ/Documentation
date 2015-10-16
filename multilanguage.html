@@ -89,7 +89,7 @@
                                             Responsive Images
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/multilanguage.html">
                                             Multi Language
                                         </a>
@@ -189,8 +189,13 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="an-h1-header">An h1 header</h1>
-<p>Paragraphs are separated by a blank line.</p>
+                    <h1 id="multi-language">Multi Language</h1>
+<p>The Stadion platform fully supports multiple languages using the native features of sitecore and umbraco. When we render any text, we pull it form the 'Dictionary' in the CMS.</p>
+<p><img src="TranslationDictionary.PNG" alt="Translation Dictionary" /></p>
+<p>To get the translated version of text, you can call the following method. We store all keys in the static 'TranslationKeys class'.</p>
+<pre><code>translationService.GetText(TranslationKeys.Core.AUTHOUR_LABEL_TEXT);</code></pre>
+<p>The translationService variable can be created by injecting it in your constructor or like so:</p>
+<pre><code>   var translationService = SystemContainer.Instance().GetInstance&lt;ITranslationService&gt;();</code></pre>
                 </section>
 
             </div>
