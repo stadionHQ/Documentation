@@ -112,32 +112,6 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
-                                Sitecore
-                            </p>
-
-                            <ul class="nav nav-pills nav-stacked">
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/sitecore.html">
-                                            Overview
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/installation.html">
-                                            Installation
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/upgrades.html">
-                                            Upgrades
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/customwidgets.html">
-                                            Custom Widgets
-                                        </a>
-                                    </li>
-                                                            </ul>
-                                                    <p class="text-muted">
                                 Umbraco
                             </p>
 
@@ -159,6 +133,32 @@
                                     </li>
                                                                     <li class="">
                                         <a href="http://docs.stadion.io/umbraco/customwidgets.html">
+                                            Custom Widgets
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Sitecore
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/sitecore.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="http://docs.stadion.io/sitecore/installation.html">
+                                            Installation
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/upgrades.html">
+                                            Upgrades
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/customwidgets.html">
                                             Custom Widgets
                                         </a>
                                     </li>
@@ -189,8 +189,12 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="an-h1-header">An h1 header</h1>
-<p>Paragraphs are separated by a blank line.</p>
+                    <h1 id="installation">Installation</h1>
+<p>Set up a sitecore solution as you normally would. Then install the Stadion.Sitecore nuget package and we will automatically install all our dependencies.</p>
+<pre><code>Install-Package Stadion.Sitecore</code></pre>
+<p>Once you have done this, you will need to install some content in your Sitecore solution. Manually install the content package found in 'packages\Stadion.Sitecore.1.x.xx'.</p>
+<p>You will then need to create a SQL database to store the stats data. The SQL script for creating it can be found in 'packages\Stadion.Sitecore.1.x.xx'.</p>
+<p>Once this is done, update the connection string in the web.config.</p>
                 </section>
 
             </div>

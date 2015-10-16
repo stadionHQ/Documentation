@@ -112,32 +112,6 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
-                                Sitecore
-                            </p>
-
-                            <ul class="nav nav-pills nav-stacked">
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/sitecore.html">
-                                            Overview
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/installation.html">
-                                            Installation
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/upgrades.html">
-                                            Upgrades
-                                        </a>
-                                    </li>
-                                                                    <li class="">
-                                        <a href="http://docs.stadion.io/sitecore/customwidgets.html">
-                                            Custom Widgets
-                                        </a>
-                                    </li>
-                                                            </ul>
-                                                    <p class="text-muted">
                                 Umbraco
                             </p>
 
@@ -159,6 +133,32 @@
                                     </li>
                                                                     <li class="">
                                         <a href="http://docs.stadion.io/umbraco/customwidgets.html">
+                                            Custom Widgets
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
+                                Sitecore
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/sitecore.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/installation.html">
+                                            Installation
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/sitecore/upgrades.html">
+                                            Upgrades
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="http://docs.stadion.io/sitecore/customwidgets.html">
                                             Custom Widgets
                                         </a>
                                     </li>
@@ -189,8 +189,18 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="an-h1-header">An h1 header</h1>
-<p>Paragraphs are separated by a blank line.</p>
+                    <h1 id="custom-widgets">Custom Widgets</h1>
+<p>Below is an example of a simple rendering. The <code>[Glass] BaseSitecoreItem model</code> in the action parameters will be automatically binded from the current page or datasource, if one is set.</p>
+<pre><code>
+    public class SamplePageController : Controller
+    {
+        public ActionResult PageA([UmbracoGlass] BaseSitecoreItem model)
+        {
+            var viewModel = model;
+            return UmbracoView("~/Views/SampleModule/PageA", viewModel);
+        }
+    }
+</code></pre>
                 </section>
 
             </div>
