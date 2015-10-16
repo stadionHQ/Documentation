@@ -1,3 +1,7 @@
+---
+currentMenu: Configuration
+---
+
 #Configuration
 
 Everything that needs to be configured can, naturally, be done via a configuration file. All config files are stored in the App_Config folder in the root of the site.

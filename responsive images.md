@@ -1,3 +1,6 @@
+---
+currentMenu: Responsive images
+---
 Responsive Images
 ============
 

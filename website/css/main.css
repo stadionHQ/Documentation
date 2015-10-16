@@ -45,11 +45,7 @@ header.navbar {
     color: white;
 }
 
-@media (min-width: 768px) {
-    #sidebar {
-        position:fixed;
-    }
-}
+
 @media (max-width: 960px) {
     body {
         font-size: 17px;
@@ -92,4 +88,10 @@ code {
     color: #c5c8c6;
     border: solid 1px #3D5166;
     background-color: #1D2B3A;
+}
+
+.col-sm-offset-3{
+float:right;
+margin-left: 0;
+
 }

@@ -1,3 +1,7 @@
+---
+currentMenu: home
+---
+
 Overview
 ============
 
@@ -10,10 +14,24 @@ Stadion is made up of multiple components, as can be seen in the diagram below.
 
 We expose many [services](services.html) which provide all of the key functionality you may need to create a custom widget.
 
+
+Nuget
+============
+The stadion platform is distributed as a series of versioned nuget packages, from a private nuget feed.  We operate a Contiuos Delivery release policy, so you can always grab the latest build by using the –IncludePrerelease switch.
+
+```
+
+Update-Package Stadion.Sitecore –IncludePrerelease
+
+```
+
+When we do an update, we always try to overwrite our core files (including views, css, etc), so you should try not to modify our files and duplicate / inherit from them instead.
+
 Dependencies
 ============
 We have dependencies on the following services / software:
 * StructureMap
+* GlassMapper
 * Pubnub
 * jQuery
 * AWS S3
@@ -21,7 +39,8 @@ We have dependencies on the following services / software:
 
 How to Customize
 ============
-You can customize any aspect of Stadion. If you want to provide your own implementation of a service, you should create your own 'Registry' in StructureMap and tell an interface to to implement your version like in the example below.
+You can customize any aspect of Stadion. If you want to provide your own implementation of a service, you should create a StructureMap 'Registry' and tell an interface to to implement your new implementation.
+
 
 ```
 	public class FakeDataProviderRegistry : Registry
@@ -37,6 +56,9 @@ You can customize any aspect of Stadion. If you want to provide your own impleme
         }
     } 
 ```
+
+You can of course just extend our implementations and override specific methods.
+
 Supported Browsers
 ============
 

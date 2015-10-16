@@ -42,7 +42,7 @@ menu:
                     # Or absolute urls
                     relativeUrl: hosting.html
                 Deployments:
-                    text: Deployments
+                    text: CI & Deployments
                     # Or absolute urls
                     relativeUrl: deployments.html
                 Services:
@@ -53,11 +53,11 @@ menu:
                     text: Configuration
                     # Or absolute urls
                     relativeUrl: configuration.html
-                Data feeds:
+                Datafeeds:
                     text: Data feeds
                     # Or absolute urls
                     relativeUrl: datafeeds.html	
-                CDN:
+                cdn:
                     text: CDN
                     # Or absolute urls
                     relativeUrl: cdn.html	
@@ -72,52 +72,53 @@ menu:
         Design:
             name: Design Guidelines
             items:
-                Overview:
+                Design Overview:
                     text: Overview
                     # You can use relative urls
                     relativeUrl: design.html
-                Design:
+                Design Style Guide:
                     text: Style Guide
                     # Or absolute urls
                     relativeUrl: style guide.html
-        Sitecore:
-            name: Sitecore
-            items:
-                Overview:
-                    text: Overview
-                    # You can use relative urls
-                    relativeUrl: sitecore/sitecore.html
-                Installation:
-                    text: Installation
-                    # Or absolute urls
-                    relativeUrl: sitecore/installation.html
-                Upgrades:
-                    text: Upgrades
-                    # Or absolute urls
-                    relativeUrl: sitecore/upgrades.html
-                Custom Widgets:
-                    text: Custom Widgets
-                    # Or absolute urls
-                    relativeUrl: sitecore/customwidgets.html
+        
         Umbraco:
             name: Umbraco
             items:
-                Overview:
+                UmbracoOverview:
                     text: Overview
                     # You can use relative urls
                     relativeUrl: umbraco/umbraco.html
-                Installation:
+                UmbracoInstallation:
                     text: Installation
                     # Or absolute urls
                     relativeUrl: umbraco/installation.html
-                Upgrades:
+                UmbracoUpgrades:
                     text: Upgrades
                     # Or absolute urls
                     relativeUrl: umbraco/upgrades.html
-                Custom Widgets:
+                Umbraco Custom Widgets:
                     text: Custom Widgets
                     # Or absolute urls
                     relativeUrl: umbraco/customwidgets.html
+        Sitecore:
+            name: Sitecore
+            items:
+                SitecoreOverview:
+                    text: Overview
+                    # You can use relative urls
+                    relativeUrl: sitecore/sitecore.html
+                SitecoreInstallation:
+                    text: Installation
+                    # Or absolute urls
+                    relativeUrl: sitecore/installation.html
+                SitecoreUpgrades:
+                    text: Upgrades
+                    # Or absolute urls
+                    relativeUrl: sitecore/upgrades.html
+                Sitecore Custom Widgets:
+                    text: Custom Widgets
+                    # Or absolute urls
+                    relativeUrl: sitecore/customwidgets.html
         Editor:
             name: Editor Guidelines
             items:
