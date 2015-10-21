@@ -59,6 +59,8 @@ You can customize any aspect of Stadion. If you want to provide your own impleme
 
 You can of course just extend our implementations and override specific methods.
 
+## [Frontend](frontend/index.html)
+
 Supported Browsers
 ============
 
