@@ -6,10 +6,15 @@ Front End
 ============
 
 
-## Front-end site for Stadion Digital Sports platform
+Front-end site for Stadion Digital Sports platform
 
 ### Summary
 This is a standalone site running on a Node Express server. It's acts a static site to allow fast prototyping and development of modules without being slowed down by real data from a CMS. All assets to be used in the related Stadion platform repository are generated and minified io an output folder [dist](/dist) which can then be copied over to the platform. This includes handlebars templates which are transformed in the platform using [Nustache](https://github.com/jdiamond/Nustache)
+
+#### Terms used in docs for Front-end
+"Production site" - This refers to the csm drived production site that is outside of the static front end site. It is a completely seperate entity and only uses built views and css, js, image assets.
+
+"Static site" or "ExpressJs app" - This refers to the static Expressjs and mock api driven front-end website described in these front-end docs.
 
 #### Backend:
 Using Expressjs, the site is rendered from a rest api, [Apiary.io](http://apiary.io/). The data supplied from this rest endpoint matches the data structure that is used in the actual Stadion platform. Each module eg: Content Listing module, has it's own data set and is documented. See the api [here](http://docs.stephenzsolnai.apiary.io/)
@@ -27,20 +32,14 @@ All images, icons, and built css and javascript files are output to the [dist](/
 
 
 
-##  Folder structure - TODO THIS IS CHANGING PLEASE IGNORE FOR NOW
+##  Folder structure
+All details of the folder structure for the site [here](fontend/folder-structure.html).
 
-### App
-All server side components for the app
 
-### Assets
-A place to store assets for the site. Nothing in here is used directly in the site. Just a resource fo small psds, font files svgs etc that need to be in source control.
 
-### Client
-All css,js,images,icons before processing.
 
 
 ## Build
-
 All build tasks handled with Gulp
 
 
