@@ -33,40 +33,17 @@ All images, icons, and built css and javascript files are output to the [dist](/
 
 
 ##  Folder structure
-All details of the folder structure for the site [here](fontend/folder-structure.html).
-
-
-
+All details of the folder structure for the site [here](frontend/folder-structure.html).
 
 
 ## Build
-All build tasks handled with Gulp
+All build tasks handled with Gulp. All steps and information can be found [here](frontend/build.html).
 
-
-### Production asset generation
-
-```
-gulp prod
-```
-
-Build step to generate:
-Base css asset - containing base styles, structure, branding etc.
-    - src: /client/styles
-
-Module css assets - Individual assets
-    - src: /client/modules/<module_name>/<module_name>.styl
-
-Seperate css and javascript assets for the platform will be sent to dest folder. These can then be copied to the production site. (Located outside of this solution)
-
-#### Production assets build
-Build step to combine and minify generated assets. This will run on the production site and create single js and css assets.
-
-More detailed build documentation can be found [here](frontend/build/index)
 
 
 ## Modules
 
-You can find a list of modules [here](fontend/modules/index.html).
+You can find a list of modules [here](frontend/modules/index.html).
 
 ### Icons
 Built using [gulp-iconify](https://github.com/gavro/gulp-iconify)
