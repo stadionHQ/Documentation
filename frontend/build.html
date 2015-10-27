@@ -223,12 +223,12 @@
                             </p>
 
                             <ul class="nav nav-pills nav-stacked">
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/index.html">
                                             Overview
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/frontend/build/index.html">
                                             Build
                                         </a>
@@ -270,30 +270,52 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="front-end">Front End</h1>
-<p>Front-end site for Stadion Digital Sports platform</p>
-<h3 id="summary">Summary</h3>
-<p>This is a standalone site running on a Node Express server. It's acts a static site to allow fast prototyping and development of modules without being slowed down by real data from a CMS. All assets to be used in the related Stadion platform repository are generated and minified io an output folder <a href="/dist">dist</a> which can then be copied over to the platform. This includes handlebars templates which are transformed in the platform using <a href="https://github.com/jdiamond/Nustache">Nustache</a></p>
-<h4 id="terms-used-in-docs-for-front-end">Terms used in docs for Front-end</h4>
-<p>&quot;Production site&quot; - This refers to the csm drived production site that is outside of the static front end site. It is a completely seperate entity and only uses built views and css, js, image assets.</p>
-<p>&quot;Static site&quot; or &quot;ExpressJs app&quot; - This refers to the static Expressjs and mock api driven front-end website described in these front-end docs.</p>
-<h4 id="backend">Backend:</h4>
-<p>Using Expressjs, the site is rendered from a rest api, <a href="http://apiary.io/">Apiary.io</a>. The data supplied from this rest endpoint matches the data structure that is used in the actual Stadion platform. Each module eg: Content Listing module, has it's own data set and is documented. See the api <a href="http://docs.stephenzsolnai.apiary.io/">here</a></p>
-<h4 id="frontend">Frontend:</h4>
-<p>The site is completely modularised and each component has it's own assets and handlebars template. This allows us to easily add and remove components as needed.</p>
-<p>Css is built using <a href="http://learnboost.github.io/stylus/">stylus</a> and follows BEM syntax and OOCSS patterns similar to those outlined <a href="http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/">here</a> as well as loosly following <a href="https://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml#ID_and_Class_Naming">Google's html and css style guide</a>. More details can be found in the styles folder<a href="/client/styles">icons</a> folder</p>
-<p>Javascript is built using <a href="http://browserify.org/">Browserify</a>. This allows to to write concise, modularised, Nodejs style javascript following commonjs practices. A vendor.js file is built out seperately and any third party libraries that have issues running inside Browserify can be built into this file and added to the Gulp commmand.</p>
-<p>Icons are generated inline in css files from svg files using a mix of Filament Group's <a href="https://github.com/filamentgroup/grunticon">Grunticon tool</a> and it's <a href="https://www.npmjs.com/package/gulp-iconify">Gulp version</a> More details can be found in the icons folder<a href="/client/icons">icons</a> folder.</p>
-<p>All images, icons, and built css and javascript files are output to the <a href="/dist">dist</a> folder with the ''Gulp prod'' command.</p>
-<h2 id="folder-structure">Folder structure</h2>
-<p>All details of the folder structure for the site <a href="frontend/folder-structure.html">here</a>.</p>
-<h2 id="build">Build</h2>
-<p>All build tasks handled with Gulp. All steps and information can be found <a href="frontend/build.html">here</a>.</p>
-<h2 id="modules">Modules</h2>
-<p>You can find a list of modules <a href="frontend/modules/index.html">here</a>.</p>
-<h3 id="icons">Icons</h3>
-<p>Built using <a href="https://github.com/gavro/gulp-iconify">gulp-iconify</a>
-See <a href="/client/icons/index.html">/client/icons/README.md</a> for more info.</p>
+                    <h1 id="frond-end-build">Frond-end Build</h1>
+<p>This site uses <a href="http://gulpjs.com/">gulp</a> as the build tool. There are comments above each task listed in the gulpfile in the root of the site.</p>
+<p>All build tasks build to &quot;/public&quot; folder. This includes production tasks as a flag will be set to indicate if the task is production and this will be available in the gulp stream with the variable:</p>
+<pre><code>var isProd</code></pre>
+<p>We can then effect things like compression, disabling or source maps etc. The prodution task will then move the assets from &quot;/public&quot; folder to the &quot;/dist&quot; folder.
+This method allows us to run dev tasks with a production flag eg:</p>
+<pre><code>gulp styles --production</code></pre>
+<p>and we can see the dev site running locally with compressed prodution assets for testing purposes.</p>
+<h2 id="server-start-and-dev-task">Server start and dev task</h2>
+<pre><code>gulp dev</code></pre>
+<p>will start a server running at: localhost:3000.
+A <a href="https://www.npmjs.com/package/browser-sync">browser sync</a> instance will also start and will watch all css and js files for changes and run the appropriate tasks when needed.</p>
+<h2 id="css-build-summary-using-stylus">Css build summary using stylus.</h2>
+<h3 id="tools">Tools:</h3>
+<p>Pre-compiler:
+<a href="https://learnboost.github.io/stylus/">stylus</a> with <a href="https://www.npmjs.com/package/gulp-stylus">gulp-stylus</a>
+Postcss:
+<a href="https://www.npmjs.com/package/autoprefixer">Autoprefixer</a>
+Stylus libraries:
+<a href="http://jeet.gs/">Jeet grid system</a>
+<a href="http://axis.netlify.com/">Axis utilities for stylus</a></p>
+<p>Gulp task:</p>
+<pre><code>gulp styles</code></pre>
+<p>This is initially run along with </p>
+<pre><code>gulp dev</code></pre>
+<p>and will also be triggered via browser sync on .styl file changes.</p>
+<p>The task has an entry point at &quot;/client/styles/core.styl&quot;. This file imports all styl files including files from a temp folder &quot;styl&quot; in &quot;/client/styles/modules&quot;. This folder gets created with the</p>
+<pre><code>copy-stylus-tmp</code></pre>
+<p>and removed again with</p>
+<pre><code>remove-stylus-tmp</code></pre>
+<p>after the styus task has run</p>
+<h2 id="production-asset-generation">Production asset generation</h2>
+<pre><code>gulp prod</code></pre>
+<p>Build step to generate:
+Base css asset - containing base styles, structure, branding etc.</p>
+<ul>
+<li>src: /client/styles</li>
+</ul>
+<p>Module css assets - Individual assets</p>
+<ul>
+<li>src: /client/modules/<module_name>/<module_name>.styl</li>
+</ul>
+<p>Seperate css and javascript assets for the platform will be sent to dest folder. These can then be copied to the production site. (Located outside of this solution)</p>
+<h3 id="production-assets-build">Production assets build</h3>
+<p>Build step to combine and minify generated assets. This will run on the production site and create single js and css assets.</p>
+<p>More detailed build documentation can be found <a href="frontend/build/index">here</a></p>
                 </section>
 
             </div>

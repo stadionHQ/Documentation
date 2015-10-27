@@ -223,7 +223,7 @@
                             </p>
 
                             <ul class="nav nav-pills nav-stacked">
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/index.html">
                                             Overview
                                         </a>
@@ -270,30 +270,60 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="front-end">Front End</h1>
-<p>Front-end site for Stadion Digital Sports platform</p>
-<h3 id="summary">Summary</h3>
-<p>This is a standalone site running on a Node Express server. It's acts a static site to allow fast prototyping and development of modules without being slowed down by real data from a CMS. All assets to be used in the related Stadion platform repository are generated and minified io an output folder <a href="/dist">dist</a> which can then be copied over to the platform. This includes handlebars templates which are transformed in the platform using <a href="https://github.com/jdiamond/Nustache">Nustache</a></p>
-<h4 id="terms-used-in-docs-for-front-end">Terms used in docs for Front-end</h4>
-<p>&quot;Production site&quot; - This refers to the csm drived production site that is outside of the static front end site. It is a completely seperate entity and only uses built views and css, js, image assets.</p>
-<p>&quot;Static site&quot; or &quot;ExpressJs app&quot; - This refers to the static Expressjs and mock api driven front-end website described in these front-end docs.</p>
-<h4 id="backend">Backend:</h4>
-<p>Using Expressjs, the site is rendered from a rest api, <a href="http://apiary.io/">Apiary.io</a>. The data supplied from this rest endpoint matches the data structure that is used in the actual Stadion platform. Each module eg: Content Listing module, has it's own data set and is documented. See the api <a href="http://docs.stephenzsolnai.apiary.io/">here</a></p>
-<h4 id="frontend">Frontend:</h4>
-<p>The site is completely modularised and each component has it's own assets and handlebars template. This allows us to easily add and remove components as needed.</p>
-<p>Css is built using <a href="http://learnboost.github.io/stylus/">stylus</a> and follows BEM syntax and OOCSS patterns similar to those outlined <a href="http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/">here</a> as well as loosly following <a href="https://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml#ID_and_Class_Naming">Google's html and css style guide</a>. More details can be found in the styles folder<a href="/client/styles">icons</a> folder</p>
-<p>Javascript is built using <a href="http://browserify.org/">Browserify</a>. This allows to to write concise, modularised, Nodejs style javascript following commonjs practices. A vendor.js file is built out seperately and any third party libraries that have issues running inside Browserify can be built into this file and added to the Gulp commmand.</p>
-<p>Icons are generated inline in css files from svg files using a mix of Filament Group's <a href="https://github.com/filamentgroup/grunticon">Grunticon tool</a> and it's <a href="https://www.npmjs.com/package/gulp-iconify">Gulp version</a> More details can be found in the icons folder<a href="/client/icons">icons</a> folder.</p>
-<p>All images, icons, and built css and javascript files are output to the <a href="/dist">dist</a> folder with the ''Gulp prod'' command.</p>
-<h2 id="folder-structure">Folder structure</h2>
-<p>All details of the folder structure for the site <a href="frontend/folder-structure.html">here</a>.</p>
-<h2 id="build">Build</h2>
-<p>All build tasks handled with Gulp. All steps and information can be found <a href="frontend/build.html">here</a>.</p>
-<h2 id="modules">Modules</h2>
-<p>You can find a list of modules <a href="frontend/modules/index.html">here</a>.</p>
-<h3 id="icons">Icons</h3>
-<p>Built using <a href="https://github.com/gavro/gulp-iconify">gulp-iconify</a>
-See <a href="/client/icons/index.html">/client/icons/README.md</a> for more info.</p>
+                    <h1 id="frond-end-folder-structure">Frond-end Folder Structure</h1>
+<h2 id="app">app</h2>
+<p>All server side components for the ExpressJs app. None of this is used in the production site.</p>
+<h3 id="api">api</h3>
+<p>Initialisation and REST tasks for the Apiary api end point in here.</p>
+<h3 id="controllers">controllers</h3>
+<p>Each page in the static Expressjs site needs a controller. They are all stored here.</p>
+<h3 id="data"> data</h3>
+<p>The REST data set from Apiary is statically stored and referenced here to save constanly calling the api. Periodic backups of the api can also be stored here. This is a manual copy and paste job from Apiary directly.</p>
+<h3 id="views">views</h3>
+<p>All views used in the static site. The views can be added here directly to the child folders except for the modules folder. This contents of this are dynamically added in a gulp build step from the /clients/modules folders and are not to be edited directly.</p>
+<h2 id="assets">assets</h2>
+<p>A place to store assets for the site. Nothing in here is used directly in the site. Just a resource fo small psds, font files svgs etc that need to be in source control.</p>
+<h2 id="client">client</h2>
+<p>All css,js,images,icons before processing.</p>
+<h3 id="bower_components">bower_components</h3>
+<pre><code>Bower install</code></pre>
+<p>Adds bower components to here.</p>
+<h3 id="development">development</h3>
+<p>Contains css and js used ONLY in this static site. Nothing in here is used in production. Eg: Prism css is referenced statically for the style guide in (/style-guide) and gridpak is referenced for the grid (/grid)</p>
+<h3 id="fonts">fonts</h3>
+<p>All fonts used in the site. These are copied out to various locations on gulp build steps</p>
+<h3 id="icons">icons</h3>
+<p>All grunticon (gulp version - gulp-iconify) assets stored here. The grunticons.js file is referenced directly from here.</p>
+<h3 id="img">img</h3>
+<p>Image assets kept here and copied out to various locations on gulp build steps</p>
+<h3 id="modules">modules</h3>
+<p>All modules for the site are stored here. Thius included views, styl, js and spec.js files. Various gulp tasks build out css and js bundles and copy them to public locations in dev and prod. The views are copied to the dist location too and are used in the production site.</p>
+<h3 id="public-assets">public-assets</h3>
+<p>Extra assets like favicons that are used in dev and production.</p>
+<h3 id="scripts">scripts</h3>
+<p>All js and entry point for the javascript application. Any javascript that is not related to a module is added here. The bundle for dev and prod is generated from this js and all the js in the modules folder.</p>
+<h3 id="spec">spec</h3>
+<p>Entry point for the test runner. All spec files relating to each module are contained in the modules folder.</p>
+<h3 id="sprite-src">sprite-src</h3>
+<p>All files used in the image sprit file added here. The site uses gulp sprite-smith to build a sprite from these images.</p>
+<h3 id="styles">styles</h3>
+<p>All styl files that are note related to modules. Css asset is built out from these and the files in the modules folder.</p>
+<h3 id="svg">svg</h3>
+<p>All svg assets that are converted to icons with gulp-iconify are added here.</p>
+<h2 id="cms">cms</h2>
+<p>Files specific to cms systems. will mainly be css files to overide editor styling.</p>
+<h2 id="config">config</h2>
+<p>All serverside configuration for the static Expressjs site. Not used in production. </p>
+<h2 id="dist">dist</h2>
+<p>Production location for all assets to be used in the production site. This will be populated when running:</p>
+<pre><code>gulp prod</code></pre>
+<h2 id="node_modules">node_modules</h2>
+<p>npm modules location</p>
+<h2 id="public">public</h2>
+<p>The assets location for all assets built for the static Expressjs site. This is populated when running:</p>
+<pre><code>gulp dev</code></pre>
+<h2 id="tests">tests</h2>
+<p>All setup for the Karma test suite in here.</p>
                 </section>
 
             </div>
