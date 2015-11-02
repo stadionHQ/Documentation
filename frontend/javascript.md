@@ -1,0 +1,7 @@
+---
+currentMenu: Javascript
+---
+
+Javascript
+============
+
