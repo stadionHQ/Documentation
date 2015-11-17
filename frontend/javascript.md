@@ -17,7 +17,7 @@ var newMethod = function() {
 }
 ```
 You can see that there is a tab indentation of two spaces and there is a space between () and the opening '{'. This is consistent throughout the site. Set your editor to use spaces not tabs.
-The javascript architecture of the site follows a strict adherance to the [Nodejs require and export module pattern](http://www.sitepoint.com/understanding-module-exports-exports-node-js/). New modules are created and added to the 'client/modules' folder for new modules and components. There are also more generic modules and helpers located in 'clientscripts'. An example of a new module initialisation:
+The javascript architecture of the site follows a strict adherance to the [Nodejs require and export module pattern](http://www.sitepoint.com/understanding-module-exports-exports-node-js/). New modules are created and added to the 'client/modules' folder for new modules and components. There are also more generic modules and helpers located in 'client/scripts'. An example of a new module initialisation:
 ```
 
 'use strict';
@@ -48,7 +48,7 @@ The module can then be required like this:
 var myNewModule = new MyNewModule({"width" : 500});
 ```
 
-If a module is added to the 'client/modules folder', then it should have an initialiser file to accompany it. There is a glob pattern in 'clinet/scripts/app.js' to do this:
+If a module is added to the 'client/modules folder', then it needs an initialiser file to accompany it. There is a glob pattern in 'client/scripts/app.js' to do this:
 ```
 require('../modules/**/*.initialiser.js', {glob: true});
 ```
@@ -75,8 +75,24 @@ module.exports = new CarouselInitialiser();
 ```
 
 
-### Introduction and standards
+## Introduction and standards
 
-              Inter-module communications done via node mediator following syntax (MODULEORIGINATOR:EVENTNAME) eg (APP:STARTED)
-              Private Methods:
-              To be appended to modules  with '_' and 'exposed' but not used. This is to allow for api testing.
+### Event architechture
+Inter-module communications are handled via the node mediator following syntax (MODULEORIGINATOR:EVENTNAME) eg (UI:BREAKPOINT_CHANGED). All events should be added to the 'client/scripts/config.js' file. An example trigger and listener:
+
+```
+var config.events = require('../config')
+var mediator = require('mediatorjs');
+
+//To listen to the mediator event:
+mediator.on(events.ui.breakPointChanged, upDateUiMethod);
+
+//To trigger mediator event:
+mediator.trigger(events.ui.breakPointChanged, {passed: 'parameters'});
+
+
+```
+
+### Initialisation
+The entry point to the application is in '/client/scripts/app.js'. 
+
