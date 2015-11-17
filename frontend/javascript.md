@@ -17,7 +17,7 @@ var newMethod = function() {
 }
 ```
 You can see that there is a tab indentation of two spaces and there is a space between () and the opening '{'. This is consistent throughout the site. Set your editor to use spaces not tabs.
-The javascript architecture of the site follows a strict adherance to the [Nodejs require and export module pattern](http://www.sitepoint.com/understanding-module-exports-exports-node-js/). New modules are created and added to the 'client/modules' folder for new modules and components. There are also more generic modules and helpers located in 'client/scripts'. An example of a new module initialisation:
+The javascript architecture of the site follows a strict adherance to the [Nodejs require and export module pattern](http://www.sitepoint.com/understanding-module-exports-exports-node-js/). New modules are created and added to the 'client/modules' folder for new modules. There are also more generic modules and helpers located in 'client/scripts'. An example of a new module initialisation:
 ```
 
 'use strict';
@@ -93,6 +93,32 @@ mediator.trigger(events.ui.breakPointChanged, {passed: 'parameters'});
 
 ```
 
-### Initialisation
-The entry point to the application is in '/client/scripts/app.js'. 
+### Root javascript Initialisation
+
+#### Entry point  (app.js)
+The entry point to the application is in 'client/scripts/app.js'. This is called from 'client/scripts/main.js'which will be the name of the bundled file in production. This allows us the flexibility to add other entry points to secondary applications if needed.
+
+#### Ui initialisation (ui.js)
+'client/scripts/ui.js' initialises UI state for the application. Things like mediator, global listeners and breakpoints watchers.
+
+#### reusable components (uiComponents.js)
+'client/scripts/uiComponents.js' contains initialisation for all globale and reusable components not deemed to be bespoke modules (which would be added to the 'modules' folder). That can be generally be initiated and used anywhere in the site. 
+
+The uiComponents module's init() method checks for css class existance in child elements of the passed parent Dom node. On page load this will be the 'body' but it can be something more dynamic if content has been added after page load with ajax. In these instances uiComponents.init($newParentNode); can be called to run all the checks again and initialise and new instances only contained in the scope of the new wrapper element ($newParentNode).
+
+An example initialisation:
+
+```
+  var $infiniteScroll = $parent.find('.js-infinitescroll');
+  if ($infiniteScroll.length) {
+    var InfiniteScroll = require('./utilities/infiniteScroll');
+    $infiniteScroll.each(function(index, item){
+      var infiniteScroll = new InfiniteScroll($(item));
+    });
+  }
+
+```
+ 
+
+
 
