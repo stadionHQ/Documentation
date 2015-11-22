@@ -151,6 +151,7 @@ A utility to handle all dynamic content throughout the application. The idea is 
 
 - *updateWarning* : Warn the user that an update is about to happen with overlay. This will be sent to the renderer which will handle the delay.
 
+##### Details
 Render actions can be trigger by pagination links in the element or by events with realtime data fired by oubnub channels.
 
 Render actions could also be triggered by a button external to the container referenced by data-trigger-link="triggerLinkClass"
