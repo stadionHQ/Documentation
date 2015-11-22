@@ -119,6 +119,90 @@ An example initialisation:
 
 ```
  
+#### Config (config.js)
+Config and settings for the site.
 
+#### Icons (icons.js)
+This file manages the rendering of svg assets in the site. More information can be found in the [icons docs](frontend/icons.html).
+
+
+
+
+
+
+
+### Utilities
+The are various utilities available for use in the site. Theye are all located in the 'lient/scripts/utilities' folder.
+
+<a name="dynamicContainer"></a>
+#### Dynamic container (utilities/dynamicContainer.js)
+A utility to handle all dynamic content throughout the application. The idea is the ajax endpoints, settings and templates are driven from data-attributes in the markup, rather that individual javascript views for each component. This more generic approach means we can keep the js bundle lighter. It was also the better approach to handling dynamic ajax content in the absence of a javascript framework. This works together with the render ('utilities/renderer.js'). More details on this [here](#renderer)
+
+##### Options :
+- *$elem* : The target wrapper that will have it's content be dynamic. The module will be initialised with this passed element (js-dynamicContainer).
+
+- *$triggerLinks* : The container may have links inside it that trigger the render action. Pagination for instance. These will be targeted with (js-triggerLinks). There can also be an external trigger link. The can be referenced by adding the target class of the external link to the 'data-trigger-link' attribute. An example of this is the link ('js-reveal-login') to reveal the login container (which is a dynamic container)
+
+- *renderAction* : How the new markup comin in is treated. Options are 'append', 'prepend', 'replace' (default). Set with data-render-action="append". Defaults to replace if not used.
+
+- *template* : The template to render content with. This can be replaced if a new template is required. But is normally the same one throughout it's life cycle. Starts with what is set in data-template attribute. This will be passed as a string to the template mapper and will assign the correct pre-compiled hanadlebars template.
+
+- *isHiddenWithContent* : This should be set to true if the dynamic container has content but is hidden from view on the page. An example of this would be the login dropdown. It provides a way of allowing external trigger links to reveal a container rather than updating the content.
+
+- *updateWarning* : Warn the user that an update is about to happen with overlay. This will be sent to the renderer which will handle the delay.
+
+Render actions can be trigger by pagination links in the element or by events with realtime data fired by oubnub channels.
+
+Render actions could also be triggered by a button external to the container referenced by data-trigger-link="triggerLinkClass"
+
+If the DynamicContainer is has data to be revealed and no ajax call needs to be made then the  data-is-hidden-with-content="true" will be present
+
+The utility will use the [renderer](#renderer) utility to fetch the data and handle the rendering of dom elements.
+
+When pagination is used, the next links should be updated in the data passed from the backend and rendered into the template.
+
+Example markup for a dynamic container:
+```
+<section class="list js-dynamicContainer" data-template="ContentListing" data-render-action="append" >
+  <h1 class="list__header">Other News</h1>
+  <ul class="list__wrapper">
+    <li class="list__item">
+      Some listed content in here....
+    </li>
+    <li class="list__item">
+      Some listed content in here....
+    </li>
+  </ul>
+  <div class="pagination js-triggerLinks">
+    <ul class="pagination__list">
+        <li class="previous"><a href="http://private-003c2-stephenzsolnai.apiary-mock.com/content-listing?page=1" rel="previous" data-load-previous="">
+            Previous
+          </a>
+        </li>
+          <li class="next"><a href="http://private-003c2-stephenzsolnai.apiary-mock.com/content-listing?page=3" rel="next" data-load-next="">
+            Next
+          </a>
+        </li>
+    </ul>
+  </div>
+</section>
+```
+
+<a name="renderer"></a>
+#### Renderer ('utilities/renderer.js')
+This utility gives a central place for ajax and realtime renderings to be handled. It is used in conjunction with the [Dynamic Container utility](#dynamicContainer).
+
+##### Options
+
+- *template* : The pre compiled handlebars template that has been passed to the instance.
+- *renderAction* : The render action passed. Options are 'append', 'prepend', 'replace' (default).
+- *$target* : The target element that the resulting html will be rendered inside.
+
+##### Public methods
+- *load()* : takes an ajax end point and template and calls the internal _loadData(). This is the ajax call. An event is triggered when the result is returned. This then calls the _renderToTarget() method to render the resultant html.
+
+- *renderData(0* : If we have the data already and just need to render it without an ajax call. Calls the _renderToTarget() method immediately.
+
+- *empty()* : Empties the parent container of all content. 
 
 
