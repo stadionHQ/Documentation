@@ -1,7 +1,5 @@
-
-
 ---
-currentMenu: modules/image
+currentMenu: FrontEndImages
 ---
 
 Image Module

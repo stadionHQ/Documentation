@@ -12,10 +12,10 @@ Below is an example of a simple rendering. The ```[Glass] BaseSitecoreItem model
 		
 	public class SamplePageController : Controller
     {
-        public ActionResult PageA([UmbracoGlass] BaseSitecoreItem model)
+        public ActionResult PageA([Glass] BaseSitecoreItem model)
         {
             var viewModel = model;
-            return UmbracoView("~/Views/SampleModule/PageA", viewModel);
+            return View("~/Views/SampleModule/PageA", viewModel);
         }
     }
 

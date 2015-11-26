@@ -29,10 +29,6 @@ menu:
                     text: Overview
                     # You can use relative urls
                     relativeUrl: index.html	
-                Front end:
-                    text: Front End
-                    # Or absolute urls
-                    relativeUrl: front end.html
                 API:
                     text: API
                     # Or absolute urls
@@ -69,18 +65,65 @@ menu:
                     text: Multi Language
                     # Or absolute urls
                     relativeUrl: multilanguage.html	
+                Videotech:
+                    text: Video
+                    # Or absolute urls
+                    relativeUrl: video.html						
         Design:
             name: Design Guidelines
             items:
                 Design Overview:
                     text: Overview
                     # You can use relative urls
-                    relativeUrl: design.html
-                Design Style Guide:
-                    text: Style Guide
+                    relativeUrl: design/design.html
+                Components:
+                    text: Components
                     # Or absolute urls
-                    relativeUrl: style guide.html
-        
+                    relativeUrl: design/Components.html						
+                Homepage:
+                    text: Homepage
+                    # Or absolute urls
+                    relativeUrl: design/homepage.html
+                Player Landing:
+                    text: Player Landing
+                    # Or absolute urls
+                    relativeUrl: design/playerlanding.html						
+                Player Profile:
+                    text: Player Profile
+                    # Or absolute urls
+                    relativeUrl: design/playerprofile.html
+                Fixtures:
+                    text: Fixtures
+                    # Or absolute urls
+                    relativeUrl: design/fixtures.html
+                Navigation:
+                    text: Navigation
+                    # Or absolute urls
+                    relativeUrl: design/navigation.html
+                MatchReport:
+                    text: Match Report
+                    # Or absolute urls
+                    relativeUrl: design/matchreport.html
+                Video:
+                    text: Video Detail
+                    # Or absolute urls
+                    relativeUrl: design/video.html	
+                VideoLanding:
+                    text: Video landing
+                    # Or absolute urls
+                    relativeUrl: design/videolanding.html
+                News Article:
+                    text: News Detail
+                    # Or absolute urls
+                    relativeUrl: design/news.html
+                News Landing:
+                    text: News Landing
+                    # Or absolute urls
+                    relativeUrl: design/newslanding.html
+                Hygiene:
+                    text: Hygiene
+                    # Or absolute urls
+                    relativeUrl: design/hygiene.html
         Umbraco:
             name: Umbraco
             items:
@@ -119,6 +162,26 @@ menu:
                     text: Custom Widgets
                     # Or absolute urls
                     relativeUrl: sitecore/customwidgets.html
+        FrontEnd:
+            name: Front End
+            items:
+                Front end:
+                    text: Overview
+                    # Or absolute urls
+                    relativeUrl: frontend/index.html
+                Build:
+                    text: Build
+                    # Or absolute urls
+                    relativeUrl: frontend/build/index.html
+                ModuleOverview:
+                    text: Module Overview
+                    # Or absolute urls
+                    relativeUrl: frontend/modules/index.html
+                FrontEndImages:
+                    text: Image Module
+                    # Or absolute urls
+                    relativeUrl: frontend/modules/image.html	
+                
         Editor:
             name: Editor Guidelines
             items:
