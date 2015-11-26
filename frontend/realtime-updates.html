@@ -228,7 +228,7 @@
                                             Overview
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/build/index.html">
                                             Build
                                         </a>
@@ -270,71 +270,55 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="frond-end-build">Frond-end Build</h1>
-<p>This site uses <a href="http://gulpjs.com/">gulp</a> as the build tool. There are comments above each task listed in the gulpfile in the root of the site.</p>
-<h2 id="gulp-task-summary">Gulp task summary:</h2>
-<pre><code>gulp dev</code></pre>
-<p>complies css,js and copies all assets to the '/public' folder which is
-used for the Expressjs site to serve the assets.</p>
-<pre><code>gulp dev --production</code></pre>
-<p>sets prod flag to test site with minified assets. Otherwise exactly the same as normal 'gulp dev' just allows running of the site locally with compressed prodution assets for testing purposes.</p>
-<pre><code>gulp prod</code></pre>
-<p>Production build to minify assets. Normal dev task runs but with prod flag set.
-Copies all assets needed for production to dist folder.</p>
-<pre><code>gulp default</code></pre>
-<p>The same as gulp dev, but without the server and browser sync.</p>
-<p>All build tasks build to &quot;/public&quot; folder. This includes production tasks as a flag will be set to indicate if the task is production and this will be available in the gulp stream with the variable:</p>
-<pre><code>var isProd</code></pre>
-<p>We can then effect things like compression, disabling or source maps etc. The prodution task will then move the assets from &quot;/public&quot; folder to the &quot;/dist&quot; folder.</p>
-<h2 id="server-start-and-dev-task">Server start and dev task</h2>
-<pre><code>gulp dev</code></pre>
-<p>will start a server running at: localhost:3000.
-A <a href="https://www.npmjs.com/package/browser-sync">browser sync</a> instance will also start and will watch all css and js files for changes and run the appropriate tasks when needed.</p>
-<h2 id="css-build-using-stylus">Css build using stylus.</h2>
-<h3 id="tools">Tools:</h3>
-<p>Pre-compiler:
-<a href="https://learnboost.github.io/stylus/">stylus</a> with <a href="https://www.npmjs.com/package/gulp-stylus">gulp-stylus</a>
-Postcss:
-<a href="https://www.npmjs.com/package/autoprefixer">Autoprefixer</a>
-Stylus libraries:
-<a href="http://jeet.gs/">Jeet grid system</a>
-<a href="http://axis.netlify.com/">Axis utilities for stylus</a></p>
-<h3 id="gulp-tasks">Gulp tasks:</h3>
-<pre><code>gulp styles</code></pre>
-<p>This is initially run along with </p>
-<pre><code>gulp dev</code></pre>
-<p>and will also be triggered via browser sync on .styl file changes.</p>
-<p>The task has an entry point at &quot;/client/styles/core.styl&quot;. This file imports all styl files including files from a temp folder &quot;styl&quot; in &quot;/client/styles/modules&quot;. This folder gets created with the</p>
-<pre><code>copy-stylus-tmp</code></pre>
-<p>and removed again with</p>
-<pre><code>remove-stylus-tmp</code></pre>
-<p>after the styus task has run. This allows globbing of all .styl files from the temp location /client/styles/modules/core.styl.</p>
-<h2 id="javascript-build">Javascript build</h2>
-<h3 id="tools-1">Tools:</h3>
-<p>Bundler:
-<a href="http://needlink">Browserify: NEED LINK</a> - Allows for bundling in the browser using Node require syntax.
-<a href="http://needlink">Bower: NEED LINK</a> - Vendor managment tool.</p>
-<h3 id="gulp-tasks-1">Gulp tasks:</h3>
-<pre><code>gulp vendor</code></pre>
-<p>Simple task to generate vendor.js file. this ic concatenated from Bower dependencies as well as other third party scripts added manually to '/scripts/vendor'</p>
-<pre><code>gulp scripts</code></pre>
-<p>Runs browserify using 'client/'/scripts/main.js' as the entry point. The process takes care of pre-defining all npm dependencies and ordering from all require() statements in each of the js files referenced internally as well as handlebars template pre-compiling, so that we are left with a bundle that is browser ready.</p>
-<h2 id="production-build-and-asset-generation">Production build and asset generation.</h2>
-<h3 id="gulp-tasks-2">Gulp tasks:</h3>
-<pre><code>gulp prod</code></pre>
-<p>Runs the gulp dev task as described earlier, but with the added addition of a production flag to remove comments and minify etc. All js, css, icons, fonts and images are copied from /public folder to /dist.
-Views are sourced for the production site from /app/Views/ayouts and /app/Views/shared and alos copied to /dist.
-Individual module views are also added from /Modules/**.handlebars.</p>
-<h3 id="important">IMPORTANT!!!</h3>
-<p>The views contained in the <em>/app/Views/partials</em> folder are dynamically built from the .handlebars templates contained in each module in:</p>
-<p><em>/client/modules/<module-name>/<module-name.handlebars></em></p>
-<p>The reason for this is so to avoid duplicating module templates as these are used as handlebars partials in the Expressjs site and need to be located here. But we need to keep the views together with their othe modules assets inside /modules folder for consistency. Modules/*.handlebars views can also be required client side if needed.</p>
-<p>.handlebars views in the app/views/ folder are rendered server side on page load for the FE site. </p>
-<p>.handlebars templates in the client/modules/ folder will be copied to the /dist folder. They will then be copied accross by a production build task (not covered here as this is a backend task) to the relevant folder in the production site to be packaged into Nuget. </p>
-<h3 id="the-shared-layouts-and-pages-folder-however-are-not-dynamic">The shared, layouts and pages folder however are not dynamic.</h3>
-<p>The Views folder contains shared and layout views like header and footer which are used around the site but NOT as front-end views on the client site. These are needed server side here as well as in the production site.</p>
-<h2 id="other-build-tasks">Other Build Tasks</h2>
-<p>Other tasks as well as thos described here are also documented in details inside: gulpfile.js</p>
+                    <h1 id="realtime-updates">Realtime Updates</h1>
+<h2 id="summary">Summary</h2>
+<p>The site updates content and data in realtime with <a href="https://www.pubnub.com/">Pubnub</a>. Settings and initialisation for Pubnub are handled in a Pubnub adaptor ('/client/scripts/utilities/adaptor-pubnub.js'). Configuration settings themselves are held in 'client/scripts/config.js'. All that is needed is the 'subscribe_key'. Pubnub uses channels to allow the application to subscribe to individual update events. More information can be found on the Pubnub docs. Once you have your account setup and have received your login, you will be given this key as well as a 'publish_key' which is used to push updates to Pubnub from the serverside part of the website. </p>
+<h2 id="usage">Usage</h2>
+<p>The pubnub adaptor is initialised by the realtime listener ('/client/scripts/utilities/realtime-listener.js'):</p>
+<pre><code>var pubnubAdapter = null;
+
+var RealtimeListener = function($elem) {
+  var channel = $elem.data('realtime-channel');
+
+  if (channel) {
+    if (!pubnubAdapter) {
+      pubnubAdapter = require('./adaptor-pubnub');
+    }
+    pubnubAdapter.connect(channel);
+  }
+};
+
+module.exports = RealtimeListener;
+</code></pre>
+<p>An instance of the realtime listener is then initiated for every instance it is needed and triggered with the presence of the '.js-realtime' css class. This happens in the components.js file. the containing element that will need to be live updated is passed to it:</p>
+<pre><code>var $realtime = $parent.find('.js-realtime');
+if ($realtime.length) {
+var RealtimeListener = require('./utilities/realtimelistener');
+$realtime.each(function(index, item) {
+  var rt = new RealtimeListener($(item));
+});
+}</code></pre>
+<p>The pubnub adaptor's connect method will be called by the realtime listener for each container needing realtime updates and the channel id is taken from the 'data-realtime-channel' attribute on the container will be passed to it. The only handling that then needs to be done is to listen for the unique event that will be fired from the pubnub adaptors mediator instance:</p>
+<pre><code>PubnubAdapter.prototype._recieved = function(data, envelope, channel) {
+  console.log('message received on ' + channel);
+  mediator.trigger("REALTIME:" + channel, data);
+};</code></pre>
+<p>An example of this usage:</p>
+<pre><code>
+var MyNewModule = function() {
+    mediator.on("REALTIME:" + MyNewModuleChannelId, this.update);
+}
+
+MyNewModule.prototype.attach = function() {
+    //Update the module here...
+}
+...
+
+This event driven architecture allows us to abtract the adaptor making it easy to drop in another provider if required. The new provider will just need an adaptor added like the pubnub adaptor. Assuming the new provider uses a similar event based system, the listeners can be attached in the same way.
+
+## Testing data updates.
+
+Testing new and exisitng components are rendering correctly through Pubnub updates is a manual process. Pubnub provides a development console for this purpose. You can drop in test json data structured as the application would be expecting it, and manually push this out to a selected channel to test the wonrkings of your module. There is already some test data in source control for this very purpose in 'assets/reference'.</code></pre>
                 </section>
 
             </div>

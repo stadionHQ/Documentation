@@ -228,7 +228,7 @@
                                             Overview
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/build/index.html">
                                             Build
                                         </a>
@@ -270,28 +270,8 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="frond-end-build">Frond-end Build</h1>
-<p>This site uses <a href="http://gulpjs.com/">gulp</a> as the build tool. There are comments above each task listed in the gulpfile in the root of the site.</p>
-<h2 id="gulp-task-summary">Gulp task summary:</h2>
-<pre><code>gulp dev</code></pre>
-<p>complies css,js and copies all assets to the '/public' folder which is
-used for the Expressjs site to serve the assets.</p>
-<pre><code>gulp dev --production</code></pre>
-<p>sets prod flag to test site with minified assets. Otherwise exactly the same as normal 'gulp dev' just allows running of the site locally with compressed prodution assets for testing purposes.</p>
-<pre><code>gulp prod</code></pre>
-<p>Production build to minify assets. Normal dev task runs but with prod flag set.
-Copies all assets needed for production to dist folder.</p>
-<pre><code>gulp default</code></pre>
-<p>The same as gulp dev, but without the server and browser sync.</p>
-<p>All build tasks build to &quot;/public&quot; folder. This includes production tasks as a flag will be set to indicate if the task is production and this will be available in the gulp stream with the variable:</p>
-<pre><code>var isProd</code></pre>
-<p>We can then effect things like compression, disabling or source maps etc. The prodution task will then move the assets from &quot;/public&quot; folder to the &quot;/dist&quot; folder.</p>
-<h2 id="server-start-and-dev-task">Server start and dev task</h2>
-<pre><code>gulp dev</code></pre>
-<p>will start a server running at: localhost:3000.
-A <a href="https://www.npmjs.com/package/browser-sync">browser sync</a> instance will also start and will watch all css and js files for changes and run the appropriate tasks when needed.</p>
-<h2 id="css-build-using-stylus">Css build using stylus.</h2>
-<h3 id="tools">Tools:</h3>
+                    <h1 id="css">CSS</h1>
+<h2 id="tools">Tools:</h2>
 <p>Pre-compiler:
 <a href="https://learnboost.github.io/stylus/">stylus</a> with <a href="https://www.npmjs.com/package/gulp-stylus">gulp-stylus</a>
 Postcss:
@@ -299,42 +279,144 @@ Postcss:
 Stylus libraries:
 <a href="http://jeet.gs/">Jeet grid system</a>
 <a href="http://axis.netlify.com/">Axis utilities for stylus</a></p>
-<h3 id="gulp-tasks">Gulp tasks:</h3>
-<pre><code>gulp styles</code></pre>
-<p>This is initially run along with </p>
-<pre><code>gulp dev</code></pre>
-<p>and will also be triggered via browser sync on .styl file changes.</p>
-<p>The task has an entry point at &quot;/client/styles/core.styl&quot;. This file imports all styl files including files from a temp folder &quot;styl&quot; in &quot;/client/styles/modules&quot;. This folder gets created with the</p>
-<pre><code>copy-stylus-tmp</code></pre>
-<p>and removed again with</p>
-<pre><code>remove-stylus-tmp</code></pre>
-<p>after the styus task has run. This allows globbing of all .styl files from the temp location /client/styles/modules/core.styl.</p>
-<h2 id="javascript-build">Javascript build</h2>
-<h3 id="tools-1">Tools:</h3>
-<p>Bundler:
-<a href="http://needlink">Browserify: NEED LINK</a> - Allows for bundling in the browser using Node require syntax.
-<a href="http://needlink">Bower: NEED LINK</a> - Vendor managment tool.</p>
-<h3 id="gulp-tasks-1">Gulp tasks:</h3>
-<pre><code>gulp vendor</code></pre>
-<p>Simple task to generate vendor.js file. this ic concatenated from Bower dependencies as well as other third party scripts added manually to '/scripts/vendor'</p>
-<pre><code>gulp scripts</code></pre>
-<p>Runs browserify using 'client/'/scripts/main.js' as the entry point. The process takes care of pre-defining all npm dependencies and ordering from all require() statements in each of the js files referenced internally as well as handlebars template pre-compiling, so that we are left with a bundle that is browser ready.</p>
-<h2 id="production-build-and-asset-generation">Production build and asset generation.</h2>
-<h3 id="gulp-tasks-2">Gulp tasks:</h3>
-<pre><code>gulp prod</code></pre>
-<p>Runs the gulp dev task as described earlier, but with the added addition of a production flag to remove comments and minify etc. All js, css, icons, fonts and images are copied from /public folder to /dist.
-Views are sourced for the production site from /app/Views/ayouts and /app/Views/shared and alos copied to /dist.
-Individual module views are also added from /Modules/**.handlebars.</p>
-<h3 id="important">IMPORTANT!!!</h3>
-<p>The views contained in the <em>/app/Views/partials</em> folder are dynamically built from the .handlebars templates contained in each module in:</p>
-<p><em>/client/modules/<module-name>/<module-name.handlebars></em></p>
-<p>The reason for this is so to avoid duplicating module templates as these are used as handlebars partials in the Expressjs site and need to be located here. But we need to keep the views together with their othe modules assets inside /modules folder for consistency. Modules/*.handlebars views can also be required client side if needed.</p>
-<p>.handlebars views in the app/views/ folder are rendered server side on page load for the FE site. </p>
-<p>.handlebars templates in the client/modules/ folder will be copied to the /dist folder. They will then be copied accross by a production build task (not covered here as this is a backend task) to the relevant folder in the production site to be packaged into Nuget. </p>
-<h3 id="the-shared-layouts-and-pages-folder-however-are-not-dynamic">The shared, layouts and pages folder however are not dynamic.</h3>
-<p>The Views folder contains shared and layout views like header and footer which are used around the site but NOT as front-end views on the client site. These are needed server side here as well as in the production site.</p>
-<h2 id="other-build-tasks">Other Build Tasks</h2>
-<p>Other tasks as well as thos described here are also documented in details inside: gulpfile.js</p>
+<h2 id="settings-variables-and-general-global-styles">Settings variables and general global styles</h2>
+<p>These are all located in &quot;client/styles&quot; folder, whereas module specific styles are located in &quot;client/modules&quot;.
+All settings and variables used with stylus are located in &quot;client/styles/settings&quot; and are all preceded with &quot;$&quot; symbol. This is where fonts, colours, sizes etc are all declared.</p>
+<h3 id="other-files-of-note">Other files of note:</h3>
+<p>The purpose of most files in this folder will be self explainatory with comments inside them. However, there are a few with extra comments noted here:</p>
+<ul>
+<li>&quot;components.styl&quot; is a file to hold smaller components that are re-used around the site that are not module specific. They still follow the same syntax rules as modules though.</li>
+<li>&quot;Scaffolding.styl&quot; houses everything to do with layout and grid. More information can be found <a href="frontend/grid-and-scaffolding.html">here</a>)</li>
+<li>&quot;core.styl&quot; this is the entry point for the stylus build and everything gets built fro this. More information on css build can be found <a href="frontend/build.html">here</a></li>
+<li>&quot;sprite.styl&quot; this is dynamically generated by the spritesmith gulp plugin as part of the build. DO NOT EDIT THIS FILE.</li>
+</ul>
+<h2 id="jeet-and-axis">Jeet and Axis</h2>
+<p>As stated above, Jeet is a powerful third party grid system that is used extensively through out the site. More info on it's usage can be found here <a href="frontend/grid-and-scaffolding.html">here</a>)
+Axis is also a third party system with a bunch of helper mixins. Please read the <a href="http://axis.netlify.com/">docs</a> for details and for descriptions of the mixins available. One of the most used examples is the linear-gradient mixin which provides an easy way to create cross-browser background gradients</p>
+<pre><code>linear-gradient(to bottom, #fff, #000 100%)</code></pre>
+<h2 id="css-methodology-and-syntax">CSS Methodology and syntax</h2>
+<p>The BEM methodology is primarily used in the css authoring for the site. There is no strict adherance to it, but the basic principles of Block, Element and modifier are followed. Lowercase syntax is used for selector / module names with dash (-) seperators preferred to camelcasing. Child elements are denoted with a double underscore (__) and modifiers are described with a double dash (--). </p>
+<p>State classes are preceded by verbs to denote actions for example:</p>
+<pre><code>.has-sub-nav
+.is-active</code></pre>
+<p>Any helper classes follow the same naming principles for example:</p>
+<pre><code>.centered-content
+</code></pre>
+<p>Any class that is used as a trigger for a javascript action will be preceded by js-. For example:</p>
+<pre><code>js-dynamicContainer</code></pre>
+<p>This class should have NO STYLING applied to it and should be purely used as a javascript trigger.</p>
+<p>Since the site is largely module based, all css relating to any module is generally housed in the file associated to that module. We then use Bem syntax to target child elements of the module. So the following css:</p>
+<pre><code>.module-name {}
+.module-name__first-child {}
+.module-name__first-child__nested {}
+
+.module-name--expanded {
+    width: 100%
+}
+</code></pre>
+<p>would be used along with the following markup:</p>
+<pre><code>&lt;section class="module-name module-name--expanded"&gt;
+    &lt;div class="module-name__first-child"&gt;
+        &lt;p&gt;This is the child element&lt;/p&gt;
+        &lt;a class="module-name__first-child__nested" href="/ALINK"&gt;This is a furter nested child&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+<p>That's the css example. But with styus we would write this:</p>
+<pre><code>.module-name
+    //module css here
+    &amp;__first-child
+        //first child css here
+        &amp;__nested
+            //nested child css here
+
+.module-name--expanded
+    @extend .module-name
+    width 100%
+</code></pre>
+<p>using extend means that you don't have to use the module class as well as it's modified class. So the following would work:</p>
+<pre><code>&lt;section class="module-name--expanded"&gt;
+    &lt;!-- Module-name--expanded has all the css applied to module-name applied to it as well --&gt;
+&lt;/section&gt;</code></pre>
+<h2 id="module-examples">Module examples</h2>
+<p>Here is example usage of css authoring with the commentary module. First the html (located at: &quot;modules/CommentaryModule/Commentary.handlebars&quot;):</p>
+<pre><code>&lt;section class="commentary"&gt;
+  &lt;div data-template="CommentaryModule/CommentaryHeader" class="commentary__attribution js-commentary-header"&gt;
+    {{&gt;CommentaryHeader}}
+  &lt;/div&gt;
+
+  &lt;ul class="commentary__list js-dynamicContainer js-realtime" 
+      data-realtime-channel="{{commentaryChannel}}" 
+      data-render-action="prepend"
+      data-template="CommentaryModule/CommentaryItem"&gt;
+    {{#each items}}
+      {{&gt;CommentaryItem}}
+    {{/each}}
+  &lt;/ul&gt;
+&lt;/section&gt;</code></pre>
+<p>contains a child element &quot;commentary__list&quot; (located at: &quot;modules/CommentaryModule/CommentaryItem.handlebars&quot;)</p>
+<pre><code>&lt;li id="{{id}}" data-timestamp="{{timestamp}}" class="commentary__list__item commentary__list__item--{{icon}} commentary__list__item commentary__list__item--{{contentType}}"&gt;
+  &lt;div class="commentary__list__item__time"&gt;
+    {{#if icon}}&lt;i class="commentary__list__item__icon icon-{{icon}}"&gt;&lt;/i&gt;{{/if}}
+    &lt;span&gt;{{matchTime}}&lt;/span&gt;
+    {{#if extraTime}}&lt;span&gt;{{extraTime}}&lt;/span&gt;{{/if}}
+  &lt;/div&gt;
+  &lt;div class="commentary__list__item__content"&gt;
+
+    {{#if contentType}}&lt;i class="commentary__list__item__type icon-{{contentType}}"&gt;&lt;/i&gt;{{/if}}
+    &lt;header class="commentary__list__item__content__title"&gt;
+      &lt;h3&gt;{{title}}&lt;/h3&gt;
+    &lt;/header&gt;
+
+    &lt;div class="commentary__list__item__content__body"&gt;
+      {{{content}}}
+    &lt;/div&gt;        
+  &lt;/div&gt;
+&lt;/li&gt;</code></pre>
+<p>and the css used with this would follow like so:</p>
+<pre><code>.commentary
+  text-align left 
+  padding-top 2rem
+
+  &amp;__list
+    list-style none 
+    padding-left 0
+    margin-top 0.5em  
+
+    &amp;__item
+      @extends .row--flush
+      position relative
+
+    //Then goal is a modifier that has been added by {{contentType}}
+
+      &amp;--goal
+
+        .commentary__list__item__content
+          border-bottom 4px solid color-highlight-inverse-dark
+
+        .commentary__list__item__time
+          background color-highlight-inverse
+          background linear-gradient(to bottom, color-highlight-inverse 0%,color-highlight-inverse 70%,color-highlight-inverse-dark 100%)
+</code></pre>
+<h2 id="media-queries">Media Queries</h2>
+<p>The authoring of the css follows a mobile first approach. So the core styles contained in &quot;.module-name&quot; will default to mobile. No specifix devices are target. Only widths at certain breakpoints. The breakpoints are listed in &quot;client/styles/settings.styl&quot;</p>
+<pre><code>$breakMini = 400px
+$breakOne = 500px
+$breakOneAndHalf = 640px
+$breakTwo = 850px
+$breakThree = 1000px
+$breakThreeBump = 1100px
+$breakFour = 1300px
+</code></pre>
+<p>There is then a media query mixin that gives a short hand style to declaring a breakpoint using the variables. Example:</p>
+<pre><code>
+.module-name
+  padding 0
+  //mobile styles here
+
+  +media-query(only screen, min-width $breakThree)
+    background rgba(0,0,0,0.2)
+    padding-left global-gutter-padding-desktop
+    padding-right global-gutter-padding-desktop</code></pre>
                 </section>
 
             </div>

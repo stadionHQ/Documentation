@@ -44,7 +44,7 @@
                                             Overview
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/api.html">
                                             API
                                         </a>
@@ -228,7 +228,7 @@
                                             Overview
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/build/index.html">
                                             Build
                                         </a>
@@ -270,71 +270,73 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="frond-end-build">Frond-end Build</h1>
-<p>This site uses <a href="http://gulpjs.com/">gulp</a> as the build tool. There are comments above each task listed in the gulpfile in the root of the site.</p>
-<h2 id="gulp-task-summary">Gulp task summary:</h2>
+                    <h1 id="api-apiary-mock">API (Apiary mock)</h1>
+<h2 id="summary">Summary</h2>
+<p>The Expressjs site is driven by mock data located at:
+<a href="http://private-003c2-stadion1.apiary-mock.com"><a href="http://private-003c2-stadion1.apiary-mock.com">http://private-003c2-stadion1.apiary-mock.com</a></a></p>
+<p>This behaves like a production REST API and should always mock what exists in the production .NET version. The production site is ultimately driven by the same sets of data as the templates are shared between the Expressjs and production sites. But it's important to note that they are seperate entities and exist independantly. They are both also purely backend apis (Expressjs site and Production).</p>
+<p>This mock location can change to something more appropriate with a new instance of the Stadion demo site. But for the current demo site, this is used. To have a custom named location for data for a new instance will need assistance from Stadion developers to retrieve a snapshot of the current data set that can be added to a fresh <a href="http://apiary.io/">Apiary</a> instance. The data and docs can then be accessed via the Apiry docs location url </p>
+<p>A find and replace then needs to be done in the front-end project as well as the test suite for the production site. </p>
+<h3 id="steps-to-find-and-replace-the-end-point-address">Steps to find and replace the end-point address:</h3>
+<ul>
+<li>Log into your new Apiary instance.</li>
+<li>Click the &quot;Inspector&quot; Link in the top level navigation. You will be redirected to your docs location which will be something like: <a href="http://docs.yourProjectName.apiary.io/traffic">http://docs.yourProjectName.apiary.io/traffic</a></li>
+<li>Underneath the menu bar you should see something like: Listening at &quot;<a href="http://private-xxx000-yourProjectName.apiary-mock.com">http://private-xxx000-yourProjectName.apiary-mock.com</a>&quot;.</li>
+<li>Use this end-point in the project and change the existing config located at: &quot;config/config.js&quot;. Change 
+<pre><code>apiRoot: 'http://private-003c2-stadion1.apiary-mock.com/' </code></pre>
+<p>to your new end-point: &quot;<a href="http://private-xxx000-yourProjectName.apiary-mock.com">http://private-xxx000-yourProjectName.apiary-mock.com</a>&quot;</p></li>
+</ul>
+<h3 id="managing-the-api-data">Managing the API data</h3>
+<p>When the server first starts and runs the application with</p>
 <pre><code>gulp dev</code></pre>
-<p>complies css,js and copies all assets to the '/public' folder which is
-used for the Expressjs site to serve the assets.</p>
-<pre><code>gulp dev --production</code></pre>
-<p>sets prod flag to test site with minified assets. Otherwise exactly the same as normal 'gulp dev' just allows running of the site locally with compressed prodution assets for testing purposes.</p>
-<pre><code>gulp prod</code></pre>
-<p>Production build to minify assets. Normal dev task runs but with prod flag set.
-Copies all assets needed for production to dist folder.</p>
-<pre><code>gulp default</code></pre>
-<p>The same as gulp dev, but without the server and browser sync.</p>
-<p>All build tasks build to &quot;/public&quot; folder. This includes production tasks as a flag will be set to indicate if the task is production and this will be available in the gulp stream with the variable:</p>
-<pre><code>var isProd</code></pre>
-<p>We can then effect things like compression, disabling or source maps etc. The prodution task will then move the assets from &quot;/public&quot; folder to the &quot;/dist&quot; folder.</p>
-<h2 id="server-start-and-dev-task">Server start and dev task</h2>
+<p>the entire data set will be fetched from the API and added to a global object variable. This will then be referenced throughout the application on subsequent page requests while this instance of the server is running. </p>
+<p>All this logic to handle data is held in &quot;app/api/globals.js&quot;. How it works is on first load the method &quot;updateGlobalDataConfig&quot; is called. This first checks to see if a local version of the dataset exists at &quot;api/data/globalData.json&quot; and uses this data if the file exists. It then attempts to fetch the entire API dataset and if it successfully fetches it, updates the config variable &quot;globalData&quot; again and writes the file &quot;api/data/globalData.json&quot; with the latest data. This efeectively allows us to be able to work offline if needed as the error from the non-existant API in offline mode will be handled.</p>
+<p>The &quot;app/api/globals.js&quot; also runs through all the pages folder to get the namse of files and adds then to the globalData config variable too. this allows us to have a list of all pages on the homepage.</p>
+<p><em>Important note</em>
+If you encounter an error like:</p>
+<pre><code>[10:06:17] Development server has error.
+undefined:1
+
+SyntaxError: Unexpected end of input</code></pre>
+<p>when running</p>
 <pre><code>gulp dev</code></pre>
-<p>will start a server running at: localhost:3000.
-A <a href="https://www.npmjs.com/package/browser-sync">browser sync</a> instance will also start and will watch all css and js files for changes and run the appropriate tasks when needed.</p>
-<h2 id="css-build-using-stylus">Css build using stylus.</h2>
-<h3 id="tools">Tools:</h3>
-<p>Pre-compiler:
-<a href="https://learnboost.github.io/stylus/">stylus</a> with <a href="https://www.npmjs.com/package/gulp-stylus">gulp-stylus</a>
-Postcss:
-<a href="https://www.npmjs.com/package/autoprefixer">Autoprefixer</a>
-Stylus libraries:
-<a href="http://jeet.gs/">Jeet grid system</a>
-<a href="http://axis.netlify.com/">Axis utilities for stylus</a></p>
-<h3 id="gulp-tasks">Gulp tasks:</h3>
-<pre><code>gulp styles</code></pre>
-<p>This is initially run along with </p>
-<pre><code>gulp dev</code></pre>
-<p>and will also be triggered via browser sync on .styl file changes.</p>
-<p>The task has an entry point at &quot;/client/styles/core.styl&quot;. This file imports all styl files including files from a temp folder &quot;styl&quot; in &quot;/client/styles/modules&quot;. This folder gets created with the</p>
-<pre><code>copy-stylus-tmp</code></pre>
-<p>and removed again with</p>
-<pre><code>remove-stylus-tmp</code></pre>
-<p>after the styus task has run. This allows globbing of all .styl files from the temp location /client/styles/modules/core.styl.</p>
-<h2 id="javascript-build">Javascript build</h2>
-<h3 id="tools-1">Tools:</h3>
-<p>Bundler:
-<a href="http://needlink">Browserify: NEED LINK</a> - Allows for bundling in the browser using Node require syntax.
-<a href="http://needlink">Bower: NEED LINK</a> - Vendor managment tool.</p>
-<h3 id="gulp-tasks-1">Gulp tasks:</h3>
-<pre><code>gulp vendor</code></pre>
-<p>Simple task to generate vendor.js file. this ic concatenated from Bower dependencies as well as other third party scripts added manually to '/scripts/vendor'</p>
-<pre><code>gulp scripts</code></pre>
-<p>Runs browserify using 'client/'/scripts/main.js' as the entry point. The process takes care of pre-defining all npm dependencies and ordering from all require() statements in each of the js files referenced internally as well as handlebars template pre-compiling, so that we are left with a bundle that is browser ready.</p>
-<h2 id="production-build-and-asset-generation">Production build and asset generation.</h2>
-<h3 id="gulp-tasks-2">Gulp tasks:</h3>
-<pre><code>gulp prod</code></pre>
-<p>Runs the gulp dev task as described earlier, but with the added addition of a production flag to remove comments and minify etc. All js, css, icons, fonts and images are copied from /public folder to /dist.
-Views are sourced for the production site from /app/Views/ayouts and /app/Views/shared and alos copied to /dist.
-Individual module views are also added from /Modules/**.handlebars.</p>
-<h3 id="important">IMPORTANT!!!</h3>
-<p>The views contained in the <em>/app/Views/partials</em> folder are dynamically built from the .handlebars templates contained in each module in:</p>
-<p><em>/client/modules/<module-name>/<module-name.handlebars></em></p>
-<p>The reason for this is so to avoid duplicating module templates as these are used as handlebars partials in the Expressjs site and need to be located here. But we need to keep the views together with their othe modules assets inside /modules folder for consistency. Modules/*.handlebars views can also be required client side if needed.</p>
-<p>.handlebars views in the app/views/ folder are rendered server side on page load for the FE site. </p>
-<p>.handlebars templates in the client/modules/ folder will be copied to the /dist folder. They will then be copied accross by a production build task (not covered here as this is a backend task) to the relevant folder in the production site to be packaged into Nuget. </p>
-<h3 id="the-shared-layouts-and-pages-folder-however-are-not-dynamic">The shared, layouts and pages folder however are not dynamic.</h3>
-<p>The Views folder contains shared and layout views like header and footer which are used around the site but NOT as front-end views on the client site. These are needed server side here as well as in the production site.</p>
-<h2 id="other-build-tasks">Other Build Tasks</h2>
-<p>Other tasks as well as thos described here are also documented in details inside: gulpfile.js</p>
+<p>It probably means that something has gone wrong with the local &quot;globalData.json&quot; file and it may be corrupt of have no data. DELETE this file and then start the server again.</p>
+<h3 id="adding-a-new-end-point-to-the-api-dataset">Adding a new end-point to the API dataset</h3>
+<p>If a new feature or module is added to the site then a new data end-point in the API will need to be added. Steps to acheive this:</p>
+<ul>
+<li>Log into apiary.io and navigate to the &quot;editor&quot; tab.</li>
+<li>You'll see the list of all the current end-points. They should be roughly alphabetical.</li>
+<li>Scroll down to where you would like to add the new end-point and enter:
+<pre><code>
+## New Module Name [/new-module-end-point]
+### New module description [GET]</code></pre></li>
+<li>
+<p>Response 200 (application/json)</p>
+<pre><code>{
+    //data in here
+}</code></pre>
+<pre><code></code></pre>
+</li>
+<li>Once you are done adding the data you should test the status and health of the data but accessingthe &quot;inspector&quot; tab. Your new end-point should be green.</li>
+<li>Now you need to add this new value to config so that the application knows to add it the global data object. Open &quot;config/config.js&quot; and look for the following:
+<pre><code></code></pre></li>
+</ul>
+<p>/<em> A list of all endpoints for the mock API.
+========================================================================== </em>/
+var endPoints = [
+'article',
+'carousel',
+'content-listing',
+'featuredArticleModule',
+'featuredVideoModule',
+'featured-videos',
+'fixtures',
+...
+];</p>
+<pre><code>add your new end-point to this list:</code></pre>
+<pre><code>'new-module-end-point'</code></pre>
+<pre><code>
+and restart the server. Your new data will now be available in the application.</code></pre>
                 </section>
 
             </div>

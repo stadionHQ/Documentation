@@ -228,7 +228,7 @@
                                             Overview
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/build/index.html">
                                             Build
                                         </a>
@@ -270,8 +270,42 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="build">Build</h1>
-<h2 id="guidlines-and-steps">Guidlines and steps</h2>
+                    <h1 id="grid-and-scaffolding">Grid and Scaffolding</h1>
+<h2 id="summary">Summary:</h2>
+<p>The site has been built on a 12 column grid system. This is the most flexible grid for websites as it can be very flexible, is divisible by 6, 3, and 4 to allow for a flexible number of layout options. It also gives the best control when it comes to nesting. The site uses a four column grid layout for mobile, 8 column for tablet widths and 12 column for desktop.
+The grid system is built upon the third party <a href="http://jeet.gs/">Jeet grid system</a>. It's a very flexible system and allows for margin, padding and width variables to be available and has powerful nesting capabilities. All grid classes are dynamically created in &quot;client/styles/scaffolding.styl&quot;
+Also, it is possible to change the overall layout to be 10 column for instance. This would be acheived by changing all occurances of the &quot;12&quot; col declarations in this file. All content in the site has flexible width and so modules will flex to their containers. But we should stress again that it is ill advices to stray from the 12 column setup here as it has been tried and tested and is the most flexible.</p>
+<h2 id="the-methodology">The methodology</h2>
+<p>It is best to read the Jeet docs to see what mixins is available, but the site mostly makes use of the &quot;col&quot; method. For example:</p>
+<pre><code>.col--2
+    col(2/12, cycle: 6, gutter: gutter-percentage-desktop)</code></pre>
+<p>would create a class that when added to a number of elements within a .row container would size those elements to fit side by side with 6 to a row. To break it down:</p>
+<ul>
+<li>2/12 - This means an item that is 2 columns wide of 12.</li>
+<li>cycle: 6 - This tells the system not to add a right margin to every 6th item allowing for many items to stack and be flush to the right.</li>
+<li>gutter: gutter-percentage-desktop - This is the size of the gutter between items, &quot;gutter-percentage-desktop&quot; being one of the variables available in &quot;settings.styl&quot;. </li>
+</ul>
+<p>Other methods like:</p>
+<pre><code>column-width(2/12)
+column-gutter(2/12)</code></pre>
+<p>return the raw percentage values and can be used to explicitly set values if needed.</p>
+<p>The gutter size changes and different breakpoints as per the design for the demo site so these can be changed easily with a new design.
+To see examples of all grid options in action, run the dev site and go to &quot;<a href="http://localhost:3000/grid">http://localhost:3000/grid</a>&quot;.</p>
+<p>This is how the classes should then be used in markup so create layouts.</p>
+<pre><code>&lt;div class="row"&gt;
+    &lt;article class="col--9"&gt;
+        This would be the main content in this instance
+    &lt;/article&gt;
+    &lt;aside class="col--3"&gt;
+        This would be secondary aside content
+        &lt;div class="aside-module"&gt;
+            This would be nest content inside the layout to flex to it's parent
+        &lt;/div&gt;
+    &lt;/aside&gt;
+&lt;/div&gt;</code></pre>
+<p>Remember to keep layout and module containers seperate. This makes it easier to drop modules into layout containers without hassle.</p>
+<h2 id="gutter-overlays-and-helpers">Gutter overlays and helpers</h2>
+<p>When viewing any page in the Expressjs site, the grid overlay can be shown with the &quot;x&quot; key or by clicking the &quot;show grid&quot; link in the top left. This overlay has been generated from <a href="http://gridpak.com/">Gridpak</a> and the assets for it are available in &quot;client/development/gridpak&quot;. This is a quick and easy way to make sure everything lines up with any designs and the grid system. It's best to decide on fixed gutter widths with the design team and then set these in the gridpak editor for each breakpoint. Design will then match development and the new files once downloaded can be dropped into the &quot;client/development/gridpak&quot; folder.</p>
                 </section>
 
             </div>

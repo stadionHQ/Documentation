@@ -228,7 +228,7 @@
                                             Overview
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/build/index.html">
                                             Build
                                         </a>
@@ -270,71 +270,22 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="frond-end-build">Frond-end Build</h1>
-<p>This site uses <a href="http://gulpjs.com/">gulp</a> as the build tool. There are comments above each task listed in the gulpfile in the root of the site.</p>
-<h2 id="gulp-task-summary">Gulp task summary:</h2>
-<pre><code>gulp dev</code></pre>
-<p>complies css,js and copies all assets to the '/public' folder which is
-used for the Expressjs site to serve the assets.</p>
-<pre><code>gulp dev --production</code></pre>
-<p>sets prod flag to test site with minified assets. Otherwise exactly the same as normal 'gulp dev' just allows running of the site locally with compressed prodution assets for testing purposes.</p>
-<pre><code>gulp prod</code></pre>
-<p>Production build to minify assets. Normal dev task runs but with prod flag set.
-Copies all assets needed for production to dist folder.</p>
-<pre><code>gulp default</code></pre>
-<p>The same as gulp dev, but without the server and browser sync.</p>
-<p>All build tasks build to &quot;/public&quot; folder. This includes production tasks as a flag will be set to indicate if the task is production and this will be available in the gulp stream with the variable:</p>
-<pre><code>var isProd</code></pre>
-<p>We can then effect things like compression, disabling or source maps etc. The prodution task will then move the assets from &quot;/public&quot; folder to the &quot;/dist&quot; folder.</p>
-<h2 id="server-start-and-dev-task">Server start and dev task</h2>
-<pre><code>gulp dev</code></pre>
-<p>will start a server running at: localhost:3000.
-A <a href="https://www.npmjs.com/package/browser-sync">browser sync</a> instance will also start and will watch all css and js files for changes and run the appropriate tasks when needed.</p>
-<h2 id="css-build-using-stylus">Css build using stylus.</h2>
-<h3 id="tools">Tools:</h3>
-<p>Pre-compiler:
-<a href="https://learnboost.github.io/stylus/">stylus</a> with <a href="https://www.npmjs.com/package/gulp-stylus">gulp-stylus</a>
-Postcss:
-<a href="https://www.npmjs.com/package/autoprefixer">Autoprefixer</a>
-Stylus libraries:
-<a href="http://jeet.gs/">Jeet grid system</a>
-<a href="http://axis.netlify.com/">Axis utilities for stylus</a></p>
-<h3 id="gulp-tasks">Gulp tasks:</h3>
-<pre><code>gulp styles</code></pre>
-<p>This is initially run along with </p>
-<pre><code>gulp dev</code></pre>
-<p>and will also be triggered via browser sync on .styl file changes.</p>
-<p>The task has an entry point at &quot;/client/styles/core.styl&quot;. This file imports all styl files including files from a temp folder &quot;styl&quot; in &quot;/client/styles/modules&quot;. This folder gets created with the</p>
-<pre><code>copy-stylus-tmp</code></pre>
-<p>and removed again with</p>
-<pre><code>remove-stylus-tmp</code></pre>
-<p>after the styus task has run. This allows globbing of all .styl files from the temp location /client/styles/modules/core.styl.</p>
-<h2 id="javascript-build">Javascript build</h2>
-<h3 id="tools-1">Tools:</h3>
-<p>Bundler:
-<a href="http://needlink">Browserify: NEED LINK</a> - Allows for bundling in the browser using Node require syntax.
-<a href="http://needlink">Bower: NEED LINK</a> - Vendor managment tool.</p>
-<h3 id="gulp-tasks-1">Gulp tasks:</h3>
-<pre><code>gulp vendor</code></pre>
-<p>Simple task to generate vendor.js file. this ic concatenated from Bower dependencies as well as other third party scripts added manually to '/scripts/vendor'</p>
-<pre><code>gulp scripts</code></pre>
-<p>Runs browserify using 'client/'/scripts/main.js' as the entry point. The process takes care of pre-defining all npm dependencies and ordering from all require() statements in each of the js files referenced internally as well as handlebars template pre-compiling, so that we are left with a bundle that is browser ready.</p>
-<h2 id="production-build-and-asset-generation">Production build and asset generation.</h2>
-<h3 id="gulp-tasks-2">Gulp tasks:</h3>
-<pre><code>gulp prod</code></pre>
-<p>Runs the gulp dev task as described earlier, but with the added addition of a production flag to remove comments and minify etc. All js, css, icons, fonts and images are copied from /public folder to /dist.
-Views are sourced for the production site from /app/Views/ayouts and /app/Views/shared and alos copied to /dist.
-Individual module views are also added from /Modules/**.handlebars.</p>
-<h3 id="important">IMPORTANT!!!</h3>
-<p>The views contained in the <em>/app/Views/partials</em> folder are dynamically built from the .handlebars templates contained in each module in:</p>
-<p><em>/client/modules/<module-name>/<module-name.handlebars></em></p>
-<p>The reason for this is so to avoid duplicating module templates as these are used as handlebars partials in the Expressjs site and need to be located here. But we need to keep the views together with their othe modules assets inside /modules folder for consistency. Modules/*.handlebars views can also be required client side if needed.</p>
-<p>.handlebars views in the app/views/ folder are rendered server side on page load for the FE site. </p>
-<p>.handlebars templates in the client/modules/ folder will be copied to the /dist folder. They will then be copied accross by a production build task (not covered here as this is a backend task) to the relevant folder in the production site to be packaged into Nuget. </p>
-<h3 id="the-shared-layouts-and-pages-folder-however-are-not-dynamic">The shared, layouts and pages folder however are not dynamic.</h3>
-<p>The Views folder contains shared and layout views like header and footer which are used around the site but NOT as front-end views on the client site. These are needed server side here as well as in the production site.</p>
-<h2 id="other-build-tasks">Other Build Tasks</h2>
-<p>Other tasks as well as thos described here are also documented in details inside: gulpfile.js</p>
+                    <h1 id="icons">Icons</h1>
+<p>All iconography is svg based. Data uris are inlined in css files and fall back to inlined pngs. Plain pngs are also provided for older browsers.
+The Grunticon css loader is used but since we are using gulp, gulp-iconify has been used in the build process</p>
+<h3 id="gt-clienticons-folder">&gt; /client/icons folder</h3>
+<p><strong>grunticon.loader.js</strong> - The original css loader from grunticon left in place as it works well as a loader with gulp-iconify</p>
+<p><strong>output.mustache</strong> - A template for writing the css classes. Current outputs:</p>
+<pre><code>.icon-iconname {
+    background-repeat: no-repeat;
+    background-image: url(''data:image/svg+xml;charset=US-ASCII,blah-here');
+}</code></pre>
+<p>*<strong>.css</strong> - The generated css files</p>
+<h3 id="gt-clientsvg-folder">&gt; /client/svg folder</h3>
+<p>Source folder for svg files</p>
+<h3 id="usage">Usage</h3>
+<p>run <code>gulp icons</code> to generate the css files from assets in the <em>/client/svg</em> folder.
+The site will load icons in using the js module: <em>/client/script/icons.js</em> on page load using the global grunticons object that will be available. This file will be required as a module an initialised.</p>
                 </section>
 
             </div>
