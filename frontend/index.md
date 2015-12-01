@@ -17,7 +17,7 @@ This is a standalone site running on a Node Express server. It's acts a static s
 "Static site" or "ExpressJs app" - This refers to the static Expressjs and mock api driven front-end website described in these front-end docs.
 
 #### Backend:
-Using Expressjs, the site is rendered from a rest api, [Apiary.io](http://apiary.io/). The data supplied from this rest endpoint matches the data structure that is used in the actual Stadion platform. Each module eg: Content Listing module, has it's own data set and is documented. See the api [here](http://docs.stephenzsolnai.apiary.io/)
+Using Expressjs, the site is rendered from a rest api, [Apiary.io](http://apiary.io/). The data supplied from this rest endpoint matches the data structure that is used in the actual Stadion platform. Each module eg: Content Listing module, has it's own data set and is documented. See the api [here](http://docs.stadiondatamodels.apiary.io/)
 
 #### Frontend:
 The site is completely modularised and each component has it's own assets and handlebars template. This allows us to easily add and remove components as needed.

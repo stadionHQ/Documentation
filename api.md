@@ -12,4 +12,4 @@ All responses are returned in a JSON format.
 TODO
 
 ## Available methods
-You can seem them on our [Apiary](http://docs.stephenzsolnai.apiary.io/) documentation.
+You can seem them on our [Apiary](http://docs.stadiondatamodels.apiary.io/) documentation.

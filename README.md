@@ -59,8 +59,6 @@ You can customize any aspect of Stadion. If you want to provide your own impleme
 
 You can of course just extend our implementations and override specific methods.
 
-## [Frontend](frontend/index.html)
-
 Supported Browsers
 ============
 
@@ -91,7 +89,7 @@ We support all modern browsers. This basically means IE 10+. A complete matrix i
 
     <tr>
         <th align="left">Android</th>
-        <td align="center">2.3.†</td>
+        <td align="center">2.4.†</td>
         <td colspan="5" align="center">4.†</td>
     </tr>
 
@@ -159,4 +157,4 @@ You don't have to do anything special to use a handlebars view, just return a Vi
 		
 ##View Models
 
-If you want to see the properties that are available on a viewmodel, you can seem them on our [Apiary](http://docs.stephenzsolnai.apiary.io/) documentation.
+If you want to see the properties that are available on a viewmodel, you can seem them on our [Apiary](http://docs.stadiondatamodels.apiary.io/) documentation.

@@ -12,9 +12,9 @@ The Expressjs site is driven by mock data located at:
 
 This behaves like a production REST API and should always mock what exists in the production .NET version. The production site is ultimately driven by the same sets of data as the templates are shared between the Expressjs and production sites. But it's important to note that they are seperate entities and exist independantly. They are both also purely backend apis (Expressjs site and Production).
 
-This mock location can change to something more appropriate with a new instance of the Stadion demo site. But for the current demo site, this is used. To have a custom named location for data for a new instance will need assistance from Stadion developers to retrieve a snapshot of the current data set that can be added to a fresh [Apiary](http://apiary.io/) instance. The data and docs can then be accessed via the Apiry docs location url 
+This mock location can change to something more appropriate with a new instance of the Stadion demo site. But for the current demo site, this is used. To have a custom named location for data for a new instance will need assistance from Stadion developers to retrieve a snapshot of the current data set that can be added to a fresh [Apiary](http://apiary.io/) instance. The data and docs can then be accessed via the Apiry docs location url.
 
-A find and replace then needs to be done in the front-end project as well as the test suite for the production site. 
+A find and replace then needs to be done on the Apiary end point address (described below) in the front-end project as well as the test suite for the production site. 
 
 ### Steps to find and replace the end-point address:
 
@@ -33,11 +33,11 @@ When the server first starts and runs the application with
 ```
 gulp dev
 ```
-the entire data set will be fetched from the API and added to a global object variable. This will then be referenced throughout the application on subsequent page requests while this instance of the server is running. 
+the entire data set will be fetched from the API and added to a global object variable at run time. This will then be referenced throughout the application on subsequent page requests while this instance of the server is running. 
 
-All this logic to handle data is held in "app/api/globals.js". How it works is on first load the method "updateGlobalDataConfig" is called. This first checks to see if a local version of the dataset exists at "api/data/globalData.json" and uses this data if the file exists. It then attempts to fetch the entire API dataset and if it successfully fetches it, updates the config variable "globalData" again and writes the file "api/data/globalData.json" with the latest data. This efeectively allows us to be able to work offline if needed as the error from the non-existant API in offline mode will be handled.
+All this logic to handle data is held in "app/api/globals.js". How it works is on first load the method "updateGlobalDataConfig" is called. This first checks to see if a local version of the dataset exists at "api/data/globalData.json" and uses this data if the file exists. It then attempts to fetch the entire API dataset and if it successfully fetches it, updates the config variable "globalData" again and writes the file "api/data/globalData.json" with the latest data. This effectively allows us to be able to work offline if needed as the error from the non-existant API in offline mode will be handled.
 
-The "app/api/globals.js" also runs through all the pages folder to get the namse of files and adds then to the globalData config variable too. this allows us to have a list of all pages on the homepage.
+The "app/api/globals.js" also runs through all the pages folder to get the names of files and adds then to the globalData config variable too. this allows us to have a list of all pages on the homepage. 
 
 *Important note*
 If you encounter an error like:
@@ -67,7 +67,7 @@ If a new feature or module is added to the site then a new data end-point in the
             //data in here
         }
 ```
-- Once you are done adding the data you should test the status and health of the data but accessingthe "inspector" tab. Your new end-point should be green.
+- Once you are done adding the data you should test the status and health of the data but accessing the "inspector" tab. Your new end-point should be green.
 - Now you need to add this new value to config so that the application knows to add it the global data object. Open "config/config.js" and look for the following:
 ```
 
