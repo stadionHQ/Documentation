@@ -6,11 +6,8 @@ Icons
 ============
 
 
-All iconography is svg based. Data uris are inlined in css files and fall back to inlined pngs. Plain pngs are also provided for older browsers.
-The Grunticon css loader is used but since we are using gulp, gulp-iconify has been used in the build process
+All iconography is svg based. Data uris are inlined in a css file. Plain pngs are also provided for older browsers. The css file to include these is added in conditionals [if lte IE 9] for < ie9 in the Header after the rest of the css references
 ### > /client/icons folder
-    
-**grunticon.loader.js** - The original css loader from grunticon left in place as it works well as a loader with gulp-iconify
 
 **output.mustache** - A template for writing the css classes. Current outputs:
     
@@ -24,5 +21,5 @@ The Grunticon css loader is used but since we are using gulp, gulp-iconify has b
 Source folder for svg files
 
 ### Usage
-run `gulp icons` to generate the css files from assets in the */client/svg* folder.
-The site will load icons in using the js module: */client/script/icons.js* on page load using the global grunticons object that will be available. This file will be required as a module an initialised.
+run `gulp icons` to generate the css files from */client/svg* folder.
+The css.svg file will be css imported from the core.styl file
