@@ -1,5 +1,5 @@
 ---
-currentMenu: API
+currentMenu: FrontEndAPI
 ---
 
 API (Apiary mock)

@@ -135,7 +135,7 @@
                                             Navigation
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/design/matchreport.html">
                                             Match Report
                                         </a>
@@ -268,7 +268,7 @@
                                             Javascript
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/frontend/Realtime-Updates.html">
                                             Realtime Updates
                                         </a>
@@ -305,8 +305,55 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="match-report">Match Report</h1>
-<p>TODO</p>
+                    <h1 id="realtime-updates">Realtime Updates</h1>
+<h2 id="summary">Summary</h2>
+<p>The site updates content and data in realtime with <a href="https://www.pubnub.com/">Pubnub</a>. Settings and initialisation for Pubnub are handled in a Pubnub adaptor ('/client/scripts/utilities/adaptor-pubnub.js'). Configuration settings themselves are held in 'client/scripts/config.js'. All that is needed is the 'subscribe_key'. Pubnub uses channels to allow the application to subscribe to individual update events. More information can be found on the Pubnub docs. Once you have your account setup and have received your login, you will be given this key as well as a 'publish_key' which is used to push updates to Pubnub from the serverside part of the website. </p>
+<h2 id="usage">Usage</h2>
+<p>The pubnub adaptor is initialised by the realtime listener ('/client/scripts/utilities/realtime-listener.js'):</p>
+<pre><code>var pubnubAdapter = null;
+
+var RealtimeListener = function($elem) {
+  var channel = $elem.data('realtime-channel');
+
+  if (channel) {
+    if (!pubnubAdapter) {
+      pubnubAdapter = require('./adaptor-pubnub');
+    }
+    pubnubAdapter.connect(channel);
+  }
+};
+
+module.exports = RealtimeListener;
+</code></pre>
+<p>An instance of the realtime listener is then initiated for every instance it is needed and triggered with the presence of the '.js-realtime' css class. This happens in the components.js file. the containing element that will need to be live updated is passed to it:</p>
+<pre><code>var $realtime = $parent.find('.js-realtime');
+if ($realtime.length) {
+var RealtimeListener = require('./utilities/realtimelistener');
+$realtime.each(function(index, item) {
+  var rt = new RealtimeListener($(item));
+});
+}</code></pre>
+<p>The pubnub adaptor's connect method will be called by the realtime listener for each container needing realtime updates and the channel id is taken from the 'data-realtime-channel' attribute on the container will be passed to it. The only handling that then needs to be done is to listen for the unique event that will be fired from the pubnub adaptors mediator instance:</p>
+<pre><code>PubnubAdapter.prototype._recieved = function(data, envelope, channel) {
+  console.log('message received on ' + channel);
+  mediator.trigger("REALTIME:" + channel, data);
+};</code></pre>
+<p>An example of this usage:</p>
+<pre><code>
+var MyNewModule = function() {
+    mediator.on("REALTIME:" + MyNewModuleChannelId, this.update);
+}
+
+MyNewModule.prototype.attach = function() {
+    //Update the module here...
+}
+...
+
+This event driven architecture allows us to abtract the adaptor making it easy to drop in another provider if required. The new provider will just need an adaptor added like the pubnub adaptor. Assuming the new provider uses a similar event based system, the listeners can be attached in the same way.
+
+## Testing data updates.
+
+Testing new and exisitng components are rendering correctly through Pubnub updates is a manual process. Pubnub provides a development console for this purpose. You can drop in test json data structured as the application would be expecting it, and manually push this out to a selected channel to test the wonrkings of your module. There is already some test data in source control for this very purpose in 'assets/reference'.</code></pre>
                 </section>
 
             </div>

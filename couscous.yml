@@ -172,15 +172,43 @@ menu:
                 Build:
                     text: Build
                     # Or absolute urls
-                    relativeUrl: frontend/build/index.html
-                ModuleOverview:
-                    text: Module Overview
+                    relativeUrl: frontend/build.html
+                CSS:
+                    text: CSS
                     # Or absolute urls
-                    relativeUrl: frontend/modules/index.html
+                    relativeUrl: frontend/css.html
+                Folder Structure:
+                    text: Folder Structure
+                    # Or absolute urls
+                    relativeUrl: frontend/Folder-Structure.html
+                FrontEndAPI:
+                    text: API
+                    # Or absolute urls
+                    relativeUrl: frontend/api.html
                 FrontEndImages:
                     text: Image Module
                     # Or absolute urls
-                    relativeUrl: frontend/modules/image.html	
+                    relativeUrl: frontend/modules/image.html
+                Grid:
+                    text: Grid
+                    # Or absolute urls
+                    relativeUrl: frontend/grid-and-scaffolding.html
+                Icons:
+                    text: Icons
+                    # Or absolute urls
+                    relativeUrl: frontend/Icons.html
+                Javascript:
+                    text: Javascript
+                    # Or absolute urls
+                    relativeUrl: frontend/Javascript.html
+                Realtime Updates:
+                    text: Realtime Updates
+                    # Or absolute urls
+                    relativeUrl: frontend/Realtime-Updates.html
+                Server:
+                    text: Server
+                    # Or absolute urls
+                    relativeUrl: frontend/Server.html					
                 
         Editor:
             name: Editor Guidelines

@@ -135,7 +135,7 @@
                                             Navigation
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/design/matchreport.html">
                                             Match Report
                                         </a>
@@ -258,7 +258,7 @@
                                             Grid
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/frontend/Icons.html">
                                             Icons
                                         </a>
@@ -305,8 +305,20 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="match-report">Match Report</h1>
-<p>TODO</p>
+                    <h1 id="icons">Icons</h1>
+<p>All iconography is svg based. Data uris are inlined in a css file. Plain pngs are also provided for older browsers. The css file to include these is added in conditionals [if lte IE 9] for &lt; ie9 in the Header after the rest of the css references</p>
+<h3 id="gt-clienticons-folder">&gt; /client/icons folder</h3>
+<p><strong>output.mustache</strong> - A template for writing the css classes. Current outputs:</p>
+<pre><code>.icon-iconname {
+    background-repeat: no-repeat;
+    background-image: url(''data:image/svg+xml;charset=US-ASCII,blah-here');
+}</code></pre>
+<p>*<strong>.css</strong> - The generated css files</p>
+<h3 id="gt-clientsvg-folder">&gt; /client/svg folder</h3>
+<p>Source folder for svg files</p>
+<h3 id="usage">Usage</h3>
+<p>run <code>gulp icons</code> to generate the css files from <em>/client/svg</em> folder.
+The css.svg file will be css imported from the core.styl file</p>
                 </section>
 
             </div>
