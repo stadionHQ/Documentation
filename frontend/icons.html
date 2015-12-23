@@ -229,18 +229,53 @@
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="http://docs.stadion.io/frontend/build/index.html">
+                                        <a href="http://docs.stadion.io/frontend/build.html">
                                             Build
                                         </a>
                                     </li>
                                                                     <li class="">
-                                        <a href="http://docs.stadion.io/frontend/modules/index.html">
-                                            Module Overview
+                                        <a href="http://docs.stadion.io/frontend/css.html">
+                                            CSS
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/frontend/Folder-Structure.html">
+                                            Folder Structure
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/frontend/api.html">
+                                            API
                                         </a>
                                     </li>
                                                                     <li class="">
                                         <a href="http://docs.stadion.io/frontend/modules/image.html">
                                             Image Module
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/frontend/grid-and-scaffolding.html">
+                                            Grid
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="http://docs.stadion.io/frontend/Icons.html">
+                                            Icons
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/frontend/Javascript.html">
+                                            Javascript
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/frontend/Realtime-Updates.html">
+                                            Realtime Updates
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/frontend/Server.html">
+                                            Server
                                         </a>
                                     </li>
                                                             </ul>
@@ -271,10 +306,8 @@
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1 id="icons">Icons</h1>
-<p>All iconography is svg based. Data uris are inlined in css files and fall back to inlined pngs. Plain pngs are also provided for older browsers.
-The Grunticon css loader is used but since we are using gulp, gulp-iconify has been used in the build process</p>
+<p>All iconography is svg based. Data uris are inlined in a css file. Plain pngs are also provided for older browsers. The css file to include these is added in conditionals [if lte IE 9] for &lt; ie9 in the Header after the rest of the css references</p>
 <h3 id="gt-clienticons-folder">&gt; /client/icons folder</h3>
-<p><strong>grunticon.loader.js</strong> - The original css loader from grunticon left in place as it works well as a loader with gulp-iconify</p>
 <p><strong>output.mustache</strong> - A template for writing the css classes. Current outputs:</p>
 <pre><code>.icon-iconname {
     background-repeat: no-repeat;
@@ -284,8 +317,8 @@ The Grunticon css loader is used but since we are using gulp, gulp-iconify has b
 <h3 id="gt-clientsvg-folder">&gt; /client/svg folder</h3>
 <p>Source folder for svg files</p>
 <h3 id="usage">Usage</h3>
-<p>run <code>gulp icons</code> to generate the css files from assets in the <em>/client/svg</em> folder.
-The site will load icons in using the js module: <em>/client/script/icons.js</em> on page load using the global grunticons object that will be available. This file will be required as a module an initialised.</p>
+<p>run <code>gulp icons</code> to generate the css files from <em>/client/svg</em> folder.
+The css.svg file will be css imported from the core.styl file</p>
                 </section>
 
             </div>
