@@ -413,6 +413,9 @@ mediator.trigger(events.ui.breakPointChanged, {passed: 'parameters'});
 <p><em>template</em> : The template to render content with. This can be replaced if a new template is required. But is normally the same one throughout it's life cycle. Starts with what is set in data-template attribute. This will be passed as a string to the template mapper and will assign the correct pre-compiled hanadlebars template.</p>
 </li>
 <li>
+<p><em>endPoint</em> : An ajax endpoint can be specified and the dynamic container will immediately fetch the data from this endpoint and render it to the template. Mocks for this can be created in Apiary. More information on the mock end points <a href="frontend/api.html">here</a></p>
+</li>
+<li>
 <p><em>isHiddenWithContent</em> : This should be set to true if the dynamic container has content but is hidden from view on the page. An example of this would be the login dropdown. It provides a way of allowing external trigger links to reveal a container rather than updating the content.</p>
 </li>
 <li><em>updateWarning</em> : Warn the user that an update is about to happen with overlay. This will be sent to the renderer which will handle the delay.</li>

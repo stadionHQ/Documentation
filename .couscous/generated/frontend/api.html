@@ -308,17 +308,21 @@
                     <h1 id="api-apiary-mock">API (Apiary mock)</h1>
 <h2 id="summary">Summary</h2>
 <p>The Expressjs site is driven by mock data located at:
-<a href="http://private-003c2-stadion1.apiary-mock.com"><a href="http://private-003c2-stadion1.apiary-mock.com">http://private-003c2-stadion1.apiary-mock.com</a></a></p>
+<a href="http://private-003c2-stadiondatamodels.apiary-mock.com"><a href="http://private-003c2-stadiondatamodels.apiary-mock.com">http://private-003c2-stadiondatamodels.apiary-mock.com</a></a></p>
 <p>This behaves like a production REST API and should always mock what exists in the production .NET version. The production site is ultimately driven by the same sets of data as the templates are shared between the Expressjs and production sites. But it's important to note that they are seperate entities and exist independantly. They are both also purely backend apis (Expressjs site and Production).</p>
 <p>This mock location can change to something more appropriate with a new instance of the Stadion demo site. But for the current demo site, this is used. To have a custom named location for data for a new instance will need assistance from Stadion developers to retrieve a snapshot of the current data set that can be added to a fresh <a href="http://apiary.io/">Apiary</a> instance. The data and docs can then be accessed via the Apiry docs location url.</p>
 <p>A find and replace then needs to be done on the Apiary end point address (described below) in the front-end project as well as the test suite for the production site. </p>
+<p>The client side ajax mocks are driven by a seperate mock api instance at:
+<a href="private-88862-stadiondatamodelsajax.apiary-mock.com">private-88862-stadiondatamodelsajax.apiary-mock.com</a></p>
+<p>So any end points that need to be mocked can be passed as parameters in models located in 'private-003c2-stadiondatamodels.apiary-mock.com' that can then reference the mock end-point located in 'private-88862-stadiondatamodelsajax.apiary-mock.com'</p>
+<p>This means we can keep real ajax mocks and the serverside data seprate. Backend can then supply their own replacement endpoints for the production site.</p>
 <h3 id="steps-to-find-and-replace-the-end-point-address">Steps to find and replace the end-point address:</h3>
 <ul>
 <li>Log into your new Apiary instance.</li>
 <li>Click the &quot;Inspector&quot; Link in the top level navigation. You will be redirected to your docs location which will be something like: <a href="http://docs.yourProjectName.apiary.io/traffic">http://docs.yourProjectName.apiary.io/traffic</a></li>
 <li>Underneath the menu bar you should see something like: Listening at &quot;<a href="http://private-xxx000-yourProjectName.apiary-mock.com">http://private-xxx000-yourProjectName.apiary-mock.com</a>&quot;.</li>
 <li>Use this end-point in the project and change the existing config located at: &quot;config/config.js&quot;. Change 
-<pre><code>apiRoot: 'http://private-003c2-stadion1.apiary-mock.com/' </code></pre>
+<pre><code>apiRoot: 'http://private-003c2-stadiondatamodels.apiary-mock.com/' </code></pre>
 <p>to your new end-point: &quot;<a href="http://private-xxx000-yourProjectName.apiary-mock.com">http://private-xxx000-yourProjectName.apiary-mock.com</a>&quot;</p></li>
 </ul>
 <h3 id="managing-the-api-data">Managing the API data</h3>

@@ -147,6 +147,8 @@ A utility to handle all dynamic content throughout the application. The idea is 
 
 - *template* : The template to render content with. This can be replaced if a new template is required. But is normally the same one throughout it's life cycle. Starts with what is set in data-template attribute. This will be passed as a string to the template mapper and will assign the correct pre-compiled hanadlebars template.
 
+- *endPoint* : An ajax endpoint can be specified and the dynamic container will immediately fetch the data from this endpoint and render it to the template. Mocks for this can be created in Apiary. More information on the mock end points [here](frontend/api.html)
+
 - *isHiddenWithContent* : This should be set to true if the dynamic container has content but is hidden from view on the page. An example of this would be the login dropdown. It provides a way of allowing external trigger links to reveal a container rather than updating the content.
 
 - *updateWarning* : Warn the user that an update is about to happen with overlay. This will be sent to the renderer which will handle the delay.
