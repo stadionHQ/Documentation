@@ -1,9 +1,0 @@
----
-currentMenu: Hygiene
----
-
-
-Hygiene
-============
-
-TODO
