@@ -1,5 +1,5 @@
 ---
-currentMenu: Match Report
+currentMenu: DesignMatchReport
 ---
 Hero Panel
 ============

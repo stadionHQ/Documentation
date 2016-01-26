@@ -1,5 +1,5 @@
 ---
-currentMenu: Match Day Live
+currentMenu: DesignMatchDayLive
 ---
 Hero Panel
 ============

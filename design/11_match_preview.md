@@ -1,5 +1,5 @@
 ---
-currentMenu: Match Preview
+currentMenu: DesignMatchPreview
 ---
 Hero Module
 ============

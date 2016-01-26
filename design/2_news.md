@@ -1,5 +1,5 @@
 ---
-currentMenu: News
+currentMenu: DesignNews
 ---
 Sub Navigation
 ==============

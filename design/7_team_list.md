@@ -1,5 +1,5 @@
 ---
-currentMenu: Team List
+currentMenu: DesignTeamList
 ---
 Hero Panel
 ============

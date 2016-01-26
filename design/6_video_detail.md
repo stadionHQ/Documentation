@@ -1,5 +1,5 @@
 ---
-currentMenu: Video Detail
+currentMenu: DesignVideoDetail
 ---
 Video Content
 ============

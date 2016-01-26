@@ -1,5 +1,5 @@
 ---
-currentMenu: Footer
+currentMenu: DesignFooter
 ---
 Footer
 ============

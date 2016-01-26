@@ -1,5 +1,5 @@
 ---
-currentMenu: Fixtures
+currentMenu: DesignFixtures
 ---
 Hero Panel
 ============

@@ -1,5 +1,5 @@
 ---
-currentMenu: Match Stats
+currentMenu: DesignMatchStats
 ---
 Stat Panel
 ============

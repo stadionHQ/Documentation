@@ -1,5 +1,5 @@
 ---
-currentMenu: Login / Register
+currentMenu: DesignLoginRegister
 ---
 Login / Register
 ============

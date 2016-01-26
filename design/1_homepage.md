@@ -1,5 +1,5 @@
 ---
-currentMenu: Homepage
+currentMenu: DesignHomepage
 ---
 General
 ============

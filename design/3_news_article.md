@@ -1,5 +1,5 @@
 ---
-currentMenu: News Article
+currentMenu: DesignNewsArticle
 ---
 Hero Panel
 ============

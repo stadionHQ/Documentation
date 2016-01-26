@@ -76,54 +76,74 @@ menu:
                     text: Overview
                     # You can use relative urls
                     relativeUrl: design/design.html
-                Components:
-                    text: Components
-                    # Or absolute urls
-                    relativeUrl: design/Components.html						
-                Homepage:
+                DesignHomepage:
                     text: Homepage
                     # Or absolute urls
-                    relativeUrl: design/homepage.html
-                Player Landing:
-                    text: Player Landing
+                    relativeUrl: design/1_homepage.html						
+                DesignLoginRegister:
+                    text: Login & Register
                     # Or absolute urls
-                    relativeUrl: design/playerlanding.html						
-                Player Profile:
-                    text: Player Profile
+                    relativeUrl: design/loginregister.html
+                DesignNews:
+                    text: News
                     # Or absolute urls
-                    relativeUrl: design/playerprofile.html
-                Fixtures:
+                    relativeUrl: design/2_news.html						
+                DesignNewsArticle:
+                    text: News Article
+                    # Or absolute urls
+                    relativeUrl: design/3_news_article.html
+                DesignFixtures:
                     text: Fixtures
                     # Or absolute urls
-                    relativeUrl: design/fixtures.html
-                Navigation:
-                    text: Navigation
+                    relativeUrl: design/4_fixtures.html
+                DesingVideo:
+                    text: Video
                     # Or absolute urls
-                    relativeUrl: design/navigation.html
-                MatchReport:
-                    text: Match Report
-                    # Or absolute urls
-                    relativeUrl: design/matchreport.html
-                Video:
+                    relativeUrl: design/5_video.html
+                DesignVideoDetail:
                     text: Video Detail
                     # Or absolute urls
-                    relativeUrl: design/video.html	
-                VideoLanding:
-                    text: Video landing
+                    relativeUrl: design/6_video_detail.html
+                DesignTeamList:
+                    text: Squad List
                     # Or absolute urls
-                    relativeUrl: design/videolanding.html
-                News Article:
-                    text: News Detail
+                    relativeUrl: design/7_team_list.html	
+                DesignPlayerProfile:
+                    text: Player Profile
                     # Or absolute urls
-                    relativeUrl: design/news.html
-                News Landing:
-                    text: News Landing
+                    relativeUrl: design/8_player_profile.html
+                DesignSearchResults:
+                    text: Search Results
                     # Or absolute urls
-                    relativeUrl: design/newslanding.html
-                Hygiene:
-                    text: Hygiene
+                    relativeUrl: design/9_search_results.html
+                DesignMatchPreview:
+                    text: Match Preview
                     # Or absolute urls
-                    relativeUrl: design/hygiene.html
+                    relativeUrl: design/11_match_preview.html
+                DesignMatchReport:
+                    text: Match Report
+                    # Or absolute urls
+                    relativeUrl: design/12_match_report.html
+                DesignMatchDayLive:
+                    text: Match Day Live
+                    # Or absolute urls
+                    relativeUrl: design/13_match_day_live.html
+                DesignMatchStats:
+                    text: Match Stats
+                    # Or absolute urls
+                    relativeUrl: design/14_match_stats.html
+                DesignReuseableCompnents:
+                    text: Reuseable Compnents
+                    # Or absolute urls
+                    relativeUrl: design/all_reusable_elements.html
+                DesignFooter:
+                    text: Footer
+                    # Or absolute urls
+                    relativeUrl: design/footer.html
+                DesignHeader:
+                    text: Header
+                    # Or absolute urls
+                    relativeUrl: design/header.html					
         Umbraco:
             name: Umbraco
             items:

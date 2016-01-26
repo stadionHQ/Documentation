@@ -1,5 +1,5 @@
 ---
-currentMenu: Reuseable Compnents
+currentMenu: DesignReuseableCompnents
 ---
 Promo - Game
 ============

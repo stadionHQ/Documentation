@@ -1,5 +1,5 @@
 ---
-currentMenu: Search Results
+currentMenu: DesignSearchResults
 ---
 Search Panel - Full Width
 ============

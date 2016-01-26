@@ -1,5 +1,5 @@
 ---
-currentMenu: Player Profile
+currentMenu: DesignPlayerProfile
 ---
 Hero Panel
 ============
