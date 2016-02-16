@@ -200,7 +200,7 @@ menu:
                 Folder Structure:
                     text: Folder Structure
                     # Or absolute urls
-                    relativeUrl: frontend/Folder-Structure.html
+                    relativeUrl: frontend/folder-structure.html
                 FrontEndAPI:
                     text: API
                     # Or absolute urls
@@ -216,19 +216,19 @@ menu:
                 Icons:
                     text: Icons
                     # Or absolute urls
-                    relativeUrl: frontend/Icons.html
+                    relativeUrl: frontend/icons.html
                 Javascript:
                     text: Javascript
                     # Or absolute urls
-                    relativeUrl: frontend/Javascript.html
+                    relativeUrl: frontend/javascript.html
                 Realtime Updates:
                     text: Realtime Updates
                     # Or absolute urls
-                    relativeUrl: frontend/Realtime-Updates.html
+                    relativeUrl: frontend/realtime-updates.html
                 Server:
                     text: Server
                     # Or absolute urls
-                    relativeUrl: frontend/Server.html					
+                    relativeUrl: frontend/server.html					
                 
         Editor:
             name: Editor Guidelines
