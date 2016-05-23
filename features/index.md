@@ -50,9 +50,10 @@ Additonal Content Widgets
 * Full width promos
 * Sponsors
 
+
 Navigation components
 -------------
-* Global Navigation
+* Overarching Navigation
 * Main Navigation
 * Hygiene Links
 
