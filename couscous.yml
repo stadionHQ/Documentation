@@ -23,6 +23,12 @@ exclude:
 menu:
     sections:
         main:
+            name: Features
+            items:
+                Featureshome:
+                    text: Overview
+                    # You can use relative urls
+                    relativeUrl: features/index.html	
             name: Technical documentation
             items:
                 home:
@@ -72,10 +78,6 @@ menu:
         Design:
             name: Design Guidelines
             items:
-                Design Overview:
-                    text: Overview
-                    # You can use relative urls
-                    relativeUrl: design/design.html
                 DesignHomepage:
                     text: Homepage
                     # Or absolute urls
