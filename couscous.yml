@@ -26,7 +26,7 @@ menu:
             name: Features
             items:
                 Featureshome:
-                    text: Overview
+                    text: List of features
                     # You can use relative urls
                     relativeUrl: features/index.html	
             name: Technical documentation
