@@ -294,7 +294,7 @@
                                             Icons
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/javascript.html">
                                             Javascript
                                         </a>
@@ -315,96 +315,7 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="javascript">Javascript</h1>
-<h2 id="tools">Tools</h2>
-<p><a href="http://browserify.org/">Browserify</a> - Javascript bundler. Precompiles javascript written in nodejs require syntax for use in a browser.</p>
-<h2 id="syntax-and-module-pattern">Syntax and module pattern</h2>
-<p>Syntax and coding standards adhere to guidelines outlined in the <a href="https://github.com/airbnb/javascript#the-javascript-style-guide-guide">Airbnb style guide</a>. This is used as a guide, but take note of how the code looks as your are developing. Note the spacings and tab indentations etc and follow the pattern. For example:</p>
-<pre><code>var newMethod = function() {
-  var new thing = null;
-}</code></pre>
-<p>You can see that there is a tab indentation of two spaces and there is a space between () and the opening '{'. This is consistent throughout the site. Set your editor to use spaces not tabs.
-The javascript architecture of the site follows a strict adherance to the <a href="http://www.sitepoint.com/understanding-module-exports-exports-node-js/">Nodejs require and export module pattern</a>. New modules are created and added to the 'client/modules' folder for new modules. There are also more generic modules and helpers located in 'client/scripts'. An example of a new module initialisation:</p>
-<pre><code>
-'use strict';
-
-//require an instance of another module here. These can be constructors or singletons.
-var config = require('../config');
-
-var MyNewModule = function MyNewModule(settings) {
-  //Can have initialisation stuff in here...
-  this.settings = settings;
-};
-
-MyNewModule.prototype.publicMethod = function(param) {
-
-};
-
-// Private methods. These should be added at the end of the file. They are underscored and added to the prototype to make them available for testing.
-MyNewModule.prototype._privateMethod = function(param) {
-
-};
-
-//The constructor is exported here
-module.exports = MyNewModule;</code></pre>
-<p>The module can then be required like this:</p>
-<pre><code>var myNewModule = new MyNewModule({"width" : 500});</code></pre>
-<p>If a module is added to the 'client/modules folder', then it needs an initialiser file to accompany it. There is a glob pattern in 'client/scripts/app.js' to do this.</p>
-<pre><code>require('../modules/**/*.initialiser.js', {glob: true});</code></pre>
-<p>What the initialiser will do is check for a trigger on load to see if the module is to be initialised. eg:</p>
-<pre><code>var $ = window.$;
-var Carousel = require('./Carousel');
-
-var CarouselInitialiser = function() {
-  console.log('CarouselInitialiser initialised');
-  /* Initialise carousels
-  ========================================================================== */
-  var $carousel = $('.js-carousel');
-  if ($carousel.length) {
-    $carousel.each(function(index, item){
-      var carousel = new Carousel();
-      carousel.init($(item));
-    });
-
-  }
-};
-
-module.exports = new CarouselInitialiser();</code></pre>
-<p>It can also have it's initialisation added to '/scripts/modulesInitialiser.js' with others if easier. This can change going forward to have all the initialisations in '/scripts/modulesInitialiser.js' same as the utilities in '/scripts/utilitiesInitialisation.js'</p>
-<h2 id="introduction-and-standards">Introduction and standards</h2>
-<h3 id="event-architechture">Event architechture</h3>
-<p>Inter-module communications are handled via the node mediator following syntax (MODULEORIGINATOR:EVENTNAME) eg (UI:BREAKPOINT_CHANGED). All events should be added to the 'client/scripts/config.js' file. An example trigger and listener:</p>
-<pre><code>var config.events = require('../config')
-var mediator = require('mediatorjs');
-
-//To listen to the mediator event:
-mediator.on(events.ui.breakPointChanged, upDateUiMethod);
-
-//To trigger mediator event:
-mediator.trigger(events.ui.breakPointChanged, {passed: 'parameters'});
-</code></pre>
-<h3 id="root-javascript-initialisation">Root javascript Initialisation</h3>
-<h4 id="entry-point--appjs">Entry point  (app.js)</h4>
-<p>The entry point to the application is in 'client/scripts/app.js'. This is called from 'client/scripts/main.js'which will be the name of the bundled file in production. This allows us the flexibility to add other entry points to secondary applications if needed.</p>
-<h4 id="ui-initialisation-uijs">Ui initialisation (ui.js)</h4>
-<p>'client/scripts/ui.js' initialises UI state for the application. Things like mediator, global listeners and breakpoints watchers.</p>
-<h4 id="reusable-global-utilities-utilitiesinitialiserjs">reusable global utilities (utilitiesInitialiser.js)</h4>
-<p>'client/scripts/utilitiesInitialiser.js' contains initialisation for all global and reusable components not deemed to be bespoke modules (which would be added to the 'modules' folder). They can be generally be initiated and used anywhere in the site and are mostly trigger with 'js-componentname' classes.  </p>
-<p>The utilitiesInitialiser module's init() method checks for css class existance in child elements of the passed parent Dom node. On page load this will be the 'body' but it can be something more dynamic if content has been added after page load with ajax. In these instances utilitiesInitialiser.init($newParentNode); can be called to run all the checks again and initialise and new instances only contained in the scope of the new wrapper element ($newParentNode).</p>
-<p>An example initialisation:</p>
-<pre><code>  var $infiniteScroll = $parent.find('.js-infinitescroll');
-  if ($infiniteScroll.length) {
-    var InfiniteScroll = require('./utilities/infiniteScroll');
-    $infiniteScroll.each(function(index, item){
-      var infiniteScroll = new InfiniteScroll($(item));
-    });
-  }
-</code></pre>
-<p>The 'modulesInitialiser' works in the same way, but only targets modules in the '/Modules' folder.</p>
-<h4 id="config-configjs">Config (config.js)</h4>
-<p>Config and settings for the site.</p>
-<h4 id="icons-iconsjs">Icons (icons.js)</h4>
-<p>This file manages the rendering of svg assets in the site. More information can be found in the <a href="frontend/icons.html">icons docs</a>.</p>
+                    <p>Testing</p>
                 </section>
 
             </div>

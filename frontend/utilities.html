@@ -294,7 +294,7 @@
                                             Icons
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/javascript.html">
                                             Javascript
                                         </a>
@@ -315,96 +315,249 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="javascript">Javascript</h1>
-<h2 id="tools">Tools</h2>
-<p><a href="http://browserify.org/">Browserify</a> - Javascript bundler. Precompiles javascript written in nodejs require syntax for use in a browser.</p>
-<h2 id="syntax-and-module-pattern">Syntax and module pattern</h2>
-<p>Syntax and coding standards adhere to guidelines outlined in the <a href="https://github.com/airbnb/javascript#the-javascript-style-guide-guide">Airbnb style guide</a>. This is used as a guide, but take note of how the code looks as your are developing. Note the spacings and tab indentations etc and follow the pattern. For example:</p>
-<pre><code>var newMethod = function() {
-  var new thing = null;
-}</code></pre>
-<p>You can see that there is a tab indentation of two spaces and there is a space between () and the opening '{'. This is consistent throughout the site. Set your editor to use spaces not tabs.
-The javascript architecture of the site follows a strict adherance to the <a href="http://www.sitepoint.com/understanding-module-exports-exports-node-js/">Nodejs require and export module pattern</a>. New modules are created and added to the 'client/modules' folder for new modules. There are also more generic modules and helpers located in 'client/scripts'. An example of a new module initialisation:</p>
+                    <h1 id="javascript-utilities">Javascript Utilities</h1>
+<p>All globally available utilities included in /scripts/utilities folder.</p>
+<h3 id="utilities-list">Utilities list:</h3>
+<ul>
+<li><a href="#detection">Detection</a></li>
+<li><a href="#dynamicContainer">Dynamic Container</a></li>
+<li><a href="#forms">Forms</a></li>
+<li><a href="#globaldom">Global Dom elements</a></li>
+<li><a href="#handlebarshelpers">HandleBars Helpers</a></li>
+<li><a href="#handlebarspartials">Handlebars Partials</a></li>
+<li><a href="#infinitescroll">Infinit Scroll</a></li>
+<li><a href="#insertbypara">Insert By Paragraph</a></li>
+<li><a href="#loader">Loader</a></li>
+<li><a href="#pubnubadaptor">Pubnub Adaptor</a></li>
+<li><a href="#realtimelistener">Realtime Listener</a></li>
+<li><a href="#renderer">Renderer</a></li>
+<li><a href="#redirectonchange">Redirect On Change</a></li>
+<li><a href="#sideswipe">Side Swipe</a></li>
+<li>[Tabs] (#tabs)</li>
+<li><a href="#templatemapper">Template Mapper</a></li>
+<li><a href="#togglepushdown">Toggle Pushdown</a></li>
+</ul>
+<p><a name="detection"></a></p>
+<h3 id="device-detection">Device Detection</h3>
+<p>Detect devices, features etc
+Script to drive this is included 'views/Shared/Header.handlebars'.
+See here for usage info: <a href="https://github.com/kaimallea/isMobile"><a href="https://github.com/kaimallea/isMobile">https://github.com/kaimallea/isMobile</a></a>
+Require this as singleton wherever needed.</p>
+<p><a name="dynamicContainer"></a></p>
+<h3 id="dynamic-container">Dynamic Container</h3>
+<p>A utility to handle all dynamic content throughout the application. The idea is the ajax endpoints, settings and templates are driven from data-attributes in the markup, rather that individual javascript views for each component. This more generic approach means we can keep the js bundle lighter. It was also the better approach to handling dynamic ajax content in the absence of a javascript framework. This works together with the <a href="'#renderer'">render</a>. Functionality is driven from markup classes and data attributes.</p>
+<h4 id="options-">Options :</h4>
+<ul>
+<li>
+<p><em>$elem</em> : The target wrapper that will have it's content be dynamic. The module will be initialised with this passed element (js-dynamicContainer).</p>
+</li>
+<li>
+<p><em>$triggerLinks</em> : The container may have links inside it that trigger the render action. Pagination for instance. These will be targeted with (js-triggerLinks). There can also be an external trigger link. The can be referenced by adding the target class of the external link to the 'data-trigger-link' attribute. An example of this is the link ('js-reveal-login') to reveal the login container (which is a dynamic container)</p>
+</li>
+<li>
+<p><em>renderAction</em> : How the new markup comin in is treated. Options are 'append', 'prepend', 'replace' (default). Set with data-render-action=&quot;append&quot;. Defaults to replace if not used.</p>
+</li>
+<li>
+<p><em>template</em> : The template to render content with. This can be replaced if a new template is required. But is normally the same one throughout it's life cycle. Starts with what is set in data-template attribute. This will be passed as a string to the template mapper and will assign the correct pre-compiled hanadlebars template.</p>
+</li>
+<li>
+<p><em>endPoint</em> : An ajax endpoint can be specified and the dynamic container will immediately fetch the data from this endpoint and render it to the template. Mocks for this can be created in Apiary. More information on the mock end points <a href="frontend/api.html">here</a></p>
+</li>
+<li>
+<p><em>isHiddenWithContent</em> : This should be set to true if the dynamic container has content but is hidden from view on the page. An example of this would be the login dropdown. It provides a way of allowing external trigger links to reveal a container rather than updating the content.</p>
+</li>
+<li><em>updateWarning</em> : Warn the user that an update is about to happen with overlay. This will be sent to the renderer which will handle the delay.</li>
+</ul>
+<h4 id="details">Details</h4>
+<p>Render actions can be triggered by pagination links in the element or by events with realtime data fired by realtime channels.</p>
+<p>Render actions could also be triggered by a button external to the container referenced by data-trigger-link=&quot;triggerLinkClass&quot;</p>
+<p>If the DynamicContainer has data to be revealed and no ajax call needs to be made then the  data-is-hidden-with-content=&quot;true&quot; needs to be added</p>
+<p>The utility will use the <a href="#renderer">renderer</a> utility to fetch the data and handle the rendering of dom elements.</p>
+<p>When pagination is used, the next links should be updated in the data passed from the backend and rendered into the template.</p>
+<p>Some examples:</p>
+<h5 id="dynamic-container-with-endpoint-and-template-auto-loads-used-for-lazy-loading-content">Dynamic container with endpoint and template. Auto loads. Used for lazy loading content.</h2></h5>
+<p>In the real world the end-point should be passed in the model for the dynamic container on page load. This will be the ajax end-point supplying the data.</p>
+<pre><code>&lt;div class="js-dynamicContainer" 
+  data-end-point="aend-point-passed-from-server-model" 
+  data-template="NameOfModule/ModuleTemplate" &gt;
+  &lt;div class="loading"&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+</code></pre>
+<h5 id="dynamic-container-with-template-and-realtime-handler">Dynamic container with template and realtime handler.</h2></h5>
+<p>Used in combination with the <a href="#realtimelistener">realtime listener</a>.</p>
+<h6 id="replace-version">Replace version:</h6>
+<p>This replaces the existing content.</p>
+<pre><code>&lt;div class="js-dynamicContainer js-realtime" 
+    data-realtime-channel="NameOfTheChannel" 
+    data-render-action="replace"
+    data-template="NameOfModule/NameOfHandlebarsFile"&gt;
+      &lt;p&gt;&lt;strong&gt;The content in here will be &lt;i&gt;replaced&lt;/i&gt; and rendered with the data-template supplied. The data passed on the event raised on the data-realtime-channel will be used.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<h6 id="append-version">Append version</h6>
+<pre><code>&lt;div class="js-dynamicContainer js-realtime" 
+    data-realtime-channel="NameOfTheChannel" 
+    data-render-action="append"
+    data-template="NameOfModule/NameOfHandlebarsFile"&gt;
+      &lt;p&gt;&lt;strong&gt;The content in here will be have new content &lt;i&gt;appended&lt;/i&gt; and rendered with the data-template supplied. The data passed on the event raised on the data-realtime-channel will be used.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<h6 id="prepend-version">Prepend version</h6>
+<pre><code>&lt;div class="js-dynamicContainer js-realtime" 
+    data-realtime-channel="NameOfTheChannel" 
+    data-render-action="prepend"
+    data-template="NameOfModule/NameOfHandlebarsFile"&gt;
+      &lt;p&gt;&lt;strong&gt;The content in here will be have new content &lt;i&gt;prepended&lt;/i&gt; and rendered with the data-template supplied. The data passed on the event raised on the data-realtime-channel will be used.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<h5 id="pushdown-with-content">Pushdown with content</h5>
+<p>Will have content hidden. External trigger link will show hide based on a class on the link or button. Ensure this is unique to avoid conflicts</p>
+<pre><code>&lt;button type="button" class="button js-show-item"&gt;Click to reveal hidden content&lt;/button&gt;
+&lt;div class="pushdown js-dynamicContainer" data-trigger-link="js-show-item" data-is-hidden-with-content="true" &gt;
+  &lt;p&gt;Content to be releaved on toggle&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p><a name="forms"></a></p>
+<h3 id="forms">Forms</h3>
+<p>Each individual form initialised based on .js-form class</p>
+<h4 id="options--1">Options :</h4>
+<p>$form - Each individual form initialised based on .js-form class
+$errorsHtml - Container for returned erros to be displayed
+ajaxEndPoint - Specified in data-end-point. If it exists, will ajax post the form.
+isToValidate - Hook for Parsley Validator to validate the form. Triggered with data-parsley-validate</p>
+<p>There are no public methods for this utility. It's all driven from data attribute config.</p>
+<p>Initialised and required in utilitiesinitialiser.js</p>
+<p><a name="globaldom"></a></p>
+<h3 id="global-dom-elements">Global Dom Elements</h3>
+<p>A place to cache dom elements which are used repeatedly throughout the app.
+Small perf gains with this approach.</p>
+<p>Require this as singleton wherever needed.</p>
+<p><a name="handlebarshelpers"></a></p>
+<h3 id="handlebars-helpers">Handlebars Helpers</h3>
+<p>Helpers for handle bars.</p>
+<p>Required once in app.js</p>
+<p><a href="handlebarspartials"></a></p>
+<h3 id="handlebars-partials">Handlebars Partials</h3>
+<p>Attach handlebars partials which are used in client side templates.
+Only add partials that are needed as client side views here. Need to keep the bundle light.</p>
+<p>All Handlebars partials in the 'modules/' folder are copiled into the 'app/views/partials' folder to be used server side in the Static Frontend site. If the templates need to be dynamic to be used with ajax content, they manually need to be added to this file in order to be compiled along with all the other javascript.</p>
+<p>Required once in app.js</p>
+<p><a name="infinitescroll"></a></p>
+<h3 id="infinite-scroll">Infinite Scroll</h3>
+<p>Checks when base in in view and loads content from supplied endpoint in a pagination based approach.
+This works together with the <a href="#renderer.js">renderer</a>. </p>
+<p>Current page and item count is passed to the ajax call and iterated each time.</p>
+<p>Initialised and required in utilitiesinitialiser.js with .js-infinitescroll class</p>
+<p><a href="insertbypara"></a></p>
+<h3 id="insert-by-paragraph">Insert By Paragraph</h3>
+<p>Takes some content rendered at the end of an article and inserts it after the specified paragraph index supplied in data-target-index attribute.</p>
+<p>Initialised and required in utilitiesinitialiser.js with .js-insert-by-paragraph class</p>
+<p><a href="loader"></a></p>
+<h3 id="loader">Loader</h3>
+<p>Simple loader shown and hidden through the public methods based on a passed parent</p>
+<p>Require this as singleton wherever needed.</p>
+<p><a name="pubnubadaptor"></a></p>
+<h3 id="pubnub-adaptor">Pubnub adaptor</h3>
+<p>Initialises and connects to pubnub.
+Listens on channels broadcasts data.
+Initiliased and required in: <a href="#realtimelistener">realtimelistener.js</a></p>
+<p><a name="realtimelistener"></a></p>
+<h3 id="realtime-listener">Realtime Listener</h3>
+<p>Subscribes to Realtime data using a channel and triggers an event based on the realtime-channel data-attribute provided.
+Trigger with 'js-realtime' class.
+Event naming format follows the pattern: REALTIME:channelname
+Use in conjunction with the <a href="#dynamicContainer">Dynamic Container</a> module</p>
+<p>Currently only configured to use Pubnub. Other adaptors can plug in to this module.</p>
+<p>Initialised and required in utilitiesinitialiser.js and trigger with .js--realtime class</p>
+<p>Example usage with <a href="#dynamicContainer">Dynamic Container</a></p>
+<pre><code>&lt;div class="js-dynamicContainer js-realtime" 
+  data-realtime-channel="NameOfTheChannel" 
+  data-render-action="replace"
+  data-template="NameOfModule/NameOfHandlebarsFile"&gt;
+    &lt;p&gt;&lt;strong&gt;The content in here will be &lt;i&gt;replaced&lt;/i&gt; and rendered with the data-template supplied. The data passed on the event raised on the data-realtime-channel will be used.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p><a href="renderer"></a></p>
+<h3 id="renderer">Renderer</h3>
+<p>This utility gives a central place for ajax and realtime renderings to be handled. It is used in conjunction with the <a href="#dynamicContainer">Dynamic Container utility</a>.</p>
+<h4 id="options">Options</h4>
+<ul>
+<li><em>template</em> : The pre compiled handlebars template that has been passed to the instance.</li>
+<li><em>renderAction</em> : The render action passed. Options are 'append', 'prepend', 'replace' (default).</li>
+<li><em>$target</em> : The target element that the resulting html will be rendered inside.</li>
+</ul>
+<h5 id="public-methods">Public methods</h5>
+<ul>
+<li>
+<p><em>load()</em> : takes an ajax end point and template and calls the internal _loadData(). This is the ajax call. An event is triggered when the result is returned. This then calls the _renderToTarget() method to render the resultant html.</p>
+</li>
+<li>
+<p><em>renderData(0</em> : If we have the data already and just need to render it without an ajax call. Calls the _renderToTarget() method immediately.</p>
+</li>
+<li><em>empty()</em> : Empties the parent container of all content. </li>
+</ul>
+<p>Renders ajax retrieved data to Dom targets with a rendering action of append, replace or prepend.
+Instance is setup with a target Dom element and action.
+New data is then passed in on the render method triggered by listeners outside of this module through mediator events.</p>
+<p>Initialised and required in dynamicContent and CommentStreamModule/StreamController</p>
+<p><a href="redirectonchange"></a></p>
+<h3 id="redirect-on-change">Redirect On Change</h3>
+<p>Simply utility to redirect the url passed in the value of a select dropdown.</p>
+<p>Initialised and required in utilitiesinitialiser.js with .js-infinitescroll .js-redirect-on-change class</p>
+<p><a href="sideswipe"></a></p>
+<h3 id="side-swipe">Side Swipe</h3>
+<p>A utility to swipe left and right between to halves on content on mobile</p>
+<p>Initialised and required in utilitiesinitialiser.js with .js-sideswipe class</p>
+<p><a href="tabs"></a></p>
+<h3 id="tabs">Tabs</h3>
+<p>Simple accessible tabs utility based on truthyness of aria-selected attributes.
+Tab links are active with aria-selected=&quot;true&quot; and target the element to show with aria-controls=&quot;tab-1-target&quot;
+Containers are shown and hidden based on the setting by the utility on tab change of the aria-hidden=&quot;false&quot; attribute</p>
+<p>Example usage:</p>
+<pre><code>&lt;section class="tabs js-tabs"&gt;
+    &lt;ul class="tabs__list" role="tablist"&gt;
+          &lt;li class="tabs__tab js-tab"  data-label="Tab 1 description" id="tab-1" role="tab" aria-controls="tab-1-target" aria-selected="true"&gt;
+              &lt;a href="actual-page-url-where-active-tab-will-be-set-serverside" class="tabs__tab__link"&gt;
+                Tab 1 link
+              &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="tabs__tab js-tab"  data-label="Tab 2 description" id="tab-2" role="tab" aria-controls="tab-2-target" aria-selected="false"&gt;
+              &lt;a href="actual-page-url-where-active-tab-will-be-set-serverside" class="tabs__tab__link"&gt;
+                Tab 2 link
+              &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li class="tabs__tab js-tab"  data-label="Tab 3 description" id="tab-3" role="tab" aria-controls="tab-3-target" aria-selected="false"&gt;
+              &lt;a href="actual-page-url-where-active-tab-will-be-set-serverside" class="tabs__tab__link"&gt;
+                Tab 3 link
+              &lt;/a&gt;
+          &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/section&gt;
+&lt;section id="tab-1-target" class="fixtures tab-target" role="tabpanel" aria-hidden="false" aria-labelledby="tab-1"&gt;
+  Tab one content. Showing with the aria-hidden="false" attribute
+&lt;/section&gt;
+&lt;section id="tab-2-target" class="fixtures tab-target" role="tabpanel" aria-hidden="true" aria-labelledby="tab-1"&gt;
+  Tab one content. Hidden with the aria-hidden="true" attribute
+&lt;/section&gt;
+&lt;section id="tab-2-target" class="fixtures tab-target" role="tabpanel" aria-hidden="true" aria-labelledby="tab-1"&gt;
+  Tab one content. Hidden with the aria-hidden="true" attribute
+&lt;/section&gt;
+</code></pre>
+<p><a href="templatemapper"></a></p>
+<h3 id="template-mapper">Template Mapper</h3>
+<p>Takes a template string provided from a dom element data attribute.
+Provides a way of globbing with require to return the correct template.
+Returns the compiled template for hashed obj of template paths.</p>
+<p>Singleton pattern and required and used anywhere.</p>
+<p>Example usage:</p>
 <pre><code>
-'use strict';
-
-//require an instance of another module here. These can be constructors or singletons.
-var config = require('../config');
-
-var MyNewModule = function MyNewModule(settings) {
-  //Can have initialisation stuff in here...
-  this.settings = settings;
-};
-
-MyNewModule.prototype.publicMethod = function(param) {
-
-};
-
-// Private methods. These should be added at the end of the file. They are underscored and added to the prototype to make them available for testing.
-MyNewModule.prototype._privateMethod = function(param) {
-
-};
-
-//The constructor is exported here
-module.exports = MyNewModule;</code></pre>
-<p>The module can then be required like this:</p>
-<pre><code>var myNewModule = new MyNewModule({"width" : 500});</code></pre>
-<p>If a module is added to the 'client/modules folder', then it needs an initialiser file to accompany it. There is a glob pattern in 'client/scripts/app.js' to do this.</p>
-<pre><code>require('../modules/**/*.initialiser.js', {glob: true});</code></pre>
-<p>What the initialiser will do is check for a trigger on load to see if the module is to be initialised. eg:</p>
-<pre><code>var $ = window.$;
-var Carousel = require('./Carousel');
-
-var CarouselInitialiser = function() {
-  console.log('CarouselInitialiser initialised');
-  /* Initialise carousels
-  ========================================================================== */
-  var $carousel = $('.js-carousel');
-  if ($carousel.length) {
-    $carousel.each(function(index, item){
-      var carousel = new Carousel();
-      carousel.init($(item));
-    });
-
-  }
-};
-
-module.exports = new CarouselInitialiser();</code></pre>
-<p>It can also have it's initialisation added to '/scripts/modulesInitialiser.js' with others if easier. This can change going forward to have all the initialisations in '/scripts/modulesInitialiser.js' same as the utilities in '/scripts/utilitiesInitialisation.js'</p>
-<h2 id="introduction-and-standards">Introduction and standards</h2>
-<h3 id="event-architechture">Event architechture</h3>
-<p>Inter-module communications are handled via the node mediator following syntax (MODULEORIGINATOR:EVENTNAME) eg (UI:BREAKPOINT_CHANGED). All events should be added to the 'client/scripts/config.js' file. An example trigger and listener:</p>
-<pre><code>var config.events = require('../config')
-var mediator = require('mediatorjs');
-
-//To listen to the mediator event:
-mediator.on(events.ui.breakPointChanged, upDateUiMethod);
-
-//To trigger mediator event:
-mediator.trigger(events.ui.breakPointChanged, {passed: 'parameters'});
+var templateMapper = require('../../scripts/utilities/templateMapper');
+var commentItemsTmpl = templateMapper.get('CommentStream/CommentItems');
 </code></pre>
-<h3 id="root-javascript-initialisation">Root javascript Initialisation</h3>
-<h4 id="entry-point--appjs">Entry point  (app.js)</h4>
-<p>The entry point to the application is in 'client/scripts/app.js'. This is called from 'client/scripts/main.js'which will be the name of the bundled file in production. This allows us the flexibility to add other entry points to secondary applications if needed.</p>
-<h4 id="ui-initialisation-uijs">Ui initialisation (ui.js)</h4>
-<p>'client/scripts/ui.js' initialises UI state for the application. Things like mediator, global listeners and breakpoints watchers.</p>
-<h4 id="reusable-global-utilities-utilitiesinitialiserjs">reusable global utilities (utilitiesInitialiser.js)</h4>
-<p>'client/scripts/utilitiesInitialiser.js' contains initialisation for all global and reusable components not deemed to be bespoke modules (which would be added to the 'modules' folder). They can be generally be initiated and used anywhere in the site and are mostly trigger with 'js-componentname' classes.  </p>
-<p>The utilitiesInitialiser module's init() method checks for css class existance in child elements of the passed parent Dom node. On page load this will be the 'body' but it can be something more dynamic if content has been added after page load with ajax. In these instances utilitiesInitialiser.init($newParentNode); can be called to run all the checks again and initialise and new instances only contained in the scope of the new wrapper element ($newParentNode).</p>
-<p>An example initialisation:</p>
-<pre><code>  var $infiniteScroll = $parent.find('.js-infinitescroll');
-  if ($infiniteScroll.length) {
-    var InfiniteScroll = require('./utilities/infiniteScroll');
-    $infiniteScroll.each(function(index, item){
-      var infiniteScroll = new InfiniteScroll($(item));
-    });
-  }
-</code></pre>
-<p>The 'modulesInitialiser' works in the same way, but only targets modules in the '/Modules' folder.</p>
-<h4 id="config-configjs">Config (config.js)</h4>
-<p>Config and settings for the site.</p>
-<h4 id="icons-iconsjs">Icons (icons.js)</h4>
-<p>This file manages the rendering of svg assets in the site. More information can be found in the <a href="frontend/icons.html">icons docs</a>.</p>
+<p><a href="togglepushdown"></a></p>
+<h3 id="toggle-pushdown">Toggle Pushdown</h3>
+<p>A simple show / hide container trigger by a sibling ancor tag.
+When triggered ALL OTHER OPEN TOGGLES on the page will be closed.</p>
+<p>If the data-attribute stop-close-from-remote is true then it means this toggle
+instance will stay open if others are opened.</p>
+<p>Initialised and required in utilitiesinitialiser.js with .js-togglePushdown class</p>
                 </section>
 
             </div>
