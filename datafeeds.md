@@ -28,8 +28,8 @@ The S3 credentials are stored in web.config as per normal:
 ```
 	<add key="AWSProfileName" value="production" />
     <add key="AWSProfilesLocation" value="~/App_Data/awscredentials.txt" />
-    <add key="AWSAccessKey" value="AKIAI3DKGUOL4ZSIDNCQ" />
-    <add key="AWSSecretKey" value="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" />
+    <add key="AWSAccessKey" value="*" />
+    <add key="AWSSecretKey" value="*" />
 ```
 The Queue details are stored in appsettings in the web.config, with a name of ```Microsoft.ServiceBus.ConnectionString```.
 
