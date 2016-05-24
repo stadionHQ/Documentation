@@ -1,8 +1,8 @@
 ---
-currentMenu: Javascript Utilities
+currentMenu: JavascriptUtilities
 ---
 
-Javascript Utilities
+Utilities
 ============
 
 All globally available utilities included in /scripts/utilities folder.
@@ -22,7 +22,7 @@ All globally available utilities included in /scripts/utilities folder.
 - [Renderer](#renderer)
 - [Redirect On Change](#redirectonchange)
 - [Side Swipe](#sideswipe)
-- [Tabs] (#tabs)
+- [Tabs](#tabs)
 - [Template Mapper](#templatemapper)
 - [Toggle Pushdown](#togglepushdown)
 
