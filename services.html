@@ -46,6 +46,67 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
+                                Technical documentation
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/index.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/api.html">
+                                            API
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/hosting.html">
+                                            Hosting
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/deployments.html">
+                                            CI & Deployments
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="http://docs.stadion.io/services.html">
+                                            Services
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/configuration.html">
+                                            Configuration
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/datafeeds.html">
+                                            Data feeds
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/cdn.html">
+                                            CDN
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/responsive images.html">
+                                            Responsive Images
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/multilanguage.html">
+                                            Multi Language
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/video.html">
+                                            Video
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
                                 Design Guidelines
                             </p>
 
@@ -276,57 +337,17 @@
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1 id="exposed-services">Exposed Services</h1>
-<p>You can inject any of these services into your controllers using StructureMap and they will provide some very usefull functionality.</p>
-<h2 id="ifixtureservice">IFixtureService</h2>
-<pre><code>    IFixture GetFixtureByOptaId(string optaId);
-    IFixture GetNextFixture(DateTime currentTime, string clubId);
-    IEnumerable&lt;IFixture&gt; GetOrderedFixturesPaged(int pageSize, int page, out int total, string clubId, int? seasonId = null);
-    IEnumerable&lt;IFixture&gt; FixtureSearch(string search);
-    IFixture GetLastOrCurrentFixture(DateTime currentTime, string clubId);
-    IEnumerable&lt;IFixture&gt; GetLastFixtureAndNextTwo(DateTime currentTime, string clubId);
-    IEnumerable&lt;IFixture&gt; GetUpcomingFixtures(DateTime currentTime, string clubId);
-    IEnumerable&lt;IFixture&gt; GetFixturesForSeason(int seasonId, string clubId);
-    LeagueTableViewModel GetLeagueTable(int competitionId, int seasonId, string clubId);
-    IEnumerable&lt;RecentFormSummary&gt; GetHeadToHeadForm(string teamId, string secondTeamId);
-    IEnumerable&lt;RecentFormSummary&gt; GetRecentForm(string teamId);
-    TeamViewModel GetLineup(string gameId, SideEnum side);
-    OtherScoresViewModel GetLiveScores(int competitionId, int matchDay, int matchMonth, int matchYear);
-    GameOverviewModel GetGameOverview(string gameId);
-    dynamic GetTeamStats(IFixture fixture);
-    dynamic GetPlayerStats(IFixture fixture);
-    int GetCurrentSeasonId(string dataProviderId);</code></pre>
-<h2 id="iplayerprofileservice">IPlayerProfileService</h2>
-<pre><code>    PlayerProfileViewModel GetPlayerProfile(int dataProviderId, dynamic contentId = null);
-    dynamic GetPlayerStatsForSeason(string playerReference, int seasonId, FixtureType fixtureType);
-    FootballPlayerStats GetPlayerStatsForEverySeason(string playerReference);
-    List&lt;PlayerProfileViewModel&gt; GetPlayers(int teamDataProviderId, dynamic teamContentId, int seasonId);</code></pre>
-<h2 id="iplayerratingservice">IPlayerRatingService</h2>
-<pre><code>    double GetSeasonRating(string optaId);
-    double GetMatchRating(string optaId, string matchId);</code></pre>
-<h2 id="iclubservice">IClubService</h2>
-<pre><code>    string GetClubCrestUrl(string dataProviderId);
-    ClubSummary GetClubSummary(string dataProviderId);
-    List&lt;ClubSummary&gt; GetAllClubs();
-    void SaveClub(ClubSummary club);
-    List&lt;ClubSummary&gt; GetMultipleClubs(List&lt;string&gt; dataProviderIds);</code></pre>
-<h2 id="isearchservice">ISearchService</h2>
-<pre><code>    SearchResults&lt;Result&gt; SearchContent(SearchFilter filter);</code></pre>
-<h2 id="icompetitionservice">ICompetitionService</h2>
-<pre><code>    ICompetition GetCompetitionById(string dataProviderId);
-    void Save(ICompetition competition);
-    List&lt;Competition&gt; GetAllCompetitions();</code></pre>
-<h2 id="iinstagramservice">IInstagramService</h2>
-<pre><code>    long GetFollowedByCount(string userName);
-    InstagramUser GetUserDetails(int userId, int recentMediaCount = 0);
-    InstagramUser UpdateUserDetails(InstagramUser user, int recentMediaCount = 0);
-    InstagramUser GetUserDetails(string userName, int recentMediaCount = 0);</code></pre>
-<h2 id="itwitterservice">ITwitterService</h2>
-<pre><code>    IEnumerable&lt;Tweet&gt; GetStatusesForSearch(ulong? sinceId, string searchText, string channel);
-    IEnumerable&lt;Tweet&gt; GetStatusesForList(ulong? sinceId, string screenName, string listName, string channel);
-    IEnumerable&lt;Tweet&gt; GetStatusesForUser(ulong? sinceId, string screenName, string channel);</code></pre>
-<h2 id="isiteservice">ISiteService</h2>
-<pre><code>    List&lt;SiteViewModel&gt; GetAvaliableSites();
-    SiteViewModel GetCurrentSite();</code></pre>
+<p>Full .net documentation of all classes and services can be found <a href="http://stadiondocs.azurewebsites.net/index.aspx">here</a>.</p>
+<p>Below is a list of key services you may find useful. You can inject any of these services into your controllers using StructureMap and they will provide some very usefull functionality.</p>
+<pre><code>IFixtureService</code></pre>
+<pre><code>IPlayerProfileService</code></pre>
+<pre><code>IPlayerRatingService</code></pre>
+<pre><code>IClubService</code></pre>
+<pre><code>ISearchService</code></pre>
+<pre><code>CompetitionService</code></pre>
+<pre><code>IInstagramService</code></pre>
+<pre><code>ITwitterService</code></pre>
+<pre><code>ISiteService</code></pre>
 <h1 id="content-decorators">Content Decorators</h1>
 <p>Content decorators are used to combine data from a a 'dataprovider' such as Opta or PA and content from the CMS.</p>
 <h2 id="iplayerprofilecontentdecorator">IPlayerProfileContentDecorator</h2>
