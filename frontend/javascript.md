@@ -34,7 +34,7 @@ MyNewModule.prototype.publicMethod = function(param) {
   
 };
 
-// Private methods. These should be added at the end of the file. They are added to the prototype to make them available for testing.
+// Private methods. These should be added at the end of the file. They are underscored and added to the prototype to make them available for testing.
 MyNewModule.prototype._privateMethod = function(param) {
   
 };
@@ -48,7 +48,8 @@ The module can then be required like this:
 var myNewModule = new MyNewModule({"width" : 500});
 ```
 
-If a module is added to the 'client/modules folder', then it needs an initialiser file to accompany it. There is a glob pattern in 'client/scripts/app.js' to do this:
+If a module is added to the 'client/modules folder', then it needs an initialiser file to accompany it. There is a glob pattern in 'client/scripts/app.js' to do this.
+
 ```
 require('../modules/**/*.initialiser.js', {glob: true});
 ```
@@ -73,6 +74,7 @@ var CarouselInitialiser = function() {
 
 module.exports = new CarouselInitialiser();
 ```
+It can also have it's initialisation added to '/scripts/modulesInitialiser.js' with others if easier. This can change going forward to have all the initialisations in '/scripts/modulesInitialiser.js' same as the utilities in '/scripts/utilitiesInitialisation.js'
 
 
 ## Introduction and standards
@@ -101,10 +103,10 @@ The entry point to the application is in 'client/scripts/app.js'. This is called
 #### Ui initialisation (ui.js)
 'client/scripts/ui.js' initialises UI state for the application. Things like mediator, global listeners and breakpoints watchers.
 
-#### reusable components (uiComponents.js)
-'client/scripts/uiComponents.js' contains initialisation for all globale and reusable components not deemed to be bespoke modules (which would be added to the 'modules' folder). That can be generally be initiated and used anywhere in the site. 
+#### reusable global utilities (utilitiesInitialiser.js)
+'client/scripts/utilitiesInitialiser.js' contains initialisation for all global and reusable components not deemed to be bespoke modules (which would be added to the 'modules' folder). They can be generally be initiated and used anywhere in the site and are mostly trigger with 'js-componentname' classes.  
 
-The uiComponents module's init() method checks for css class existance in child elements of the passed parent Dom node. On page load this will be the 'body' but it can be something more dynamic if content has been added after page load with ajax. In these instances uiComponents.init($newParentNode); can be called to run all the checks again and initialise and new instances only contained in the scope of the new wrapper element ($newParentNode).
+The utilitiesInitialiser module's init() method checks for css class existance in child elements of the passed parent Dom node. On page load this will be the 'body' but it can be something more dynamic if content has been added after page load with ajax. In these instances utilitiesInitialiser.init($newParentNode); can be called to run all the checks again and initialise and new instances only contained in the scope of the new wrapper element ($newParentNode).
 
 An example initialisation:
 
@@ -118,6 +120,7 @@ An example initialisation:
   }
 
 ```
+The 'modulesInitialiser' works in the same way, but only targets modules in the '/Modules' folder.
  
 #### Config (config.js)
 Config and settings for the site.
@@ -130,52 +133,5 @@ This file manages the rendering of svg assets in the site. More information can 
 
 
 
-
-### Utilities
-The are various utilities available for use in the site. Theye are all located in the 'lient/scripts/utilities' folder.
-
-
-```
-<section class="list js-dynamicContainer" data-template="ContentListing" data-render-action="append" >
-  <h1 class="list__header">Other News</h1>
-  <ul class="list__wrapper">
-    <li class="list__item">
-      Some listed content in here....
-    </li>
-    <li class="list__item">
-      Some listed content in here....
-    </li>
-  </ul>
-  <div class="pagination js-triggerLinks">
-    <ul class="pagination__list">
-        <li class="previous"><a href="http://private-003c2-stephenzsolnai.apiary-mock.com/content-listing?page=1" rel="previous" data-load-previous="">
-            Previous
-          </a>
-        </li>
-          <li class="next"><a href="http://private-003c2-stephenzsolnai.apiary-mock.com/content-listing?page=3" rel="next" data-load-next="">
-            Next
-          </a>
-        </li>
-    </ul>
-  </div>
-</section>
-```
-
-<a name="renderer"></a>
-#### Renderer ('utilities/renderer.js')
-This utility gives a central place for ajax and realtime renderings to be handled. It is used in conjunction with the [Dynamic Container utility](#dynamicContainer).
-
-##### Options
-
-- *template* : The pre compiled handlebars template that has been passed to the instance.
-- *renderAction* : The render action passed. Options are 'append', 'prepend', 'replace' (default).
-- *$target* : The target element that the resulting html will be rendered inside.
-
-##### Public methods
-- *load()* : takes an ajax end point and template and calls the internal _loadData(). This is the ajax call. An event is triggered when the result is returned. This then calls the _renderToTarget() method to render the resultant html.
-
-- *renderData(0* : If we have the data already and just need to render it without an ajax call. Calls the _renderToTarget() method immediately.
-
-- *empty()* : Empties the parent container of all content. 
 
 

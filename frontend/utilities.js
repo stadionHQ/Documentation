@@ -8,8 +8,6 @@ Javascript Utilities
 All globally available utilities included in /scripts/utilities folder.
 
 ### Utilities list:
-- [Pubnub Adaptor](#pubnubadaptor)
-- [Realtime Listener](#realtimelistener)
 - [Detection](#detection)
 - [Dynamic Container](#dynamicContainer)
 - [Forms](#forms)
@@ -19,6 +17,14 @@ All globally available utilities included in /scripts/utilities folder.
 - [Infinit Scroll](#infinitescroll)
 - [Insert By Paragraph](#insertbypara)
 - [Loader](#loader)
+- [Pubnub Adaptor](#pubnubadaptor)
+- [Realtime Listener](#realtimelistener)
+- [Renderer](#renderer)
+- [Redirect On Change](#redirectonchange)
+- [Side Swipe](#sideswipe)
+- [Tabs] (#tabs)
+- [Template Mapper](#templatemapper)
+- [Toggle Pushdown](#togglepushdown)
 
 <a name="detection"></a>
 ### Device Detection
@@ -168,9 +174,14 @@ This works together with the [renderer](#renderer.js).
 
 Current page and item count is passed to the ajax call and iterated each time.
 
+Initialised and required in utilitiesinitialiser.js with .js-infinitescroll class
+
+
 <a href="insertbypara"></a>
 ### Insert By Paragraph
-Takes some content rendered at the end of an article and inserts it after the specified paragraph index supplied in data-target-index attribute
+Takes some content rendered at the end of an article and inserts it after the specified paragraph index supplied in data-target-index attribute.
+
+Initialised and required in utilitiesinitialiser.js with .js-insert-by-paragraph class
 
 <a href="loader"></a>
 ### Loader
@@ -187,16 +198,127 @@ Initiliased and required in: [realtimelistener.js](#realtimelistener)
 
 <a name="realtimelistener"></a>
 ### Realtime Listener
+Subscribes to Realtime data using a channel and triggers an event based on the realtime-channel data-attribute provided.
+Trigger with 'js-realtime' class.
+Event naming format follows the pattern: REALTIME:channelname
+Use in conjunction with the [Dynamic Container](#dynamicContainer) module
 
+Currently only configured to use Pubnub. Other adaptors can plug in to this module.
 
+Initialised and required in utilitiesinitialiser.js and trigger with .js--realtime class
+
+Example usage with [Dynamic Container](#dynamicContainer)
+```
+<div class="js-dynamicContainer js-realtime" 
+  data-realtime-channel="NameOfTheChannel" 
+  data-render-action="replace"
+  data-template="NameOfModule/NameOfHandlebarsFile">
+    <p><strong>The content in here will be <i>replaced</i> and rendered with the data-template supplied. The data passed on the event raised on the data-realtime-channel will be used.</strong></p>
+</div>
 
 ```
-  var $infiniteScroll = $parent.find('.js-infinitescroll');
-  if ($infiniteScroll.length) {
-    var InfiniteScroll = require('./utilities/infiniteScroll');
-    $infiniteScroll.each(function(index, item){
-      var infiniteScroll = new InfiniteScroll($(item));
-    });
-  }
+
+<a href="renderer"></a>
+### Renderer
+This utility gives a central place for ajax and realtime renderings to be handled. It is used in conjunction with the [Dynamic Container utility](#dynamicContainer).
+
+#### Options
+
+- *template* : The pre compiled handlebars template that has been passed to the instance.
+- *renderAction* : The render action passed. Options are 'append', 'prepend', 'replace' (default).
+- *$target* : The target element that the resulting html will be rendered inside.
+
+##### Public methods
+- *load()* : takes an ajax end point and template and calls the internal _loadData(). This is the ajax call. An event is triggered when the result is returned. This then calls the _renderToTarget() method to render the resultant html.
+
+- *renderData(0* : If we have the data already and just need to render it without an ajax call. Calls the _renderToTarget() method immediately.
+
+- *empty()* : Empties the parent container of all content. 
+
+Renders ajax retrieved data to Dom targets with a rendering action of append, replace or prepend.
+Instance is setup with a target Dom element and action.
+New data is then passed in on the render method triggered by listeners outside of this module through mediator events.
+
+Initialised and required in dynamicContent and CommentStreamModule/StreamController
+
+
+<a href="redirectonchange"></a>
+### Redirect On Change
+Simply utility to redirect the url passed in the value of a select dropdown.
+
+Initialised and required in utilitiesinitialiser.js with .js-infinitescroll .js-redirect-on-change class
+
+<a href="sideswipe"></a>
+### Side Swipe
+A utility to swipe left and right between to halves on content on mobile
+
+Initialised and required in utilitiesinitialiser.js with .js-sideswipe class
+
+
+<a href="tabs"></a>
+### Tabs
+Simple accessible tabs utility based on truthyness of aria-selected attributes.
+Tab links are active with aria-selected="true" and target the element to show with aria-controls="tab-1-target"
+Containers are shown and hidden based on the setting by the utility on tab change of the aria-hidden="false" attribute
+
+Example usage:
+```
+<section class="tabs js-tabs">
+    <ul class="tabs__list" role="tablist">
+          <li class="tabs__tab js-tab"  data-label="Tab 1 description" id="tab-1" role="tab" aria-controls="tab-1-target" aria-selected="true">
+              <a href="actual-page-url-where-active-tab-will-be-set-serverside" class="tabs__tab__link">
+                Tab 1 link
+              </a>
+          </li>
+          <li class="tabs__tab js-tab"  data-label="Tab 2 description" id="tab-2" role="tab" aria-controls="tab-2-target" aria-selected="false">
+              <a href="actual-page-url-where-active-tab-will-be-set-serverside" class="tabs__tab__link">
+                Tab 2 link
+              </a>
+          </li>
+          <li class="tabs__tab js-tab"  data-label="Tab 3 description" id="tab-3" role="tab" aria-controls="tab-3-target" aria-selected="false">
+              <a href="actual-page-url-where-active-tab-will-be-set-serverside" class="tabs__tab__link">
+                Tab 3 link
+              </a>
+          </li>
+    </ul>
+</section>
+<section id="tab-1-target" class="fixtures tab-target" role="tabpanel" aria-hidden="false" aria-labelledby="tab-1">
+  Tab one content. Showing with the aria-hidden="false" attribute
+</section>
+<section id="tab-2-target" class="fixtures tab-target" role="tabpanel" aria-hidden="true" aria-labelledby="tab-1">
+  Tab one content. Hidden with the aria-hidden="true" attribute
+</section>
+<section id="tab-2-target" class="fixtures tab-target" role="tabpanel" aria-hidden="true" aria-labelledby="tab-1">
+  Tab one content. Hidden with the aria-hidden="true" attribute
+</section>
 
 ```
+
+<a href="templatemapper"></a>
+### Template Mapper
+Takes a template string provided from a dom element data attribute.
+Provides a way of globbing with require to return the correct template.
+Returns the compiled template for hashed obj of template paths.
+
+Singleton pattern and required and used anywhere.
+
+Example usage:
+
+```
+
+var templateMapper = require('../../scripts/utilities/templateMapper');
+var commentItemsTmpl = templateMapper.get('CommentStream/CommentItems');
+
+```
+
+
+<a href="togglepushdown"></a>
+### Toggle Pushdown
+A simple show / hide container trigger by a sibling ancor tag.
+When triggered ALL OTHER OPEN TOGGLES on the page will be closed.
+
+If the data-attribute stop-close-from-remote is true then it means this toggle
+instance will stay open if others are opened.
+
+Initialised and required in utilitiesinitialiser.js with .js-togglePushdown class
+
