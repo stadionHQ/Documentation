@@ -224,6 +224,10 @@ menu:
                     text: Javascript
                     # Or absolute urls
                     relativeUrl: frontend/javascript.html
+                JavascriptUtilities:
+                    text: Javascript Utilities
+                    # Or absolute urls
+                    relativeUrl: frontend/utilities.html
                 Realtime Updates:
                     text: Realtime Updates
                     # Or absolute urls

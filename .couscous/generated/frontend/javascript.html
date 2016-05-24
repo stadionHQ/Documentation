@@ -300,6 +300,11 @@
                                         </a>
                                     </li>
                                                                     <li class="">
+                                        <a href="http://docs.stadion.io/frontend/utilities.html">
+                                            Javascript Utilities
+                                        </a>
+                                    </li>
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/frontend/realtime-updates.html">
                                             Realtime Updates
                                         </a>
@@ -340,7 +345,7 @@ MyNewModule.prototype.publicMethod = function(param) {
 
 };
 
-// Private methods. These should be added at the end of the file. They are added to the prototype to make them available for testing.
+// Private methods. These should be added at the end of the file. They are underscored and added to the prototype to make them available for testing.
 MyNewModule.prototype._privateMethod = function(param) {
 
 };
@@ -349,7 +354,7 @@ MyNewModule.prototype._privateMethod = function(param) {
 module.exports = MyNewModule;</code></pre>
 <p>The module can then be required like this:</p>
 <pre><code>var myNewModule = new MyNewModule({"width" : 500});</code></pre>
-<p>If a module is added to the 'client/modules folder', then it needs an initialiser file to accompany it. There is a glob pattern in 'client/scripts/app.js' to do this:</p>
+<p>If a module is added to the 'client/modules folder', then it needs an initialiser file to accompany it. There is a glob pattern in 'client/scripts/app.js' to do this.</p>
 <pre><code>require('../modules/**/*.initialiser.js', {glob: true});</code></pre>
 <p>What the initialiser will do is check for a trigger on load to see if the module is to be initialised. eg:</p>
 <pre><code>var $ = window.$;
@@ -370,6 +375,7 @@ var CarouselInitialiser = function() {
 };
 
 module.exports = new CarouselInitialiser();</code></pre>
+<p>It can also have it's initialisation added to '/scripts/modulesInitialiser.js' with others if easier. This can change going forward to have all the initialisations in '/scripts/modulesInitialiser.js' same as the utilities in '/scripts/utilitiesInitialisation.js'</p>
 <h2 id="introduction-and-standards">Introduction and standards</h2>
 <h3 id="event-architechture">Event architechture</h3>
 <p>Inter-module communications are handled via the node mediator following syntax (MODULEORIGINATOR:EVENTNAME) eg (UI:BREAKPOINT_CHANGED). All events should be added to the 'client/scripts/config.js' file. An example trigger and listener:</p>
@@ -387,9 +393,9 @@ mediator.trigger(events.ui.breakPointChanged, {passed: 'parameters'});
 <p>The entry point to the application is in 'client/scripts/app.js'. This is called from 'client/scripts/main.js'which will be the name of the bundled file in production. This allows us the flexibility to add other entry points to secondary applications if needed.</p>
 <h4 id="ui-initialisation-uijs">Ui initialisation (ui.js)</h4>
 <p>'client/scripts/ui.js' initialises UI state for the application. Things like mediator, global listeners and breakpoints watchers.</p>
-<h4 id="reusable-components-uicomponentsjs">reusable components (uiComponents.js)</h4>
-<p>'client/scripts/uiComponents.js' contains initialisation for all globale and reusable components not deemed to be bespoke modules (which would be added to the 'modules' folder). That can be generally be initiated and used anywhere in the site. </p>
-<p>The uiComponents module's init() method checks for css class existance in child elements of the passed parent Dom node. On page load this will be the 'body' but it can be something more dynamic if content has been added after page load with ajax. In these instances uiComponents.init($newParentNode); can be called to run all the checks again and initialise and new instances only contained in the scope of the new wrapper element ($newParentNode).</p>
+<h4 id="reusable-global-utilities-utilitiesinitialiserjs">reusable global utilities (utilitiesInitialiser.js)</h4>
+<p>'client/scripts/utilitiesInitialiser.js' contains initialisation for all global and reusable components not deemed to be bespoke modules (which would be added to the 'modules' folder). They can be generally be initiated and used anywhere in the site and are mostly trigger with 'js-componentname' classes.  </p>
+<p>The utilitiesInitialiser module's init() method checks for css class existance in child elements of the passed parent Dom node. On page load this will be the 'body' but it can be something more dynamic if content has been added after page load with ajax. In these instances utilitiesInitialiser.init($newParentNode); can be called to run all the checks again and initialise and new instances only contained in the scope of the new wrapper element ($newParentNode).</p>
 <p>An example initialisation:</p>
 <pre><code>  var $infiniteScroll = $parent.find('.js-infinitescroll');
   if ($infiniteScroll.length) {
@@ -399,86 +405,11 @@ mediator.trigger(events.ui.breakPointChanged, {passed: 'parameters'});
     });
   }
 </code></pre>
+<p>The 'modulesInitialiser' works in the same way, but only targets modules in the '/Modules' folder.</p>
 <h4 id="config-configjs">Config (config.js)</h4>
 <p>Config and settings for the site.</p>
 <h4 id="icons-iconsjs">Icons (icons.js)</h4>
 <p>This file manages the rendering of svg assets in the site. More information can be found in the <a href="frontend/icons.html">icons docs</a>.</p>
-<h3 id="utilities">Utilities</h3>
-<p>The are various utilities available for use in the site. Theye are all located in the 'lient/scripts/utilities' folder.</p>
-<p><a name="dynamicContainer"></a></p>
-<h4 id="dynamic-container-utilitiesdynamiccontainerjs">Dynamic container (utilities/dynamicContainer.js)</h4>
-<p>A utility to handle all dynamic content throughout the application. The idea is the ajax endpoints, settings and templates are driven from data-attributes in the markup, rather that individual javascript views for each component. This more generic approach means we can keep the js bundle lighter. It was also the better approach to handling dynamic ajax content in the absence of a javascript framework. This works together with the render ('utilities/renderer.js'). More details on this <a href="#renderer">here</a></p>
-<h5 id="options-">Options :</h5>
-<ul>
-<li>
-<p><em>$elem</em> : The target wrapper that will have it's content be dynamic. The module will be initialised with this passed element (js-dynamicContainer).</p>
-</li>
-<li>
-<p><em>$triggerLinks</em> : The container may have links inside it that trigger the render action. Pagination for instance. These will be targeted with (js-triggerLinks). There can also be an external trigger link. The can be referenced by adding the target class of the external link to the 'data-trigger-link' attribute. An example of this is the link ('js-reveal-login') to reveal the login container (which is a dynamic container)</p>
-</li>
-<li>
-<p><em>renderAction</em> : How the new markup comin in is treated. Options are 'append', 'prepend', 'replace' (default). Set with data-render-action=&quot;append&quot;. Defaults to replace if not used.</p>
-</li>
-<li>
-<p><em>template</em> : The template to render content with. This can be replaced if a new template is required. But is normally the same one throughout it's life cycle. Starts with what is set in data-template attribute. This will be passed as a string to the template mapper and will assign the correct pre-compiled hanadlebars template.</p>
-</li>
-<li>
-<p><em>endPoint</em> : An ajax endpoint can be specified and the dynamic container will immediately fetch the data from this endpoint and render it to the template. Mocks for this can be created in Apiary. More information on the mock end points <a href="frontend/api.html">here</a></p>
-</li>
-<li>
-<p><em>isHiddenWithContent</em> : This should be set to true if the dynamic container has content but is hidden from view on the page. An example of this would be the login dropdown. It provides a way of allowing external trigger links to reveal a container rather than updating the content.</p>
-</li>
-<li><em>updateWarning</em> : Warn the user that an update is about to happen with overlay. This will be sent to the renderer which will handle the delay.</li>
-</ul>
-<h5 id="details">Details</h5>
-<p>Render actions can be trigger by pagination links in the element or by events with realtime data fired by oubnub channels.</p>
-<p>Render actions could also be triggered by a button external to the container referenced by data-trigger-link=&quot;triggerLinkClass&quot;</p>
-<p>If the DynamicContainer is has data to be revealed and no ajax call needs to be made then the  data-is-hidden-with-content=&quot;true&quot; will be present</p>
-<p>The utility will use the <a href="#renderer">renderer</a> utility to fetch the data and handle the rendering of dom elements.</p>
-<p>When pagination is used, the next links should be updated in the data passed from the backend and rendered into the template.</p>
-<p>Example markup for a dynamic container:</p>
-<pre><code>&lt;section class="list js-dynamicContainer" data-template="ContentListing" data-render-action="append" &gt;
-  &lt;h1 class="list__header"&gt;Other News&lt;/h1&gt;
-  &lt;ul class="list__wrapper"&gt;
-    &lt;li class="list__item"&gt;
-      Some listed content in here....
-    &lt;/li&gt;
-    &lt;li class="list__item"&gt;
-      Some listed content in here....
-    &lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;div class="pagination js-triggerLinks"&gt;
-    &lt;ul class="pagination__list"&gt;
-        &lt;li class="previous"&gt;&lt;a href="http://private-003c2-stephenzsolnai.apiary-mock.com/content-listing?page=1" rel="previous" data-load-previous=""&gt;
-            Previous
-          &lt;/a&gt;
-        &lt;/li&gt;
-          &lt;li class="next"&gt;&lt;a href="http://private-003c2-stephenzsolnai.apiary-mock.com/content-listing?page=3" rel="next" data-load-next=""&gt;
-            Next
-          &lt;/a&gt;
-        &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-<p><a name="renderer"></a></p>
-<h4 id="renderer-utilitiesrendererjs">Renderer ('utilities/renderer.js')</h4>
-<p>This utility gives a central place for ajax and realtime renderings to be handled. It is used in conjunction with the <a href="#dynamicContainer">Dynamic Container utility</a>.</p>
-<h5 id="options">Options</h5>
-<ul>
-<li><em>template</em> : The pre compiled handlebars template that has been passed to the instance.</li>
-<li><em>renderAction</em> : The render action passed. Options are 'append', 'prepend', 'replace' (default).</li>
-<li><em>$target</em> : The target element that the resulting html will be rendered inside.</li>
-</ul>
-<h5 id="public-methods">Public methods</h5>
-<ul>
-<li>
-<p><em>load()</em> : takes an ajax end point and template and calls the internal _loadData(). This is the ajax call. An event is triggered when the result is returned. This then calls the _renderToTarget() method to render the resultant html.</p>
-</li>
-<li>
-<p><em>renderData(0</em> : If we have the data already and just need to render it without an ajax call. Calls the _renderToTarget() method immediately.</p>
-</li>
-<li><em>empty()</em> : Empties the parent container of all content. </li>
-</ul>
                 </section>
 
             </div>
