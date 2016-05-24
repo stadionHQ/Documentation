@@ -10,12 +10,15 @@ All globally available utilities included in /scripts/utilities folder.
 ### Utilities list:
 - [Pubnub Adaptor](#pubnubadaptor)
 - [Realtime Listener](#realtimelistener)
-- [Detection](#detection) (Device detection)
+- [Detection](#detection)
 - [Dynamic Container](#dynamicContainer)
-
-
-
-
+- [Forms](#forms)
+- [Global Dom elements](#globaldom)
+- [HandleBars Helpers](#handlebarshelpers)
+- [Handlebars Partials](#handlebarspartials)
+- [Infinit Scroll](#infinitescroll)
+- [Insert By Paragraph](#insertbypara)
+- [Loader](#loader)
 
 <a name="detection"></a>
 ### Device Detection
@@ -119,16 +122,71 @@ Will have content hidden. External trigger link will show hide based on a class 
 </div>
 ```
 
+<a name="forms"></a>
+### Forms
+
+Each individual form initialised based on .js-form class
+#### Options :
+$form - Each individual form initialised based on .js-form class
+$errorsHtml - Container for returned erros to be displayed
+ajaxEndPoint - Specified in data-end-point. If it exists, will ajax post the form.
+isToValidate - Hook for Parsley Validator to validate the form. Triggered with data-parsley-validate
+
+There are no public methods for this utility. It's all driven from data attribute config.
+              
+Initialised and required in utilitiesinitialiser.js
+
+
+<a name="globaldom"></a>
+### Global Dom Elements
+A place to cache dom elements which are used repeatedly throughout the app.
+Small perf gains with this approach.
+
+Require this as singleton wherever needed.
+
+
+<a name="handlebarshelpers"></a>
+### Handlebars Helpers
+Helpers for handle bars.
+
+Required once in app.js
+
+<a href="handlebarspartials"></a>
+### Handlebars Partials
+Attach handlebars partials which are used in client side templates.
+Only add partials that are needed as client side views here. Need to keep the bundle light.
+
+All Handlebars partials in the 'modules/' folder are copiled into the 'app/views/partials' folder to be used server side in the Static Frontend site. If the templates need to be dynamic to be used with ajax content, they manually need to be added to this file in order to be compiled along with all the other javascript.
+
+Required once in app.js
+
+
+<a name="infinitescroll"></a>
+### Infinite Scroll
+Checks when base in in view and loads content from supplied endpoint in a pagination based approach.
+This works together with the [renderer](#renderer.js). 
+
+Current page and item count is passed to the ajax call and iterated each time.
+
+<a href="insertbypara"></a>
+### Insert By Paragraph
+Takes some content rendered at the end of an article and inserts it after the specified paragraph index supplied in data-target-index attribute
+
+<a href="loader"></a>
+### Loader
+Simple loader shown and hidden through the public methods based on a passed parent
+
+Require this as singleton wherever needed.
 
 <a name="pubnubadaptor"></a>
-## Pubnub adaptor
+### Pubnub adaptor
 Initialises and connects to pubnub.
 Listens on channels broadcasts data.
 Initiliased and required in: [realtimelistener.js](#realtimelistener)
 
 
-<a href="realtimelistener"></a>
-## Realtime Listener
+<a name="realtimelistener"></a>
+### Realtime Listener
 
 
 
