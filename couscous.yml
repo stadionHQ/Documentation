@@ -232,19 +232,3 @@ menu:
                     text: Server
                     # Or absolute urls
                     relativeUrl: frontend/server.html					
-                
-        Editor:
-            name: Editor Guidelines
-            items:
-                Editor Guidelines:
-                    text: Overview
-                    # Or absolute urls
-                    relativeUrl: editor guidelines.html
-                Images:
-                    text: Images
-                    # Or absolute urls
-                    relativeUrl: images.html	
-                Publishing:
-                    text: Publishing
-                    # Or absolute urls
-                    relativeUrl: publishing.html						
