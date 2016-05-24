@@ -23,6 +23,13 @@ exclude:
 menu:
     sections:
         main:
+            name: Features
+            items:
+                Featureshome:
+                    text: List of features
+                    # You can use relative urls
+                    relativeUrl: features/index.html	
+        Technical Documentation:
             name: Technical documentation
             items:
                 home:
@@ -72,10 +79,6 @@ menu:
         Design:
             name: Design Guidelines
             items:
-                Design Overview:
-                    text: Overview
-                    # You can use relative urls
-                    relativeUrl: design/design.html
                 DesignHomepage:
                     text: Homepage
                     # Or absolute urls
@@ -200,7 +203,7 @@ menu:
                 Folder Structure:
                     text: Folder Structure
                     # Or absolute urls
-                    relativeUrl: frontend/Folder-Structure.html
+                    relativeUrl: frontend/folder-structure.html
                 FrontEndAPI:
                     text: API
                     # Or absolute urls
@@ -216,32 +219,16 @@ menu:
                 Icons:
                     text: Icons
                     # Or absolute urls
-                    relativeUrl: frontend/Icons.html
+                    relativeUrl: frontend/icons.html
                 Javascript:
                     text: Javascript
                     # Or absolute urls
-                    relativeUrl: frontend/Javascript.html
+                    relativeUrl: frontend/javascript.html
                 Realtime Updates:
                     text: Realtime Updates
                     # Or absolute urls
-                    relativeUrl: frontend/Realtime-Updates.html
+                    relativeUrl: frontend/realtime-updates.html
                 Server:
                     text: Server
                     # Or absolute urls
-                    relativeUrl: frontend/Server.html					
-                
-        Editor:
-            name: Editor Guidelines
-            items:
-                Editor Guidelines:
-                    text: Overview
-                    # Or absolute urls
-                    relativeUrl: editor guidelines.html
-                Images:
-                    text: Images
-                    # Or absolute urls
-                    relativeUrl: images.html	
-                Publishing:
-                    text: Publishing
-                    # Or absolute urls
-                    relativeUrl: publishing.html						
+                    relativeUrl: frontend/server.html					
