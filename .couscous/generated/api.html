@@ -46,6 +46,67 @@
                                     </li>
                                                             </ul>
                                                     <p class="text-muted">
+                                Technical documentation
+                            </p>
+
+                            <ul class="nav nav-pills nav-stacked">
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/index.html">
+                                            Overview
+                                        </a>
+                                    </li>
+                                                                    <li class="active">
+                                        <a href="http://docs.stadion.io/api.html">
+                                            API
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/hosting.html">
+                                            Hosting
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/deployments.html">
+                                            CI & Deployments
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/services.html">
+                                            Services
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/configuration.html">
+                                            Configuration
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/datafeeds.html">
+                                            Data feeds
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/cdn.html">
+                                            CDN
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/responsive images.html">
+                                            Responsive Images
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/multilanguage.html">
+                                            Multi Language
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/video.html">
+                                            Video
+                                        </a>
+                                    </li>
+                                                            </ul>
+                                                    <p class="text-muted">
                                 Design Guidelines
                             </p>
 
@@ -279,9 +340,18 @@
 <p>We try to expose all functionality as a REST based API. </p>
 <p>All responses are returned in a JSON format.</p>
 <h2 id="securing-your-api">Securing your API</h2>
-<p>TODO</p>
+<p>API Access can be secured via an OAuth Mechanism.</p>
+<p>On API Controlers there are attibutes such as  <code>[AuthorizePermission("football")]</code>
+The parameter is a role that is passed in to say what types of API user can access these methods.</p>
+<p>The types of role we have defined are:</p>
+<ul>
+<li>football</li>
+<li>membership</li>
+<li>content</li>
+</ul>
+<p>You can implement any permission / token scheme you want here, but we would reccommend a JsonWebToken based model. There is a good guide on how to do this with <a href="https://auth0.com/docs/server-apis/aspnet-webapi">Auth0</a> . </p>
 <h2 id="available-methods">Available methods</h2>
-<p>You can seem them on our <a href="http://docs.stadiondatamodels.apiary.io/">Apiary</a> documentation.</p>
+<p>You can seem them on our <a href="http://demo.stadion.io/swagger">Swagger</a> documentation.</p>
                 </section>
 
             </div>

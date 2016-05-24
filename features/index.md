@@ -42,6 +42,8 @@ Key Modules
 Additonal Content Widgets
 -------------
 * Carousel
+* Inline Gallery
+* Full Screen Gallery
 * Next Match
 * Last Match
 * Upcoming Games
@@ -49,8 +51,9 @@ Additonal Content Widgets
 * Promo Modules
 * Full width promos
 * Sponsors
-
-
+* Quote Modules
+* Related Content
+* Tabs
 Navigation components
 -------------
 * Overarching Navigation
@@ -68,11 +71,10 @@ Additional components
 -------------
 
 * Pagination
-* Tabs
+* Tagging
 * Infinite Scroll
 * Social Sharing
-* Quote Modules
-* Related Content
+
 
 Meta Data
 -------------

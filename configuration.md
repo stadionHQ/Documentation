@@ -6,7 +6,7 @@ currentMenu: Configuration
 
 Everything that needs to be configured can, naturally, be done via a configuration file. All config files are stored in the App_Config folder in the root of the site.
 
-##DSP.config
+##Stadion.config
 
 
 This is the main config file. It contains settings for the following things:
@@ -42,7 +42,7 @@ This is the main config file. It contains settings for the following things:
 </dsp>
 ```
 
-##dsp.images.config
+##Stadion.images.config
 
 This file contains what size images should be for each different type of module.
 
