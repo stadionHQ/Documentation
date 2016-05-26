@@ -5,7 +5,7 @@ currentMenu: Featureshome
 Overview
 ============
 
-Below is alist of every module in the stadion platform.
+Below is a list of every module in the stadion platform.
 
 Key Modules
 -------------

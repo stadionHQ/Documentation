@@ -13,7 +13,15 @@ This site uses [gulp](http://gulpjs.com/) as the build tool. There are comments 
 gulp dev
 ```
 complies css,js and copies all assets to the '/public' folder which is
-used for the Expressjs site to serve the assets.
+used for the Expressjs site to serve the assets. Loads the static mock api from: '/app/data/globalData.json'. this can be refreshed by running 'gulp fetchapi'
+
+
+```
+gulp fetchapi
+```
+This gets all the data from the apiary endpoint (currently: [https://app.apiary.io/stadiondatamodels](https://app.apiary.io/stadiondatamodels)) and populates the '/app/data/globalData.json'. 
+
+This needs to be run when any changes have been made to the data models in the api.
 
 
 ```
@@ -40,6 +48,8 @@ All build tasks build to "/public" folder. This includes production tasks as a f
 var isProd
 ```
 We can then effect things like compression, disabling or source maps etc. The prodution task will then move the assets from "/public" folder to the "/dist" folder.
+
+gulp dev
 
 
 ## Server start and dev task
