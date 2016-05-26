@@ -325,7 +325,10 @@
 <h2 id="gulp-task-summary">Gulp task summary:</h2>
 <pre><code>gulp dev</code></pre>
 <p>complies css,js and copies all assets to the '/public' folder which is
-used for the Expressjs site to serve the assets.</p>
+used for the Expressjs site to serve the assets. Loads the static mock api from: '/app/data/globalData.json'. this can be refreshed by running 'gulp fetchapi'</p>
+<pre><code>gulp fetchapi</code></pre>
+<p>This gets all the data from the apiary endpoint (currently: <a href="https://app.apiary.io/stadiondatamodels"><a href="https://app.apiary.io/stadiondatamodels">https://app.apiary.io/stadiondatamodels</a></a>) and populates the '/app/data/globalData.json'. </p>
+<p>This needs to be run when any changes have been made to the data models in the api.</p>
 <pre><code>gulp dev --production</code></pre>
 <p>sets prod flag to test site with minified assets. Otherwise exactly the same as normal 'gulp dev' just allows running of the site locally with compressed prodution assets for testing purposes.</p>
 <pre><code>gulp prod</code></pre>
@@ -336,6 +339,7 @@ Copies all assets needed for production to dist folder.</p>
 <p>All build tasks build to &quot;/public&quot; folder. This includes production tasks as a flag will be set to indicate if the task is production and this will be available in the gulp stream with the variable:</p>
 <pre><code>var isProd</code></pre>
 <p>We can then effect things like compression, disabling or source maps etc. The prodution task will then move the assets from &quot;/public&quot; folder to the &quot;/dist&quot; folder.</p>
+<p>gulp dev</p>
 <h2 id="server-start-and-dev-task">Server start and dev task</h2>
 <pre><code>gulp dev</code></pre>
 <p>will start a server running at: localhost:3000.
