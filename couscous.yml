@@ -75,7 +75,15 @@ menu:
                 Videotech:
                     text: Video
                     # Or absolute urls
-                    relativeUrl: video.html						
+                    relativeUrl: video.html		
+                Events:
+                    text: Events
+                    # Or absolute urls
+                    relativeUrl: events.html
+                generators:
+                    text: Generators
+                    # Or absolute urls
+                    relativeUrl: generators.html					
         Design:
             name: Design Guidelines
             items:
