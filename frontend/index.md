@@ -39,6 +39,9 @@ All details of the folder structure for the site [here](frontend/folder-structur
 ## Build
 All build tasks handled with Gulp. All steps and information can be found [here](frontend/build.html).
 
+## Setup
+Run 'npm install' and then 'gulp dev'. 
+
 
 
 ## Modules
