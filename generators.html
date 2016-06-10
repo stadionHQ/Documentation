@@ -110,7 +110,7 @@
                                             Events
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/generators.html">
                                             Generators
                                         </a>
@@ -186,7 +186,7 @@
                                             Match Day Live
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/design/14_match_stats.html">
                                             Match Stats
                                         </a>
@@ -330,41 +330,16 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="stat-panel">Stat Panel</h1>
-<h2 id="components">Components</h2>
-<ul>
-<li>Crests</li>
-<li>Pitch visualisation</li>
-<li>Value titles</li>
-<li>Values</li>
-<li>Pie chart</li>
-<li>Card icons</li>
-</ul>
-<h2 id="images">Images</h2>
-<p><img src="M142_MatchStats_320.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_640.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_1004.png" alt="Alt text" /></p>
-<p><img src="M142_Match_Stats.png" alt="Alt text" /></p>
-<h1 id="top-players">Top Players</h1>
-<h2 id="components-1">Components</h2>
-<ul>
-<li>Title</li>
-<li>Player thumbnail</li>
-<li>Position acronym</li>
-<li>Player name</li>
-<li>Player rating (WhoScored)</li>
-<li>Card indicator</li>
-<li>Radar graph</li>
-<li>Value titles</li>
-<li>Value</li>
-<li>Data provider logos</li>
-</ul>
-<h2 id="images-1">Images</h2>
-<p><img src="M142_MatchStats_Open_320.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_Open_1004.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_Players_1004.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_PlayersOpen_1004.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_Players_Open2_1004.png" alt="Alt text" /></p>
+                    <h1 id="overview">Overview</h1>
+<p>We supply generators that be used to generate content in the CMS based on the data in the SQL database.  You can set these to run with quartz or any other such scheduling task. Note: They willneed to run with a CMS context of some kind.</p>
+<h1 id="fixture-generator">Fixture generator</h1>
+<p>There is a class called  <code>FixtureGenerator</code> which implements  <code>IFixtureGenerator</code>.
+You can use this to create fixtures from opta data, based on the teams defined in your cms.
+It will automatically create the seasons as appropriate and won't re-create fixtures that already exsist.</p>
+<h1 id="player-profile-generator">Player profile generator</h1>
+<p>There is a class called  <code>PlayerGenerator</code> which implements  <code>IPlayerGenerator</code>.
+You can use this to create players from opta data (F40) based on the teams defined in your cms.
+It will automatically create the players as appropriate and won't re-create players that already exsist.</p>
                 </section>
 
             </div>

@@ -105,6 +105,16 @@
                                             Video
                                         </a>
                                     </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/events.html">
+                                            Events
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://docs.stadion.io/generators.html">
+                                            Generators
+                                        </a>
+                                    </li>
                                                             </ul>
                                                     <p class="text-muted">
                                 Design Guidelines
@@ -331,6 +341,11 @@ Serving your whole site via the CDN will make the site very fast and will signif
 <p>The 'mediaHost' attribute is used when rendering images. ( It uses a different CDN as it has to pull images form the S3 bucket.)</p>
 <h2 id="logged-in-users">Logged In Users</h2>
 <p>When a user logs in, we redirect them to the version of your site served by your webserver(s). We would recommend a domain name such as secure.exampleclub.com</p>
+<h2 id="cache-headers">Cache Headers</h2>
+<p>As you CDN will obey your cache headers (usually), you should keep the cache time relatively short. We would suggest around 1 hour.</p>
+<h2 id="invalidating-the-cdn">Invalidating the CDN</h2>
+<p>There is an interface called <code>ICdnInvalidator</code> that is called when a publish operation happens.
+There is a default implementation that works with AWS couldfront called <code>CloudfrontInvalidator</code>.</p>
                 </section>
 
             </div>

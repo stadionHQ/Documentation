@@ -105,7 +105,7 @@
                                             Video
                                         </a>
                                     </li>
-                                                                    <li class="">
+                                                                    <li class="active">
                                         <a href="http://docs.stadion.io/events.html">
                                             Events
                                         </a>
@@ -186,7 +186,7 @@
                                             Match Day Live
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://docs.stadion.io/design/14_match_stats.html">
                                             Match Stats
                                         </a>
@@ -330,41 +330,27 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="stat-panel">Stat Panel</h1>
-<h2 id="components">Components</h2>
+                    <h1 id="exposed-events">Exposed Events</h1>
+<p>There some events that you can hook into to do things at ceartin times.</p>
 <ul>
-<li>Crests</li>
-<li>Pitch visualisation</li>
-<li>Value titles</li>
-<li>Values</li>
-<li>Pie chart</li>
-<li>Card icons</li>
+<li>NewsletterSignupEvent</li>
+<li>SuccessfullRegistrationEvent</li>
 </ul>
-<h2 id="images">Images</h2>
-<p><img src="M142_MatchStats_320.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_640.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_1004.png" alt="Alt text" /></p>
-<p><img src="M142_Match_Stats.png" alt="Alt text" /></p>
-<h1 id="top-players">Top Players</h1>
-<h2 id="components-1">Components</h2>
-<ul>
-<li>Title</li>
-<li>Player thumbnail</li>
-<li>Position acronym</li>
-<li>Player name</li>
-<li>Player rating (WhoScored)</li>
-<li>Card indicator</li>
-<li>Radar graph</li>
-<li>Value titles</li>
-<li>Value</li>
-<li>Data provider logos</li>
-</ul>
-<h2 id="images-1">Images</h2>
-<p><img src="M142_MatchStats_Open_320.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_Open_1004.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_Players_1004.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_PlayersOpen_1004.png" alt="Alt text" /></p>
-<p><img src="M142_MatchStats_Players_Open2_1004.png" alt="Alt text" /></p>
+<h1 id="how-to-perform-an-action-on-an-event">How to perform an action on an event</h1>
+<p>You need to implement a class that implements the <code>IHandle&lt;T&gt;</code>    interface.</p>
+<p>An example is below:</p>
+<pre><code>    public class NewsletterSignupEventHandler : IHandle&lt;NewsletterSignupEvent&gt;
+    {
+        private static ILog Log = LogManager.GetLogger&lt;StandardMembershipProvider&gt;();
+        public void Handle(NewsletterSignupEvent @event)
+        {
+            Log.Info(string.Format("Newsletter sign up: {0}", @event.EmailAddress));
+
+            //Send to CRM
+
+        }
+</code></pre>
+<p>Events are not distributed ( no service bus), so they are executed on the server that raises them. However, you could chnage this if you changed the implementation of <code>IEventNotifier</code>.</p>
                 </section>
 
             </div>
