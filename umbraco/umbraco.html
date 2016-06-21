@@ -344,6 +344,17 @@ You will wish to do this on a 'FeaturedPromo', for example.</p>
 <p>The search is powered by Umbraco's built in Examine search library, which is jsut a wrapper around lucene.</p>
 <h2 id="orm">ORM</h2>
 <p>We are using a forked version of the Umbraco Glass Mapper library, which has some speed improvements.</p>
+<h2 id="scheduled-tasks">Scheduled Tasks</h2>
+<p>If you want to have various jobs running periodically, you can set them up in the   umbracoSettings.config file like so:</p>
+<pre><code>&lt;scheduledTasks&gt;
+    &lt;!-- add tasks that should be called with an interval (seconds) --&gt;
+    &lt;!--    &lt;task log="true" alias="test60" interval="60" url="http://localhost/umbraco/test.aspx"/&gt;--&gt;
+    &lt;task log="true" alias="fixtures" interval="60" url="https://test.local.umbraco.demo.stadion.io/tasKS/FIXTURES"/&gt;
+    &lt;task log="true" alias="tweets" interval="60" url="https://test.local.umbraco.demo.stadion.io/tasKS/twitter"/&gt;
+    &lt;task log="true" alias="instagram" interval="60" url="https://test.local.umbraco.demo.stadion.io/tasKS/instagram"/&gt;
+  &lt;/scheduledTasks&gt;</code></pre>
+<p>The Twitter and instagram tasks updates tweets/posts for any defined accounts in the cms.
+The fixtures task creates fixtures in the cms when opta post a new fixture update.</p>
                 </section>
 
             </div>
