@@ -28,3 +28,21 @@ The search is powered by Umbraco's built in Examine search library, which is jsu
 ## ORM
 
 We are using a forked version of the Umbraco Glass Mapper library, which has some speed improvements.
+
+## Scheduled Tasks
+
+If you want to have various jobs running periodically, you can set them up in the   umbracoSettings.config file like so:
+
+
+```
+<scheduledTasks>
+    <!-- add tasks that should be called with an interval (seconds) -->
+    <!--    <task log="true" alias="test60" interval="60" url="http://localhost/umbraco/test.aspx"/>-->
+    <task log="true" alias="fixtures" interval="60" url="https://test.local.umbraco.demo.stadion.io/tasKS/FIXTURES"/>
+    <task log="true" alias="tweets" interval="60" url="https://test.local.umbraco.demo.stadion.io/tasKS/twitter"/>
+    <task log="true" alias="instagram" interval="60" url="https://test.local.umbraco.demo.stadion.io/tasKS/instagram"/>
+  </scheduledTasks>
+  ```
+  
+  The Twitter and instagram tasks updates tweets/posts for any defined accounts in the cms.
+  The fixtures task creates fixtures in the cms when opta post a new fixture update.
