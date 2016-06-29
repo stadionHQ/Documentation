@@ -123,3 +123,13 @@ You can also define instagram user names to automaticly pull in a player(s) / te
   <soicalModuleQuerySettings twitterPollJobFolder="/sitecore/content/Meta/Social/Twitter//*" instagramPollJobFolder="/sitecore/content/Meta/Social/Instagram//*"/>
 </socialModule>
 ```
+
+##Caching
+
+By defualt we use the ``` MemoryCacheProvider ```, which require no configuration. If you wish to use the ``` RedisCacheProvider ```, you need to set your connection string in the web.config, like so:
+
+```
+ <add name="rediscache" connectionString="127.0.0.1,abortConnect=false,ssl=false" />
+```
+ 
+The name of the connection string is important.
