@@ -342,10 +342,32 @@
 <li>Twitter Settings</li>
 <li>API Settings</li>
 <li>MatchDay Centre Settings</li>
+<li>Blitline settings</li>
+<li>AWS S3 Settings</li>
 </ul>
 <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;dsp&gt;
-  &lt;generalSettings host="secure.umbraco.demo.stadion.io" facebookAppId="x"  isContentDeliveryServer="false"  emailAddressEmailsAreFrom="lee@dsp.com" googleTrackingCode="xxx" googleTrackingCookieDomain="none" googleTagManagerId="GTM-xxx" fixturesUrl="/fixtures" searchUrl="/search" socialSharingNetworks="facebook,twitter,google,linkedIn" /&gt;
+&lt;stadion&gt;
+  &lt;generalSettings
+   enableResponsiveImages="true"
+    host="local.stadion.clientname.com"
+    blitlineApplictaionId="xx"
+    facebookAppId="xx"
+    isContentDeliveryServer="false"
+    emailAddressEmailsAreFrom="support@stadion.io"
+    googleTrackingCode="UA-xxx"
+    googleTrackingCookieDomain="none"
+    googleTagManagerId="xx"
+    fixturesUrl="/fixtures"
+    searchUrl="/search"
+    socialSharingNetworks="facebook,twitter,google,linkedIn,whatsApp"
+    newsletterSignupUrl="/NewsletterSignup"
+    insertQuoteAfterHowManyParagraphs="3"
+    insertVideoAfterHowManyParagraphs="6"
+    ratingsPoweredByImageUrl="/img/sponsors/whoscored.png"
+    statsPoweredByImageUrl="/img/sponsors/opta.png"
+    clearCdnOnPublish="false"
+    imageQualityPercentage="75"
+    s3Bucket="stadiondemoimages" /&gt;
 
   &lt;instagramSettings ClientSecret="secret" ClientId="1" ApiUri="https://api.instagram.com/v1" AccessToken="xxx" /&gt;
 
@@ -362,7 +384,7 @@
 
   &lt;liveSettings clubIds="t31"&gt;
   &lt;/liveSettings&gt;
-&lt;/dsp&gt;</code></pre>
+&lt;/stadion&gt;</code></pre>
 <h2 id="stadionimagesconfig">Stadion.images.config</h2>
 <p>This file contains what size images should be for each different type of module.</p>
 <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
