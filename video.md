@@ -22,3 +22,17 @@ We utilize the Sitecore Media Framework for all  video providers, so we have see
 In Umbraco, there is a separate note, outside of the root, where videos can be stored.
 
 ![umbraco video](/umbracovideo.PNG)
+
+If you are using StreamUK's Kaltura platform on with Umbraco, we have created a property editor that is conencted to the StreamUK API.
+
+![umbraco videovideostream](/umbracostream.PNG)
+
+  
+You need to specifiy some settings in the Stadion.Video.config file in the App_Config folder.
+
+```	
+<?xml version="1.0" encoding="utf-8"?>
+<video>
+  <videoSettings RootVideoNodeId="2363" kaltura.AdminSecret="x" kaltura.UserId="x" kaltura.PartnerId="x" kaltura.ServiceUrl="https://mp.streamamg.com/"  />
+</video> 
+```	

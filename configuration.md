@@ -18,12 +18,34 @@ This is the main config file. It contains settings for the following things:
 * Twitter Settings
 * API Settings
 * MatchDay Centre Settings
+* Blitline settings
+* AWS S3 Settings
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
-<dsp>
-  <generalSettings host="secure.umbraco.demo.stadion.io" facebookAppId="x"  isContentDeliveryServer="false"  emailAddressEmailsAreFrom="lee@dsp.com" googleTrackingCode="xxx" googleTrackingCookieDomain="none" googleTagManagerId="GTM-xxx" fixturesUrl="/fixtures" searchUrl="/search" socialSharingNetworks="facebook,twitter,google,linkedIn" />
-
+<stadion>
+  <generalSettings
+   enableResponsiveImages="true"
+    host="local.stadion.clientname.com"
+    blitlineApplictaionId="xx"
+    facebookAppId="xx"
+    isContentDeliveryServer="false"
+    emailAddressEmailsAreFrom="support@stadion.io"
+    googleTrackingCode="UA-xxx"
+    googleTrackingCookieDomain="none"
+    googleTagManagerId="xx"
+    fixturesUrl="/fixtures"
+    searchUrl="/search"
+    socialSharingNetworks="facebook,twitter,google,linkedIn,whatsApp"
+    newsletterSignupUrl="/NewsletterSignup"
+    insertQuoteAfterHowManyParagraphs="3"
+    insertVideoAfterHowManyParagraphs="6"
+    ratingsPoweredByImageUrl="/img/sponsors/whoscored.png"
+    statsPoweredByImageUrl="/img/sponsors/opta.png"
+    clearCdnOnPublish="false"
+    imageQualityPercentage="75"
+	s3Bucket="stadiondemoimages" />
+	
   <instagramSettings ClientSecret="secret" ClientId="1" ApiUri="https://api.instagram.com/v1" AccessToken="xxx" />
   
       <cdnSettings host="cdn.dsp.local" enabled="false" mediaHost="xx.cloudfront.net"  />
@@ -39,7 +61,7 @@ This is the main config file. It contains settings for the following things:
 
   <liveSettings clubIds="t31">
   </liveSettings>
-</dsp>
+</stadion>
 ```
 
 ##Stadion.images.config
