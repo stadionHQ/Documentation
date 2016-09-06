@@ -346,12 +346,18 @@ There are many data providers out there and out of the box we support the two mo
 <p>When the feed is posted to the endpoint, we store the feed on a <code>IMediaStorageManager</code> implementation and push a message to a queue implementation (<code>IServiceBus</code>)  for processing by a webjob of some kind.</p>
 <p>By Default, <code>IMediaStorageManager</code> is wired up to <code>S3MediaStorageManager</code>, which implements storing the files on S3. and the bucket name can be configured in the stadion.config file with property 'dataS3Bucket=&quot;newcastle-sportdata&quot;'</p>
 <p>By Default, <code>IServiceBus</code> is wired up to <code>AzureServiceBus</code>, which implements an Azure Queue. You need to create two queues. &quot;footballdata&quot; and &quot;footballpushdata&quot;.</p>
-<p>The S3 credentials are stored in web.config as per normal:</p>
+<p>The S3 credentials are stored in web.config as per normal (in website and webjobs):</p>
 <pre><code>    &lt;add key="AWSProfileName" value="production" /&gt;
     &lt;add key="AWSProfilesLocation" value="~/App_Data/awscredentials.txt" /&gt;
     &lt;add key="AWSAccessKey" value="*" /&gt;
     &lt;add key="AWSSecretKey" value="*" /&gt;
     &lt;add key="BaseAPIUrl" value="https://dev.xx.stadion.io/" /&gt;</code></pre>
+<p>The name of the s3 bucket is defined in the Stadion.config  file (in website and webjobs).</p>
+<pre><code>&lt;stadion&gt;
+  &lt;generalSettings
+
+       dataS3Bucket="clientname-sportdata"
+    /&gt;</code></pre>
 <p>The Queue details are stored in appsettings in the web.config of the site, with a name of <code>Microsoft.ServiceBus.ConnectionString</code>.</p>
 <p>Example azure configuration:</p>
 <pre><code> &lt;appSettings&gt;
@@ -362,6 +368,9 @@ There are many data providers out there and out of the box we support the two mo
 <p>Currently, the WebJobs are Azure WebJobs that listen to the queues and process data as they come in. To get the webjob's to run on azure, they must live inside the 'App_data\jobs\continuous' folder.</p>
 <p>FootballDataProcessorWebJob - This processes the data posted to the 'footballdata' queue and then stores it in the database. It then pushes messages to the 'footballPushData' message queue, if any realtime updates need to be pushed out.</p>
 <p>DataPusherWebJob - This sends out any realtime updates via your IRealtTimeClient ( Default implementation is Pubnub)</p>
+<h2 id="webjob-appconfig">Webjob app.config</h2>
+<p>You also need to specify the domain of your host in appsettings, as we communicate with it via an api.</p>
+<pre><code>      &lt;add key="BaseAPIUrl" value="https://dev.xx.stadion.io/" /&gt;</code></pre>
                 </section>
 
             </div>
