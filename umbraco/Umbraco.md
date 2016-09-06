@@ -21,6 +21,7 @@ You will wish to do this on a 'FeaturedPromo', for example.
 
 ![Translation Dictionary](/UmbracoChooseRendering.PNG)
 
+##
 
 ## Search
 The search is powered by Umbraco's built in Examine search library, which is jsut a wrapper around lucene.

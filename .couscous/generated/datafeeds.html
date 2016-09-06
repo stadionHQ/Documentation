@@ -335,19 +335,31 @@
 There are many data providers out there and out of the box we support the two most common: Opta and the Press Association.</p>
 <p>We store all data in a SQL database, that is independent of which dataprovider you use. </p>
 <p>We process the data as it comes in, normalise it and store it in a generic way for fast retrieval. Should you wish to use a different 3rd party data provider, you can do so.</p>
-<h2 id="architecture-overview">Architecture overview</h2>
-<p>Data Feeds should be posed to the <code>FeedController</code>. The action is HandleFeed. By default the route is : /Feed/HandleFeed</p>
+<h2 id="summary">Summary</h2>
+<p>You post Opta files at the &quot;/feed&quot; endpoint.</p>
+<p>This then uploads the file to S3 for permanent storage. Once uploaded, it posts a message in a message queue with a reference to the file on S3, so that a seperate web job (FootballDataProcessorWebJob.exe) can process the file. </p>
+<p>FootballDataProcessorWebJob.exe read's messages from the queue and then processes the opta XML. It then stores it in the SQL database (SportsData)</p>
+<p>Another message is then posted to a different queue, which is read by another webjob (Stadion.Football.DataPusherWebJob.exe).  It send's out real time messages using the IRealTimeClient implementation you are using.</p>
+<h2 id="architecture-detail">Architecture Detail</h2>
+<p>Data Feeds should be posed to the <code>FeedController</code>. The action is HandleFeed. By default the route is : /Feed</p>
 <p>If you are passing in a feed that is not Opta, you need to pass in a querystring variable such as: ?provider=PressAssociation</p>
 <p>When the feed is posted to the endpoint, we store the feed on a <code>IMediaStorageManager</code> implementation and push a message to a queue implementation (<code>IServiceBus</code>)  for processing by a webjob of some kind.</p>
-<p>By Default, <code>IMediaStorageManager</code> is wired up to <code>S3MediaStorageManager</code>, which implements storing the files on S3. and the bucket name has to be 'stadion-sportdata'</p>
-<p>By Default, <code>IServiceBus</code> is wired up to <code>AzureServiceBus</code>, which implements an Azure Queue.</p>
+<p>By Default, <code>IMediaStorageManager</code> is wired up to <code>S3MediaStorageManager</code>, which implements storing the files on S3. and the bucket name can be configured in the stadion.config file with property 'dataS3Bucket=&quot;newcastle-sportdata&quot;'</p>
+<p>By Default, <code>IServiceBus</code> is wired up to <code>AzureServiceBus</code>, which implements an Azure Queue. You need to create two queues. &quot;footballdata&quot; and &quot;footballpushdata&quot;.</p>
 <p>The S3 credentials are stored in web.config as per normal:</p>
 <pre><code>    &lt;add key="AWSProfileName" value="production" /&gt;
     &lt;add key="AWSProfilesLocation" value="~/App_Data/awscredentials.txt" /&gt;
     &lt;add key="AWSAccessKey" value="*" /&gt;
-    &lt;add key="AWSSecretKey" value="*" /&gt;</code></pre>
-<p>The Queue details are stored in appsettings in the web.config, with a name of <code>Microsoft.ServiceBus.ConnectionString</code>.</p>
-<p>Currently, the WebJobs are Azure WebJobs that listen to the queues and process data as they come in.</p>
+    &lt;add key="AWSSecretKey" value="*" /&gt;
+    &lt;add key="BaseAPIUrl" value="https://dev.xx.stadion.io/" /&gt;</code></pre>
+<p>The Queue details are stored in appsettings in the web.config of the site, with a name of <code>Microsoft.ServiceBus.ConnectionString</code>.</p>
+<p>Example azure configuration:</p>
+<pre><code> &lt;appSettings&gt;
+        &lt;!-- Service Bus specific app setings for messaging connections --&gt;
+      &lt;add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=xx;AccountKey=xxx" /&gt;
+ &lt;/appSettings&gt;
+</code></pre>
+<p>Currently, the WebJobs are Azure WebJobs that listen to the queues and process data as they come in. To get the webjob's to run on azure, they must live inside the 'App_data\jobs\continuous' folder.</p>
 <p>FootballDataProcessorWebJob - This processes the data posted to the 'footballdata' queue and then stores it in the database. It then pushes messages to the 'footballPushData' message queue, if any realtime updates need to be pushed out.</p>
 <p>DataPusherWebJob - This sends out any realtime updates via your IRealtTimeClient ( Default implementation is Pubnub)</p>
                 </section>

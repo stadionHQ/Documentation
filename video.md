@@ -25,7 +25,7 @@ In Umbraco, there is a separate note, outside of the root, where videos can be s
 
 If you are using StreamUK's Kaltura platform on with Umbraco, we have created a property editor that is conencted to the StreamUK API.
 
-![umbraco videovideostream](/umbracostream.PNG)
+![umbracostream](/umbracostream.PNG)
 
   
 You need to specifiy some settings in the Stadion.Video.config file in the App_Config folder.
